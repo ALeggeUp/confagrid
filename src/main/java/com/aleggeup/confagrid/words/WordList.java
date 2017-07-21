@@ -10,6 +10,7 @@
 package com.aleggeup.confagrid.words;
 
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -28,6 +29,16 @@ public class WordList
                 wordIndex.put(word, wordIndex.size());
             }
         }
+    }
+
+    protected Word[] getReverseLookup() {
+        final Word[] wordArray = new Word[wordIndex.size()];
+
+        for (final Entry<Word, Integer> entry : wordIndex.entrySet()) {
+            wordArray[entry.getValue()] = entry.getKey();
+        }
+
+        return wordArray;
     }
 
     public Map<Word, Integer> getWords() {

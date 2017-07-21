@@ -52,4 +52,24 @@ public class WordListTest
         assertTrue(wordIndex.containsKey(WORD_TWO));
         assertEquals(6, wordIndex.size());
     }
+
+    @Test
+    public void reverseLookupTest() {
+        final WordList wordList = new WordList();
+        wordList.addWordsFromPhrase(PHRASE_1);
+        wordList.addWordsFromPhrase(PHRASE_2);
+        wordList.addWordsFromPhrase(PHRASE_3);
+        wordList.addWordsFromPhrase(PHRASE_3);
+        wordList.addWordsFromPhrase(PHRASE_2);
+        wordList.addWordsFromPhrase(PHRASE_1);
+
+        final Word[] lookup = wordList.getReverseLookup();
+        assertEquals(6, lookup.length);
+        assertEquals(0, lookup[0].compareTo(WORD_IS));
+        assertEquals(0, lookup[1].compareTo(WORD_IT));
+        assertEquals(0, lookup[2].compareTo(WORD_OCLOCK));
+        assertEquals(0, lookup[3].compareTo(WORD_ONE));
+        assertEquals(0, lookup[4].compareTo(WORD_TWO));
+        assertEquals(0, lookup[5].compareTo(WORD_THREE));
+    }
 }
