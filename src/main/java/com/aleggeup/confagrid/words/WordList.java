@@ -9,16 +9,13 @@
 
 package com.aleggeup.confagrid.words;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
 public class WordList
 {
-    private final Map<String, Integer> wordIndex = new TreeMap<>();
-    private final List<String> words = new ArrayList<>();
+    private final Map<Word, Integer> wordIndex = new TreeMap<>();
 
     public WordList() {
     }
@@ -26,20 +23,14 @@ public class WordList
     protected void addWordsFromPhrase(final Phrase phrase) {
         final Set<Word> wordsFromPhrase = phrase.getWords();
 
-        int lastWordIndex = -1;
         for (final Word word : wordsFromPhrase) {
-            if (!words.contains(word.getWord()) && lastWordIndex > -1) {
-                words.add(++lastWordIndex, word.getWord());
-            } else if (!words.contains(word.getWord())) {
-                words.add(word.getWord());
-                lastWordIndex = words.indexOf(word.getWord());
-            } else {
-                lastWordIndex = words.indexOf(word.getWord());
+            if (!wordIndex.containsKey(word)) {
+                wordIndex.put(word, wordIndex.size());
             }
         }
     }
 
-    public List<String> getWords() {
-        return words;
+    public Map<Word, Integer> getWords() {
+        return wordIndex;
     }
 }

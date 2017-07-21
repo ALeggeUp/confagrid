@@ -10,10 +10,9 @@
 package com.aleggeup.confagrid.words;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 
@@ -22,6 +21,13 @@ public class WordListTest
     private static final String PHRASE_STRING_1 = "IT IS ONE OCLOCK";
     private static final String PHRASE_STRING_2 = "IT IS TWO OCLOCK";
     private static final String PHRASE_STRING_3 = "IT IS THREE OCLOCK";
+
+    private static final Word WORD_IS = new Word("IS", 0);
+    private static final Word WORD_IT = new Word("IT", 0);
+    private static final Word WORD_OCLOCK = new Word("OCLOCK", 0);
+    private static final Word WORD_ONE = new Word("ONE", 0);
+    private static final Word WORD_THREE = new Word("THREE", 0);
+    private static final Word WORD_TWO = new Word("TWO", 0);
 
     private static final Phrase PHRASE_1 = new Phrase(PHRASE_STRING_1);
     private static final Phrase PHRASE_2 = new Phrase(PHRASE_STRING_2);
@@ -37,8 +43,13 @@ public class WordListTest
         wordList.addWordsFromPhrase(PHRASE_2);
         wordList.addWordsFromPhrase(PHRASE_1);
 
-        // final List<String> words = new ArrayList<>(Arrays.asList("IT", "IS", "THREE", "TWO", "ONE", "OCLOCK"));
-        final List<String> words = new ArrayList<>(Arrays.asList("ONE", "OCLOCK", "IT", "IS", "TWO", "THREE"));
-        assertEquals(words, wordList.getWords());
+        final Map<Word, Integer> wordIndex = wordList.getWords();
+        assertTrue(wordIndex.containsKey(WORD_IS));
+        assertTrue(wordIndex.containsKey(WORD_IT));
+        assertTrue(wordIndex.containsKey(WORD_OCLOCK));
+        assertTrue(wordIndex.containsKey(WORD_ONE));
+        assertTrue(wordIndex.containsKey(WORD_THREE));
+        assertTrue(wordIndex.containsKey(WORD_TWO));
+        assertEquals(6, wordIndex.size());
     }
 }

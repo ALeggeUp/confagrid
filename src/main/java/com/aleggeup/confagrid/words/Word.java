@@ -34,9 +34,14 @@ public class Word implements Comparable<Word> {
     @Override
     public int compareTo(final Word o) {
         if (!o.getWord().equals(word)) {
-            return o.getWord().compareTo(word);
+            return word.compareTo(o.getWord());
         } else {
-            return Integer.compare(o.getOccurrence(), occurrence);
+            return Integer.compare(occurrence, o.getOccurrence());
         }
+    }
+
+    @Override
+    public String toString() {
+        return word + " [" + occurrence + "]";
     }
 }
