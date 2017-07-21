@@ -11,16 +11,20 @@ package com.aleggeup.confagrid.words;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 public class WordList
 {
+    private final Map<String, Integer> wordIndex = new TreeMap<>();
     private final List<String> words = new ArrayList<>();
 
     public WordList() {
     }
 
     protected void addWordsFromPhrase(final Phrase phrase) {
-        final List<Word> wordsFromPhrase = phrase.getWords();
+        final Set<Word> wordsFromPhrase = phrase.getWords();
 
         int lastWordIndex = -1;
         for (final Word word : wordsFromPhrase) {

@@ -9,21 +9,31 @@
 
 package com.aleggeup.confagrid.words;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 public class Phrase
 {
-    private final List<Word> words = new ArrayList<>();
+    private final Set<Word> words = new TreeSet<>();
+    private final Map<String, Integer> dups = new TreeMap<>();
 
     public Phrase(final String phrase) {
         final String[] phraseWords = phrase.toUpperCase().split("\\s");
         for (final String phraseWord : phraseWords) {
-            words.add(new Word(phraseWord));
+            if (!dups.containsKey(phraseWord)) {
+                dups.put(phraseWord, 0);
+                words.add(new Word(phraseWord));
+            } else {
+                final int dupCount = dups.get(phraseWord).intValue();
+                dups.replace(phraseWord, Integer.valueOf(dupCount + 1));
+                words.add(new Word(phraseWord, dupCount + 1));
+            }
         }
     }
 
-    public List<Word> getWords() {
+    public Set<Word> getWords() {
         return words;
     }
 }

@@ -37,7 +37,8 @@ public class WordListTest
         wordList.addWordsFromPhrase(PHRASE_2);
         wordList.addWordsFromPhrase(PHRASE_1);
 
-        final List<String> words = new ArrayList<>(Arrays.asList("IT", "IS", "THREE", "TWO", "ONE", "OCLOCK"));
+        // final List<String> words = new ArrayList<>(Arrays.asList("IT", "IS", "THREE", "TWO", "ONE", "OCLOCK"));
+        final List<String> words = new ArrayList<>(Arrays.asList("ONE", "OCLOCK", "IT", "IS", "TWO", "THREE"));
         assertEquals(words, wordList.getWords());
     }
 }
