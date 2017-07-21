@@ -41,6 +41,10 @@ public class WordList
         return wordArray;
     }
 
+    public int size() {
+        return wordIndex.size();
+    }
+
     public Map<Word, Integer> getWords() {
         return wordIndex;
     }
