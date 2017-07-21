@@ -14,11 +14,13 @@ import java.util.List;
 
 public class DirectedAcyclicWordGraph {
 
+    private final WordList wordList;
     private final int verticies;
     private final int edges;
     private final List<List<Integer>> adjacentVerticies;
 
     public DirectedAcyclicWordGraph(final WordList wordList) {
+        this.wordList = wordList;
         verticies = wordList.size();
         edges = 0;
         adjacentVerticies = new ArrayList<List<Integer>>();
@@ -26,6 +28,9 @@ public class DirectedAcyclicWordGraph {
         for (int i = 0; i < verticies; ++i) {
             adjacentVerticies.add(new ArrayList<Integer>());
         }
+    }
+
+    protected void addEdgesFromPhrase(final Phrase phrase) {
     }
 
     public int getVerticies() {

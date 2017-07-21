@@ -21,4 +21,17 @@ public class DirectedAcyclicWordGraphTest {
         assertEquals(0, dawg.getVerticies());
         assertEquals(0, dawg.getEdges());
     }
+
+    @Test
+    public void adjacentVerticiesTest() {
+        final WordList wordList = new WordList();
+        wordList.addWordsFromPhrase(WordListTest.PHRASE_1);
+        wordList.addWordsFromPhrase(WordListTest.PHRASE_2);
+        wordList.addWordsFromPhrase(WordListTest.PHRASE_3);
+
+        final DirectedAcyclicWordGraph dawg = new DirectedAcyclicWordGraph(wordList);
+        dawg.addEdgesFromPhrase(WordListTest.PHRASE_1);
+        dawg.addEdgesFromPhrase(WordListTest.PHRASE_2);
+        dawg.addEdgesFromPhrase(WordListTest.PHRASE_3);
+    }
 }

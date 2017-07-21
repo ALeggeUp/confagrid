@@ -29,9 +29,9 @@ public class WordListTest
     private static final Word WORD_THREE = new Word("THREE", 0);
     private static final Word WORD_TWO = new Word("TWO", 0);
 
-    private static final Phrase PHRASE_1 = new Phrase(PHRASE_STRING_1);
-    private static final Phrase PHRASE_2 = new Phrase(PHRASE_STRING_2);
-    private static final Phrase PHRASE_3 = new Phrase(PHRASE_STRING_3);
+    protected static final Phrase PHRASE_1 = new Phrase(PHRASE_STRING_1);
+    protected static final Phrase PHRASE_2 = new Phrase(PHRASE_STRING_2);
+    protected static final Phrase PHRASE_3 = new Phrase(PHRASE_STRING_3);
 
     @Test
     public void simpleWordListTest() {
