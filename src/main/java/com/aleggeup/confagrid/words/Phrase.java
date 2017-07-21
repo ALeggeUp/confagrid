@@ -9,14 +9,15 @@
 
 package com.aleggeup.confagrid.words;
 
+import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
 public class Phrase
 {
-    private final Set<Word> words = new TreeSet<>();
+    private final Set<Word> words = new LinkedHashSet<>();
     private final Map<String, Integer> dups = new TreeMap<>();
 
     public Phrase(final String phrase) {
@@ -31,6 +32,10 @@ public class Phrase
                 words.add(new Word(phraseWord, dupCount + 1));
             }
         }
+    }
+
+    protected Iterator<Word> iterator() {
+        return words.iterator();
     }
 
     public Set<Word> getWords() {
