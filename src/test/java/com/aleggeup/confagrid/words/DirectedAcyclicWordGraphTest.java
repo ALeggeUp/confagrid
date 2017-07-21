@@ -17,7 +17,7 @@ public class DirectedAcyclicWordGraphTest {
 
     @Test
     public void simpleDawgTest() {
-        final DirectedAcyclicWordGraph dawg = new DirectedAcyclicWordGraph();
+        final DirectedAcyclicWordGraph dawg = new DirectedAcyclicWordGraph(new WordList());
         assertEquals(0, dawg.getVerticies());
         assertEquals(0, dawg.getEdges());
     }

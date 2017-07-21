@@ -9,14 +9,23 @@
 
 package com.aleggeup.confagrid.words;
 
-public class DirectedAcyclicWordGraph
-{
+import java.util.ArrayList;
+import java.util.List;
+
+public class DirectedAcyclicWordGraph {
+
     private final int verticies;
     private final int edges;
-    
-    public DirectedAcyclicWordGraph() {
-        verticies = 0;
+    private final List<List<Integer>> adjacentVerticies;
+
+    public DirectedAcyclicWordGraph(final WordList wordList) {
+        verticies = wordList.size();
         edges = 0;
+        adjacentVerticies = new ArrayList<List<Integer>>();
+
+        for (int i = 0; i < verticies; ++i) {
+            adjacentVerticies.add(new ArrayList<Integer>());
+        }
     }
 
     public int getVerticies() {
