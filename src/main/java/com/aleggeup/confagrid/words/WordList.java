@@ -48,4 +48,8 @@ public class WordList
     public Map<Word, Integer> getWords() {
         return wordIndex;
     }
+
+    public int getWordId(final Word word) {
+        return wordIndex.get(word).intValue();
+    }
 }

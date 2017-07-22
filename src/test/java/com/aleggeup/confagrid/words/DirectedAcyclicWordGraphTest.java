@@ -23,7 +23,7 @@ public class DirectedAcyclicWordGraphTest {
     }
 
     @Test
-    public void adjacentVerticiesTest() {
+    public void addEdgesFromPhraseTest() {
         final WordList wordList = new WordList();
         wordList.addWordsFromPhrase(WordListTest.PHRASE_1);
         wordList.addWordsFromPhrase(WordListTest.PHRASE_2);
@@ -33,5 +33,8 @@ public class DirectedAcyclicWordGraphTest {
         dawg.addEdgesFromPhrase(WordListTest.PHRASE_1);
         dawg.addEdgesFromPhrase(WordListTest.PHRASE_2);
         dawg.addEdgesFromPhrase(WordListTest.PHRASE_3);
+
+        assertEquals(7, dawg.getEdgesCount());
     }
+
 }
