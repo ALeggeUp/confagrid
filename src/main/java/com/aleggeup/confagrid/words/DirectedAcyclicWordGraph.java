@@ -33,11 +33,11 @@ public class DirectedAcyclicWordGraph {
     protected void addEdgesFromPhrase(final Phrase phrase) {
     }
 
-    public int getVerticies() {
+    public int getVerticiesCount() {
         return verticies;
     }
 
-    public int getEdges() {
+    public int getEdgesCount() {
         return edges;
     }
 }
