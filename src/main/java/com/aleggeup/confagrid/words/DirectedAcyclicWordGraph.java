@@ -16,20 +16,20 @@ import java.util.List;
 public class DirectedAcyclicWordGraph {
 
     private final WordList wordList;
-    private final int verticies;
+    private final int verticiesCount;
     private final List<List<Integer>> adjacentVerticies;
     private final int[] indegrees;
 
-    private int edges;
+    private int edgesCount;
 
     public DirectedAcyclicWordGraph(final WordList wordList) {
         this.wordList = wordList;
-        verticies = wordList.size();
-        edges = 0;
+        verticiesCount = wordList.size();
+        edgesCount = 0;
         adjacentVerticies = new ArrayList<List<Integer>>();
-        indegrees = new int[verticies];
+        indegrees = new int[verticiesCount];
 
-        for (int i = 0; i < verticies; ++i) {
+        for (int i = 0; i < verticiesCount; ++i) {
             adjacentVerticies.add(new ArrayList<Integer>());
         }
     }
@@ -53,15 +53,15 @@ public class DirectedAcyclicWordGraph {
         if (!adjacentVerticies.get(tailId).contains(Integer.valueOf(headId))) {
             adjacentVerticies.get(tailId).add(Integer.valueOf(headId));
             ++indegrees[headId];
-            ++edges;
+            ++edgesCount;
         }
     }
 
     public int getVerticiesCount() {
-        return verticies;
+        return verticiesCount;
     }
 
     public int getEdgesCount() {
-        return edges;
+        return edgesCount;
     }
 }
