@@ -9,7 +9,9 @@
 
 package com.aleggeup.confagrid.words;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.Iterator;
 import java.util.List;
 
@@ -19,6 +21,7 @@ public class DirectedAcyclicWordGraph {
     private final int verticiesCount;
     private final List<List<Integer>> adjacentVerticies;
     private final int[] indegrees;
+    private final int[] ranks;
 
     private int edgesCount;
 
@@ -28,6 +31,7 @@ public class DirectedAcyclicWordGraph {
         edgesCount = 0;
         adjacentVerticies = new ArrayList<List<Integer>>();
         indegrees = new int[verticiesCount];
+        ranks = new int[verticiesCount];
 
         for (int i = 0; i < verticiesCount; ++i) {
             adjacentVerticies.add(new ArrayList<Integer>());
@@ -55,6 +59,38 @@ public class DirectedAcyclicWordGraph {
             ++indegrees[headId];
             ++edgesCount;
         }
+    }
+
+    protected boolean hasOrder() {
+        final Deque<Integer> queue = new ArrayDeque<>();
+        final Deque<Integer> order = new ArrayDeque<>();
+        final int[] indegreesDiff = new int[verticiesCount];
+
+        for (int i = 0; i < verticiesCount; ++i) {
+            indegreesDiff[i] = indegrees[i];
+        }
+
+        int count = 0;
+        for (int i = 0; i < verticiesCount; ++i) {
+            if (indegreesDiff[i] == 0) {
+                queue.push(i);
+            }
+        }
+
+        while (!queue.isEmpty()) {
+            final int value = queue.pop().intValue();
+            order.push(value);
+            ranks[value] = count++;
+
+            for (final Integer v : adjacentVerticies.get(value)) {
+                indegreesDiff[v.intValue()]--;
+                if (indegreesDiff[v.intValue()] == 0) {
+                    queue.push(v);
+                }
+            }
+        }
+
+        return count == verticiesCount;
     }
 
     public int getVerticiesCount() {

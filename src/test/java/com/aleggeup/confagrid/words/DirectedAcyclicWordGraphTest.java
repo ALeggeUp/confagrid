@@ -10,6 +10,7 @@
 package com.aleggeup.confagrid.words;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -35,6 +36,7 @@ public class DirectedAcyclicWordGraphTest {
         dawg.addEdgesFromPhrase(WordListTest.PHRASE_3);
 
         assertEquals(7, dawg.getEdgesCount());
+        assertTrue(dawg.hasOrder());
     }
 
 }
