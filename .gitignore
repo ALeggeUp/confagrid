@@ -89,3 +89,7 @@ local.properties
 .cache-main
 .scala_dependencies
 .worksheet
+
+# Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
+!/.mvn/wrapper/maven-wrapper.jar
+
