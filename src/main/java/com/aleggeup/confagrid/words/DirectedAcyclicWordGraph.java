@@ -65,29 +65,42 @@ public class DirectedAcyclicWordGraph {
         final Deque<Integer> queue = new ArrayDeque<>();
         final Deque<Integer> order = new ArrayDeque<>();
         final int[] indegreesDiff = new int[verticiesCount];
+        final int[] groups = new int[verticiesCount];
 
         for (int i = 0; i < verticiesCount; ++i) {
             indegreesDiff[i] = indegrees[i];
         }
 
-        int count = 0;
         for (int i = 0; i < verticiesCount; ++i) {
             if (indegreesDiff[i] == 0) {
                 queue.push(i);
             }
         }
 
+        int count = 0;
+        int group = 0;
         while (!queue.isEmpty()) {
             final int value = queue.pop().intValue();
             order.push(value);
             ranks[value] = count++;
+            groups[value] = group;
 
+            boolean newGroup = false;
             for (final Integer v : adjacentVerticies.get(value)) {
                 indegreesDiff[v.intValue()]--;
                 if (indegreesDiff[v.intValue()] == 0) {
+                    newGroup = true;
                     queue.push(v);
                 }
             }
+
+            if (newGroup) {
+                group++;
+            }
+        }
+
+        for (int i = 0; i < verticiesCount; ++i) {
+            System.out.println(String.format("%d: %d -- %s", i, groups[i], wordList.getReverseLookup()[i].toString()));
         }
 
         return count == verticiesCount;
