@@ -41,6 +41,11 @@ public class WordList
         return wordArray;
     }
 
+    public Word getWord(final int index) {
+        final Word[] words = getReverseLookup();
+        return words[index];
+    }
+
     public int size() {
         return wordIndex.size();
     }
