@@ -80,6 +80,7 @@ public class DirectedAcyclicWordGraph {
         while (!queue.isEmpty()) {
             final int value = queue.pop().intValue();
             order.push(value);
+            ++count;
 
             for (final Integer v : adjacentVerticies.get(value)) {
                 indegreesDiff[v.intValue()]--;
