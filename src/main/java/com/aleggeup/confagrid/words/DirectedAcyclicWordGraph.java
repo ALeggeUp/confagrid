@@ -65,6 +65,37 @@ public class DirectedAcyclicWordGraph {
         final Deque<Integer> queue = new ArrayDeque<>();
         final Deque<Integer> order = new ArrayDeque<>();
         final int[] indegreesDiff = new int[verticiesCount];
+
+        for (int i = 0; i < verticiesCount; ++i) {
+            indegreesDiff[i] = indegrees[i];
+        }
+
+        for (int i = 0; i < verticiesCount; ++i) {
+            if (indegreesDiff[i] == 0) {
+                queue.push(i);
+            }
+        }
+
+        int count = 0;
+        while (!queue.isEmpty()) {
+            final int value = queue.pop().intValue();
+            order.push(value);
+
+            for (final Integer v : adjacentVerticies.get(value)) {
+                indegreesDiff[v.intValue()]--;
+                if (indegreesDiff[v.intValue()] == 0) {
+                    queue.push(v);
+                }
+            }
+        }
+
+        return count == verticiesCount;
+    }
+
+    protected int[] getGroups() {
+        final Deque<Integer> queue = new ArrayDeque<>();
+        final Deque<Integer> order = new ArrayDeque<>();
+        final int[] indegreesDiff = new int[verticiesCount];
         final int[] groups = new int[verticiesCount];
 
         for (int i = 0; i < verticiesCount; ++i) {
@@ -99,11 +130,7 @@ public class DirectedAcyclicWordGraph {
             }
         }
 
-        for (int i = 0; i < verticiesCount; ++i) {
-            System.out.println(String.format("%d: %d -- %s", i, groups[i], wordList.getReverseLookup()[i].toString()));
-        }
-
-        return count == verticiesCount;
+        return groups;
     }
 
     public int getVerticiesCount() {
