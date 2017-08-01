@@ -39,4 +39,27 @@ public class DirectedAcyclicWordGraphTest {
         assertTrue(dawg.hasOrder());
     }
 
+    @Test
+    public void addEdgesFromPhraseTest2() {
+        final String[] strings = new String[] {
+                "IT IS FIVE OCLOCK",
+                "IT IS ALMOST FIVE OCLOCK",
+                "IT IS A QUARTER TO FIVE",
+                "IT IS HALF PAST FIVE",
+                "IT IS FIVE THIRTY"
+        };
+
+        final WordList wordList = new WordList();
+        for (int i = 0; i < strings.length; ++i) {
+            wordList.addWordsFromPhrase(new Phrase(strings[i]));
+        }
+
+        final DirectedAcyclicWordGraph dawg = new DirectedAcyclicWordGraph(wordList);
+        for (int i = 0; i < strings.length; ++i) {
+            dawg.addEdgesFromPhrase(new Phrase(strings[i]));
+        }
+
+        assertTrue(dawg.hasOrder());
+    }
+
 }
