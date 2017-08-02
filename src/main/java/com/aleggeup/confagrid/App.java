@@ -23,7 +23,7 @@ import org.apache.commons.cli.ParseException;
  */
 public class App {
 
-    private final static Option help = new Option("help", "print this message");
+    private final static Option help = Option.builder("h").longOpt("help").desc("print this message").build();
 
     public static void main(final String[] args) {
         final Options options = new Options();
@@ -35,7 +35,7 @@ public class App {
             final CommandLine cmdLine = parser.parse(options, args);
             if (cmdLine.hasOption("help")) {
                 final HelpFormatter helpFormatter = new HelpFormatter();
-                helpFormatter.printHelp("confagrid", options);
+                helpFormatter.printHelp("confagrid", options, true);
             }
 
         } catch (final ParseException e) {
