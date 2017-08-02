@@ -57,8 +57,7 @@ public class App {
         try {
             final CommandLine cmdLine = parser.parse(options, args);
             if (cmdLine.hasOption(OPTION_LONG_HELP)) {
-                final HelpFormatter helpFormatter = new HelpFormatter();
-                helpFormatter.printHelp(APP_NAME, options, true);
+                printHelp(options);
             } else if (cmdLine.hasOption(OPTION_LONG_INPUT)) {
                 final String filename = cmdLine.getOptionValue(OPTION_LONG_INPUT);
 
@@ -71,11 +70,17 @@ public class App {
 
         } catch (final ParseException e) {
             System.err.println("Parsing failed.  Reason: " + e.getMessage());
+            printHelp(options);
         }
     }
 
     public static void writePhrase(final String line) {
         final Phrase phrase = new Phrase(line);
         System.out.println(phrase.toString());
+    }
+
+    public static void printHelp(final Options options) {
+        final HelpFormatter helpFormatter = new HelpFormatter();
+        helpFormatter.printHelp(APP_NAME, options, true);
     }
 }
