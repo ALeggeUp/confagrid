@@ -23,13 +23,15 @@ public class Phrase
     public Phrase(final String phrase) {
         final String[] phraseWords = phrase.toUpperCase().split("\\s");
         for (final String phraseWord : phraseWords) {
-            if (!dups.containsKey(phraseWord)) {
-                dups.put(phraseWord, 0);
-                words.add(new Word(phraseWord));
-            } else {
-                final int dupCount = dups.get(phraseWord).intValue();
-                dups.replace(phraseWord, Integer.valueOf(dupCount + 1));
-                words.add(new Word(phraseWord, dupCount + 1));
+            if (phraseWord.trim().length() > 0) {
+                if (!dups.containsKey(phraseWord)) {
+                    dups.put(phraseWord, 0);
+                    words.add(new Word(phraseWord));
+                } else {
+                    final int dupCount = dups.get(phraseWord).intValue();
+                    dups.replace(phraseWord, Integer.valueOf(dupCount + 1));
+                    words.add(new Word(phraseWord, dupCount + 1));
+                }
             }
         }
     }
@@ -40,5 +42,10 @@ public class Phrase
 
     public Set<Word> getWords() {
         return words;
+    }
+
+    @Override
+    public String toString() {
+        return words.isEmpty() ? "" : "Phrase [words=" + words + "]";
     }
 }
