@@ -31,10 +31,19 @@ import com.aleggeup.confagrid.words.Phrase;
  */
 public class App {
 
-    private final static Option help = Option.builder("h").longOpt("help").desc("print this message").build();
+    private static final String APP_NAME = "confagrid";
 
-    private final static Option input = Option.builder("i")
-            .longOpt("input").desc("phrase input file")
+    private static final String OPTION_LONG_INPUT = "input";
+    private static final String OPTION_LONG_HELP = "help";
+
+    private static final String OPTION_SHORT_INPUT = "i";
+    private static final String OPTION_SHORT_HELP = "h";
+
+    private static final Option help = Option.builder(OPTION_SHORT_HELP)
+            .longOpt(OPTION_LONG_HELP).desc("print this message").build();
+
+    private static final Option input = Option.builder(OPTION_SHORT_INPUT)
+            .longOpt(OPTION_LONG_INPUT).desc("phrase input file")
             .hasArg().argName("FILE")
             .build();
 
@@ -47,11 +56,11 @@ public class App {
 
         try {
             final CommandLine cmdLine = parser.parse(options, args);
-            if (cmdLine.hasOption("help")) {
+            if (cmdLine.hasOption(OPTION_LONG_HELP)) {
                 final HelpFormatter helpFormatter = new HelpFormatter();
-                helpFormatter.printHelp("confagrid", options, true);
-            } else if (cmdLine.hasOption("input")) {
-                final String filename = cmdLine.getOptionValue("input");
+                helpFormatter.printHelp(APP_NAME, options, true);
+            } else if (cmdLine.hasOption(OPTION_LONG_INPUT)) {
+                final String filename = cmdLine.getOptionValue(OPTION_LONG_INPUT);
 
                 try (final Stream<String> stream = Files.lines(Paths.get(filename))) {
                     stream.forEach(App::writePhrase);
