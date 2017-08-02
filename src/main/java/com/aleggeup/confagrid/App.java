@@ -9,8 +9,10 @@
 
 package com.aleggeup.confagrid;
 
+import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
@@ -30,7 +32,12 @@ public class App {
         final CommandLineParser parser = new DefaultParser();
 
         try {
-            parser.parse(options, args);
+            final CommandLine cmdLine = parser.parse(options, args);
+            if (cmdLine.hasOption("help")) {
+                final HelpFormatter helpFormatter = new HelpFormatter();
+                helpFormatter.printHelp("confagrid", options);
+            }
+
         } catch (final ParseException e) {
             System.err.println("Parsing failed.  Reason: " + e.getMessage());
         }
