@@ -44,6 +44,14 @@ public class Phrase
         return words;
     }
 
+    public boolean hasDups(final String phraseWord) {
+        return dups.containsKey(phraseWord) && getDupValue(phraseWord) > 0;
+    }
+
+    public int getDupValue(final String phraseWord) {
+        return dups.get(phraseWord).intValue();
+    }
+
     @Override
     public String toString() {
         return words.isEmpty() ? "" : "Phrase [words=" + words + "]";
