@@ -21,7 +21,7 @@ public class WordList
     public WordList() {
     }
 
-    protected void addWordsFromPhrase(final Phrase phrase) {
+    public void addWordsFromPhrase(final Phrase phrase) {
         final Set<Word> wordsFromPhrase = phrase.getWords();
 
         for (final Word word : wordsFromPhrase) {
@@ -56,5 +56,13 @@ public class WordList
 
     public int getWordId(final Word word) {
         return wordIndex.get(word).intValue();
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder("WordList [wordIndex=");
+        builder.append(wordIndex);
+        builder.append("]");
+        return builder.toString();
     }
 }

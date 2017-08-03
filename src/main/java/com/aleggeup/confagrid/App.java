@@ -23,6 +23,7 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
 import com.aleggeup.confagrid.words.Phrase;
+import com.aleggeup.confagrid.words.WordList;
 
 /**
  * App entry point.
@@ -60,12 +61,16 @@ public class App {
                 printHelp(options);
             } else if (cmdLine.hasOption(OPTION_LONG_INPUT)) {
                 final String filename = cmdLine.getOptionValue(OPTION_LONG_INPUT);
+                final WordList wordList = new WordList();
 
                 try (final Stream<String> stream = Files.lines(Paths.get(filename))) {
-                    stream.forEach(App::writePhrase);
+                    stream.forEach(line->addPhraseToWordList(wordList, line));
                 } catch (final IOException e) {
                     e.printStackTrace();
                 }
+
+                System.out.println();
+                System.out.println(wordList.toString());
             }
 
         } catch (final ParseException e) {
@@ -74,9 +79,10 @@ public class App {
         }
     }
 
-    public static void writePhrase(final String line) {
+    public static void addPhraseToWordList(final WordList wordList, final String line) {
         final Phrase phrase = new Phrase(line);
         System.out.println(phrase.toString());
+        wordList.addWordsFromPhrase(phrase);
     }
 
     public static void printHelp(final Options options) {
