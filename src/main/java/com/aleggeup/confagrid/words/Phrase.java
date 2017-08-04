@@ -44,6 +44,10 @@ public class Phrase
         return words;
     }
 
+    public boolean hasDups(final Word word) {
+        return hasDups(word.getWord());
+    }
+
     public boolean hasDups(final String phraseWord) {
         return dups.containsKey(phraseWord) && getDupValue(phraseWord) > 0;
     }
