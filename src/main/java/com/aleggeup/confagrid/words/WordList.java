@@ -9,6 +9,8 @@
 
 package com.aleggeup.confagrid.words;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -17,6 +19,7 @@ import java.util.TreeMap;
 public class WordList
 {
     private final Map<Word, Integer> wordIndex = new TreeMap<>();
+    private final List<String> dupList = new ArrayList<>();
 
     public WordList() {
     }
@@ -25,6 +28,10 @@ public class WordList
         final Set<Word> wordsFromPhrase = phrase.getWords();
 
         for (final Word word : wordsFromPhrase) {
+            if (phrase.hasDups(word) && !dupList.contains(word.getWord())) {
+                dupList.add(word.getWord());
+            }
+
             if (!wordIndex.containsKey(word)) {
                 wordIndex.put(word, wordIndex.size());
             }
