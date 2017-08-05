@@ -29,7 +29,7 @@ public class DirectedAcyclicWordGraph {
         this.wordList = wordList;
         verticiesCount = wordList.size();
         edgesCount = 0;
-        adjacentVerticies = new ArrayList<List<Integer>>();
+        adjacentVerticies = new ArrayList<>();
         indegrees = new int[verticiesCount];
         ranks = new int[verticiesCount];
 
