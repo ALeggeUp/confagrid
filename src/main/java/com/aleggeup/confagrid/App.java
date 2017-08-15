@@ -71,6 +71,7 @@ public class App {
 
                 System.out.println();
                 System.out.println(wordList.toString());
+                System.out.println(wordList.getDupList());
             }
 
         } catch (final ParseException e) {
