@@ -42,11 +42,13 @@ public class DirectedAcyclicWordGraph {
         Word tail = null;
         for (final Iterator<Word> iterator = phrase.iterator(); iterator.hasNext();) {
             final Word word = iterator.next();
-            if (tail == null) {
-                tail = word;
-            } else {
-                addEdge(tail, word);
-                tail = word;
+            if (!phrase.hasDups(word)) {
+                if (tail == null) {
+                    tail = word;
+                } else {
+                    addEdge(tail, word);
+                    tail = word;
+                }
             }
         }
     }
