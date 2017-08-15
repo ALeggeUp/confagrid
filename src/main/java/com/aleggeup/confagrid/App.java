@@ -22,6 +22,7 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
+import com.aleggeup.confagrid.words.DirectedAcyclicWordGraph;
 import com.aleggeup.confagrid.words.Phrase;
 import com.aleggeup.confagrid.words.WordList;
 
@@ -72,6 +73,14 @@ public class App {
                 System.out.println();
                 System.out.println(wordList.toString());
                 System.out.println(wordList.getDupList());
+
+                final DirectedAcyclicWordGraph dawg = new DirectedAcyclicWordGraph(wordList);
+                try (final Stream<String> stream = Files.lines(Paths.get(filename))) {
+                    stream.forEach(line->addPhraseToDawg(dawg, line));
+                } catch (final IOException e) {
+                    e.printStackTrace();
+                }
+                dawg.getGroups();
             }
 
         } catch (final ParseException e) {
@@ -84,6 +93,11 @@ public class App {
         final Phrase phrase = new Phrase(line);
         System.out.println(phrase.toString());
         wordList.addWordsFromPhrase(phrase);
+    }
+
+    public static void addPhraseToDawg(final DirectedAcyclicWordGraph dawg, final String line) {
+        final Phrase phrase = new Phrase(line);
+        dawg.addEdgesFromPhrase(phrase);
     }
 
     public static void printHelp(final Options options) {

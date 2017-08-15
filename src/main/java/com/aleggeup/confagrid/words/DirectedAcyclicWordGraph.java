@@ -38,17 +38,20 @@ public class DirectedAcyclicWordGraph {
         }
     }
 
-    protected void addEdgesFromPhrase(final Phrase phrase) {
+    public void addEdgesFromPhrase(final Phrase phrase) {
         Word tail = null;
         for (final Iterator<Word> iterator = phrase.iterator(); iterator.hasNext();) {
-            final Word word = iterator.next();
-            if (!phrase.hasDups(word)) {
-                if (tail == null) {
-                    tail = word;
-                } else {
-                    addEdge(tail, word);
-                    tail = word;
-                }
+            Word word = iterator.next();
+            int occurrences = wordList.getDupList().get(word.getWord()).intValue();
+            if (occurrences > 0 && !phrase.hasDups(word)) {
+                word = new Word(word.getWord(), occurrences);
+            }
+
+            if (tail == null) {
+                tail = word;
+            } else {
+                addEdge(tail, word);
+                tail = word;
             }
         }
     }
@@ -95,7 +98,7 @@ public class DirectedAcyclicWordGraph {
         return count == verticiesCount;
     }
 
-    protected int[] getGroups() {
+    public int[] getGroups() {
         final Deque<Integer> queue = new ArrayDeque<>();
         final Deque<Integer> order = new ArrayDeque<>();
         final int[] indegreesDiff = new int[verticiesCount];
@@ -131,6 +134,11 @@ public class DirectedAcyclicWordGraph {
             if (newGroup) {
                 group++;
             }
+
+        }
+
+        for (int i = 0; i < verticiesCount; ++i) {
+            System.out.println(String.format("%d: %d -- %s", i, groups[i], wordList.getReverseLookup()[i].toString()));
         }
 
         return groups;
