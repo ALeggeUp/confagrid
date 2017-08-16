@@ -52,6 +52,14 @@ public class Phrase
         return dups.containsKey(phraseWord) && getDupValue(phraseWord) > 0;
     }
 
+    public int dupCount(final Word word) {
+        return dupCount(word.getWord());
+    }
+
+    public int dupCount(final String phraseWord) {
+        return getDupValue(phraseWord);
+    }
+
     public int getDupValue(final String phraseWord) {
         return dups.get(phraseWord).intValue();
     }
