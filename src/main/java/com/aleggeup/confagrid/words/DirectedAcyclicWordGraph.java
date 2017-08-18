@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class DirectedAcyclicWordGraph {
 
@@ -40,11 +42,15 @@ public class DirectedAcyclicWordGraph {
 
     public void addEdgesFromPhrase(final Phrase phrase) {
         Word tail = null;
+        final Map<String, Integer> count = new TreeMap<>();
         for (final Iterator<Word> iterator = phrase.iterator(); iterator.hasNext();) {
             Word word = iterator.next();
             int occurrences = wordList.getDupList().get(word.getWord()).intValue();
             if (occurrences > 0 && !phrase.hasDups(word)) {
                 word = new Word(word.getWord(), occurrences);
+            } else if (phrase.dupCount(word) < occurrences) {
+                count.put(word.getWord(), count.getOrDefault(word.getWord(), -1).intValue() + 1);
+                word = new Word(word.getWord(), occurrences - phrase.dupCount(word) + count.get(word.getWord()).intValue());
             }
 
             if (tail == null) {
