@@ -29,6 +29,7 @@
   </properties>
 
   <modules>
+    <module>application/confagrid-parent</module>
     <module>application/confagrid-webapp</module>
   </modules>
 

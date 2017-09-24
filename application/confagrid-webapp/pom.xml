@@ -12,13 +12,18 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.aleggeup.confagrid</groupId>
-  <artifactId>confragrid</artifactId>
-  <version>0.9.0-SNAPSHOT</version>
+  <parent>
+    <groupId>com.aleggeup.confagrid</groupId>
+    <artifactId>confagrid-parent</artifactId>
+    <version>0.9.0-SNAPSHOT</version>
+    <relativePath>../confagrid-parent/pom.xml</relativePath>
+  </parent>
+
+  <artifactId>confagrid-webapp</artifactId>
 
   <packaging>jar</packaging>
 
-  <name>confragrid</name>
+  <name>${project.artifactId}::${project.version}</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
