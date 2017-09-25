@@ -30,6 +30,7 @@
 
   <modules>
     <module>application/confagrid-parent</module>
+    <module>application/confagrid-frontend</module>
     <module>application/confagrid-webapp</module>
   </modules>
 

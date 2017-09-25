@@ -1,5 +1,5 @@
 /*
- * App.java
+ * Main.java
  *
  * Copyright (C) 2017 [ A Legge Up ] <stephen@aleggeup.com>
  *
@@ -31,7 +31,7 @@ import com.aleggeup.confagrid.words.WordList;
  *
  * @author Stephen Legge <stephen@aleggeup.com>
  */
-public class App {
+public class Main {
 
     private static final String APP_NAME = "confagrid";
 
@@ -49,7 +49,7 @@ public class App {
             .hasArg().argName("FILE")
             .build();
 
-    public static void main(final String[] args) {
+    public static void start(final String[] args) {
         final Options options = new Options();
         options.addOption(help);
         options.addOption(input);

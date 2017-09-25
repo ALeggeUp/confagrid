@@ -13,7 +13,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.aleggeup.confagrid</groupId>
+    <groupId>com.aleggeup.webapp</groupId>
     <artifactId>confagrid-parent</artifactId>
     <version>0.9.0-SNAPSHOT</version>
     <relativePath>../confagrid-parent/pom.xml</relativePath>
@@ -31,11 +31,28 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
 
+    <web3j-version>2.3.1</web3j-version>
+    <spring-framework-version>4.2.0.RELEASE</spring-framework-version>
+    <spring-boot-version>1.2.2.RELEASE</spring-boot-version>
+
     <commons-cli.version>1.4</commons-cli.version>
     <junit.version>4.12</junit.version>
   </properties>
 
   <dependencies>
+
+    <dependency>
+      <groupId>com.aleggeup.webapp</groupId>
+      <artifactId>confagrid-frontend</artifactId>
+      <version>0.9.0-SNAPSHOT</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <version>${spring-boot-version}</version>
+    </dependency>
 
     <!-- https://mvnrepository.com/artifact/commons-cli/commons-cli -->
     <dependency>
@@ -58,28 +75,14 @@
     <plugins>
 
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <version>3.0.0</version>
-
-        <configuration>
-          <archive>
-            <manifest>
-              <mainClass>com.aleggeup.confagrid.App</mainClass>
-            </manifest>
-          </archive>
-
-          <descriptorRefs>
-            <descriptorRef>jar-with-dependencies</descriptorRef>
-          </descriptorRefs>
-        </configuration>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${spring-boot-version}</version>
 
         <executions>
           <execution>
-            <id>make-assembly</id>
-            <phase>package</phase>
             <goals>
-              <goal>single</goal>
+              <goal>repackage</goal>
             </goals>
           </execution>
         </executions>
