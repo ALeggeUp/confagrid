@@ -10,7 +10,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'file-drop',
+  selector: 'app-file-drop',
   templateUrl: './filedrop.component.html',
   styles: [`
     .custom-component-drop-zone {

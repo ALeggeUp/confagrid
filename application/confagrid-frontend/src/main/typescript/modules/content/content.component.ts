@@ -8,10 +8,9 @@
  */
 
 import { Component, Inject, OnInit, AfterViewInit } from '@angular/core';
-import { MetaMaskService } from '../core/services/metamask.service';
 
 @Component({
-    selector: 'content-root',
+    selector: 'app-content-root',
     templateUrl: './content.component.html',
     styleUrls: ['./content.component.less', './content.album.css']
 })
@@ -19,7 +18,7 @@ import { MetaMaskService } from '../core/services/metamask.service';
 export class ContentComponent implements OnInit, AfterViewInit {
     title = 'Confagrid';
 
-    constructor(@Inject(MetaMaskService) private metaMaskService) {
+    constructor() {
     }
 
     ngOnInit() {
@@ -30,6 +29,5 @@ export class ContentComponent implements OnInit, AfterViewInit {
 
     scratch() {
         alert('app-component-scratch');
-        console.log(this.metaMaskService.isConnected());
     }
 }

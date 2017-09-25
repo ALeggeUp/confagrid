@@ -7,21 +7,20 @@
  * of the MIT license.  See the LICENSE file for details.
  */
 
-import { Directive,HostListener,Output,EventEmitter } from '@angular/core';
+import { Directive, HostListener, Output, EventEmitter } from '@angular/core';
 
 @Directive({
-  selector: '[appCollar]'
+    selector: '[appCollar]'
 })
 
 export class CollarDirective {
 
-  @Output() itch:EventEmitter<any> = new EventEmitter();
+    @Output() itch: EventEmitter<any> = new EventEmitter();
 
-  @HostListener('click') onClick() {
-    this.itch.emit('itch itch itch');
-  }
+    @HostListener('click') onClick() {
+        this.itch.emit('itch itch itch');
+    }
 
-  constructor() {
-  }
-
+    constructor() {
+    }
 }

@@ -129,7 +129,7 @@
                 <version>1.3</version>
 
                 <configuration>
-                    <nodeVersion>v6.10.1</nodeVersion>o
+                    <nodeVersion>v6.10.1</nodeVersion>
                     <npmVersion>4.4.1</npmVersion>
                     <workingDirectory>target/.frontend</workingDirectory>
                 </configuration>

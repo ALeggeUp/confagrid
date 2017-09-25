@@ -10,7 +10,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'viper-nav',
+  selector: 'app-nav',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.less'],
 })

@@ -10,7 +10,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'nav-brand',
+  selector: 'app-nav-brand',
   templateUrl: './brand.component.html',
   styleUrls: ['./brand.component.less'],
 })

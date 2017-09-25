@@ -11,7 +11,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { LoggerService } from './services/logger.service';
-import { MetaMaskService } from './services/metamask.service';
 
 import { FileDropComponent } from './main/filedrop.component';
 import { NavComponent } from './nav/nav.component';
@@ -32,8 +31,7 @@ import { NavBrandComponent } from './nav/brand/brand.component';
     FileDropComponent
   ],
   providers: [
-    LoggerService,
-    MetaMaskService
+    LoggerService
   ]
 })
 
