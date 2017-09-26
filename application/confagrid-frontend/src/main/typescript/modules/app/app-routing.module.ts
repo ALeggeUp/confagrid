@@ -10,8 +10,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { IntroComponent } from '../main/views/intro/intro.component';
-
 export const routes: Routes = [
   { path: '', loadChildren: '../main/main.module#MainModule' }
 ];
