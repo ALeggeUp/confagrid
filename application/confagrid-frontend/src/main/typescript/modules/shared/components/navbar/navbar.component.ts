@@ -1,5 +1,5 @@
 /*
- * brand.component.ts
+ * navbar.component.ts
  *
  * Copyright (C) 2017 [ A Legge Up ]
  *
@@ -10,15 +10,18 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-nav-brand',
-  templateUrl: './brand.component.html',
-  styleUrls: ['./brand.component.less'],
+  selector: 'app-nav',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.less'],
 })
 
-export class NavBrandComponent implements OnInit {
+export class NavBarComponent implements OnInit {
 
-  name = '[ A Legge Up ]';
-  url = 'http://www.aleggeup.com';
+  menuItems = [
+    'Item 1',
+    'Item 2',
+    'Item 3'
+  ];
 
   ngOnInit() {
   }

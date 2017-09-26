@@ -10,22 +10,26 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { ContentComponent } from './content/content.component';
-import { CoreModule } from './core/core.module';
+import { AppComponent } from './app.component';
 
-import { CollarDirective } from './core/directive/collar.directive';
+import { MainModule } from '../main/main.module';
+import { SharedModule } from '../shared/shared.module';
+
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
-    ContentComponent,
-    CollarDirective
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    CoreModule
+    MainModule,
+    SharedModule,
+    AppRoutingModule
   ],
-  providers: [],
-  bootstrap: [ContentComponent]
+  providers: [
+  ],
+  bootstrap: [AppComponent]
 })
 
 export class AppModule {

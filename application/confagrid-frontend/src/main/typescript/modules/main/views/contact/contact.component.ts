@@ -1,5 +1,5 @@
 /*
- * content.component.ts
+ * contact.component.ts
  *
  * Copyright (C) 2017 [ A Legge Up ]
  *
@@ -10,12 +10,12 @@
 import { Component, Inject, OnInit, AfterViewInit } from '@angular/core';
 
 @Component({
-    selector: 'app-content-root',
-    templateUrl: './content.component.html',
-    styleUrls: ['./content.component.less', './content.album.css']
+    selector: 'app-contact-content',
+    templateUrl: './contact.component.html',
+    styleUrls: ['./contact.component.less', './content.album.css']
 })
 
-export class ContentComponent implements OnInit, AfterViewInit {
+export class ContactComponent implements OnInit, AfterViewInit {
     title = 'Confagrid';
 
     constructor() {
