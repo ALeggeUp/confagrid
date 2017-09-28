@@ -12,11 +12,12 @@ import { Component, Inject, OnInit, AfterViewInit } from '@angular/core';
 @Component({
     selector: 'app-intro-content',
     templateUrl: './intro.component.html',
-    styleUrls: ['./intro.component.less', './content.album.css']
+    styleUrls: ['./intro.component.less', './intro.component.css']
 })
 
 export class IntroComponent implements OnInit, AfterViewInit {
     title = 'Confagrid';
+    subtitle = 'Word Grid Generator';
 
     constructor() {
     }
