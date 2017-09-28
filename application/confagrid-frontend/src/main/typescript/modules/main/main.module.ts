@@ -11,6 +11,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MainRoutingModule } from './main-routing.module';
+import { SharedModule } from '../shared/shared.module';
+
 import { IntroComponent } from './views/intro/intro.component';
 import { ContactComponent } from './views/contact/contact.component';
 
@@ -22,7 +24,8 @@ import { LoggerService } from './services/logger.service';
     ContactComponent
   ],
   imports: [
-    MainRoutingModule
+    MainRoutingModule,
+    SharedModule
   ],
   exports: [
   ],
