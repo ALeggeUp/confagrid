@@ -149,7 +149,6 @@ public class DirectedAcyclicWordGraphTest {
 
         assertTrue(dawg.hasOrder());
         dawg.getGroups();
-        dawg.dumpAdjacentVerticies();
     }
 
     @Test
