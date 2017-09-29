@@ -26,13 +26,17 @@ public class WordList
         final Set<Word> wordsFromPhrase = phrase.getWords();
 
         for (final Word word : wordsFromPhrase) {
-            if (!dupList.containsKey(word.getWord()) || dupList.get(word.getWord()).intValue() < word.getOccurrence()) {
-                dupList.put(word.getWord(), word.getOccurrence());
-            }
+            addWord(word);
+        }
+    }
 
-            if (!wordIndex.containsKey(word)) {
-                wordIndex.put(word, wordIndex.size());
-            }
+    protected void addWord(final Word word) {
+        if (!dupList.containsKey(word.getWord()) || dupList.get(word.getWord()).intValue() < word.getOccurrence()) {
+            dupList.put(word.getWord(), word.getOccurrence());
+        }
+
+        if (!wordIndex.containsKey(word)) {
+            wordIndex.put(word, wordIndex.size());
         }
     }
 
@@ -60,7 +64,12 @@ public class WordList
     }
 
     public int getWordId(final Word word) {
-        return wordIndex.get(word).intValue();
+        final Integer wordValue = wordIndex.get(word);
+        if (wordValue != null) {
+            return wordIndex.get(word).intValue();
+        } else {
+            return -1;
+        }
     }
 
     public Map<String, Integer> getDupList() {
