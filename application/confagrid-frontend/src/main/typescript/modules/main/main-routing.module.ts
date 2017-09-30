@@ -10,12 +10,21 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { IntroComponent } from './views/intro/intro.component';
 import { ContactComponent } from './views/contact/contact.component';
+import { CreateComponent } from './views/create/create.component';
+import { EditComponent } from './views/edit/edit.component';
+import { ExistingComponent } from './views/existing/existing.component';
+import { IntroComponent } from './views/intro/intro.component';
+import { MoreComponent } from './views/more/more.component';
 
 export const routes: Routes = [
   { path: '', component: IntroComponent },
-  { path: 'contact', component: ContactComponent }
+  { path: 'contact', component: ContactComponent },
+  { path: 'create', component: CreateComponent },
+  { path: 'edit', component: EditComponent },
+  { path: 'existing', component: ExistingComponent },
+  { path: 'intro', component: IntroComponent },
+  { path: 'more', component: MoreComponent },
 ];
 
 @NgModule({

@@ -13,15 +13,23 @@ import { CommonModule } from '@angular/common';
 import { MainRoutingModule } from './main-routing.module';
 import { SharedModule } from '../shared/shared.module';
 
-import { IntroComponent } from './views/intro/intro.component';
 import { ContactComponent } from './views/contact/contact.component';
+import { CreateComponent } from './views/create/create.component';
+import { EditComponent } from './views/edit/edit.component';
+import { ExistingComponent } from './views/existing/existing.component';
+import { IntroComponent } from './views/intro/intro.component';
+import { MoreComponent } from './views/more/more.component';
 
 import { LoggerService } from './services/logger.service';
 
 @NgModule({
   declarations: [
+    ContactComponent,
+    CreateComponent,
+    EditComponent,
+    ExistingComponent,
     IntroComponent,
-    ContactComponent
+    MoreComponent
   ],
   imports: [
     MainRoutingModule,
