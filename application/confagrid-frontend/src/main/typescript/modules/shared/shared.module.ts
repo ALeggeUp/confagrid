@@ -9,6 +9,7 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Routes, RouterModule } from '@angular/router';
 
 import { NavBarComponent } from './components/navbar/navbar.component';
 import { NavBarBrandComponent } from './components/navbar/brand/brand.component';
@@ -19,6 +20,7 @@ import { NavBarBrandComponent } from './components/navbar/brand/brand.component'
     NavBarBrandComponent
   ],
   imports: [
+    RouterModule,
     CommonModule
   ],
   exports: [

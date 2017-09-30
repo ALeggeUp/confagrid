@@ -18,7 +18,7 @@ import { IntroComponent } from './views/intro/intro.component';
 import { MoreComponent } from './views/more/more.component';
 
 export const routes: Routes = [
-  { path: '', component: IntroComponent },
+  { path: '', redirectTo: '/intro', pathMatch: 'full' },
   { path: 'contact', component: ContactComponent },
   { path: 'create', component: CreateComponent },
   { path: 'edit', component: EditComponent },
