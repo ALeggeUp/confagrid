@@ -13,11 +13,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { NavBarComponent } from './components/navbar/navbar.component';
 import { NavBarBrandComponent } from './components/navbar/brand/brand.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
     NavBarComponent,
-    NavBarBrandComponent
+    NavBarBrandComponent,
+    FooterComponent
   ],
   imports: [
     RouterModule,
@@ -25,7 +27,8 @@ import { NavBarBrandComponent } from './components/navbar/brand/brand.component'
   ],
   exports: [
     NavBarComponent,
-    NavBarBrandComponent
+    NavBarBrandComponent,
+    FooterComponent
   ],
   providers: []
 })
