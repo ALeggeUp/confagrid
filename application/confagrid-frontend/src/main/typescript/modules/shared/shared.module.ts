@@ -14,6 +14,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NavBarComponent } from './components/navbar/navbar.component';
 import { NavBarBrandComponent } from './components/navbar/brand/brand.component';
 
+import { HeaderBannerComponent } from './components/header-banner/header-banner.component';
 import { FooterAsideComponent } from './components/footer-aside/footer-aside.component';
 import { FooterComponent } from './components/footer/footer.component';
 
@@ -21,6 +22,7 @@ import { FooterComponent } from './components/footer/footer.component';
   declarations: [
     NavBarComponent,
     NavBarBrandComponent,
+    HeaderBannerComponent,
     FooterAsideComponent,
     FooterComponent
   ],
@@ -31,6 +33,7 @@ import { FooterComponent } from './components/footer/footer.component';
   exports: [
     NavBarComponent,
     NavBarBrandComponent,
+    HeaderBannerComponent,
     FooterAsideComponent,
     FooterComponent
   ],
