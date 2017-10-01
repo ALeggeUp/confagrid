@@ -12,7 +12,7 @@ import { Component, Inject, OnInit, AfterViewInit } from '@angular/core';
 @Component({
     selector: 'app-contact-content',
     templateUrl: './contact.component.html',
-    styleUrls: ['./contact.component.less', './content.album.css']
+    styleUrls: ['./content.album.css']
 })
 
 export class ContactComponent implements OnInit, AfterViewInit {
