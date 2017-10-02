@@ -8,6 +8,7 @@
  */
 
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 
 import { WordGridModel } from '../../models/word-grid.model';
@@ -25,7 +26,7 @@ export class CreateComponent implements OnInit {
 
     wordGridForm: FormGroup;
 
-    constructor(private formBuilder: FormBuilder) {
+    constructor(private router: Router, private formBuilder: FormBuilder) {
         this.createForm();
     }
 
@@ -43,5 +44,6 @@ export class CreateComponent implements OnInit {
     onSubmit() {
         console.log('onSubmit');
         console.log(this.wordGridForm.value);
+        this.router.navigate(['/create', this.wordGridForm.value.title]);
     }
 }

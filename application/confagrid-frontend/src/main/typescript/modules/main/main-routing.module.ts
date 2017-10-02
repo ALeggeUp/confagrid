@@ -21,6 +21,7 @@ export const routes: Routes = [
   { path: '', redirectTo: '/intro', pathMatch: 'full' },
   { path: 'contact', component: ContactComponent },
   { path: 'create', component: CreateComponent },
+  { path: 'create/:title', component: CreateComponent },
   { path: 'edit', component: EditComponent },
   { path: 'existing', component: ExistingComponent },
   { path: 'intro', component: IntroComponent },
