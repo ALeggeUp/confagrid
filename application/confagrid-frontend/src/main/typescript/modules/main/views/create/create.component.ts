@@ -7,7 +7,10 @@
  * of the MIT license.  See the LICENSE file for details.
  */
 
-import { Component, Inject, OnInit, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+
+import { WordGridModel } from '../../models/word-grid.model';
 
 @Component({
     selector: 'app-create-grid',
@@ -15,14 +18,30 @@ import { Component, Inject, OnInit, AfterViewInit } from '@angular/core';
     styleUrls: ['./create.component.css']
 })
 
-export class CreateComponent implements OnInit, AfterViewInit {
+export class CreateComponent implements OnInit {
 
-    constructor() {
+    @Input()
+    wordGrid: WordGridModel;
+
+    wordGridForm: FormGroup;
+
+    constructor(private formBuilder: FormBuilder) {
+        this.createForm();
+    }
+
+    createForm() {
+        this.wordGridForm = this.formBuilder.group({
+            title: '',
+            dimensions: '',
+            description: ''
+        });
     }
 
     ngOnInit() {
     }
 
-    ngAfterViewInit() {
+    onSubmit() {
+        console.log('onSubmit');
+        console.log(this.wordGridForm.value);
     }
 }
