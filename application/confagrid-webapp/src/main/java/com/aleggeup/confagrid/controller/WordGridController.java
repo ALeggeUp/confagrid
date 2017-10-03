@@ -15,7 +15,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.aleggeup.confagrid.data.WordGridRepository;
@@ -40,6 +42,16 @@ public class WordGridController {
         for (final Iterator<WordGrid> iterator = this.wordGridRepository.findAll().iterator(); iterator.hasNext();) {
             wordGrids.add(iterator.next());
         }
+
+        return wordGrids;
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value="/word-grids")
+    @ResponseBody
+    public List<WordGrid> create(@RequestBody WordGrid wordGrid) {
+        final List<WordGrid> wordGrids = new ArrayList<>();
+        final WordGrid savedWordGrid = this.wordGridRepository.save(wordGrid);
+        wordGrids.add(savedWordGrid);
 
         return wordGrids;
     }
