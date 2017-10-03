@@ -16,7 +16,7 @@ Contributors
 How to use
 ----------
 
-* Run 'mvn package' to compile
+* Run `mvn package` to compile
 * Start the server with `java -jar application/confagrid-webapp/target/confagrid-webapp-0.9.0-SNAPSHOT.jar`
 * Open your browser and go to 'http://localhost:8080/'
 
