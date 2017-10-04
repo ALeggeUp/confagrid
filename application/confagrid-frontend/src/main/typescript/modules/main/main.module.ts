@@ -10,6 +10,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MainRoutingModule } from './main-routing.module';
 import { SharedModule } from '../shared/shared.module';
@@ -35,6 +36,7 @@ import { LoggerService } from './services/logger.service';
   imports: [
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     MainRoutingModule,
     SharedModule
   ],
