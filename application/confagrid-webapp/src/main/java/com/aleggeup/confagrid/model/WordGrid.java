@@ -44,6 +44,10 @@ public class WordGrid {
         this.description = description;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public void setTitle(final String title) {
         this.title = title;
     }
