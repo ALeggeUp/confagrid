@@ -1,0 +1,16 @@
+spring:
+    application:
+        name: confagrid
+    datasource:
+        driverClassName: org.h2.Driver
+        url: jdbc:h2:~/embeddedConfagridDb;DB_CLOSE_ON_EXIT=FALSE
+    jpa:
+        hibernate:
+            ddlAuto: update
+            ddl-auto: update
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.H2Dialect
+
+server:
+    port: 9000
