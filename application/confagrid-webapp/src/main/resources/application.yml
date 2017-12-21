@@ -13,4 +13,4 @@ spring:
                 dialect: org.hibernate.dialect.H2Dialect
 
 server:
-    port: 9000
+    port: 8080
