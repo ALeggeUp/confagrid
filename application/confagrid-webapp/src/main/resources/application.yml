@@ -6,7 +6,6 @@ spring:
         url: jdbc:h2:~/embeddedConfagridDb;DB_CLOSE_ON_EXIT=FALSE
     jpa:
         hibernate:
-            ddlAuto: update
             ddl-auto: update
         properties:
             hibernate:
