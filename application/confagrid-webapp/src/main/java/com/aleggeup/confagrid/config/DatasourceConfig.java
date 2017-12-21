@@ -11,6 +11,7 @@ package com.aleggeup.confagrid.config;
 
 import javax.sql.DataSource;
 
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -19,12 +20,12 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 public class DatasourceConfig {
 
     @Bean
-    DataSource datasource() {
+    DataSource datasource(final DataSourceProperties datasourceProperties) {
         final DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.setUsername("embedded");
-        dataSource.setPassword("embedded");
-        dataSource.setUrl("jdbc:h2:~/embeddedConfagridDb;DB_CLOSE_ON_EXIT=FALSE");
+        dataSource.setDriverClassName(datasourceProperties.getDriverClassName());
+        dataSource.setUsername(datasourceProperties.getUsername());
+        dataSource.setPassword(datasourceProperties.getPassword());
+        dataSource.setUrl(datasourceProperties.getUrl());
 
         return dataSource;
     }

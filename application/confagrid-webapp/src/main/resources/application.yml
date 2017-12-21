@@ -1,9 +1,13 @@
 spring:
     application:
         name: confagrid
+
     datasource:
-        driverClassName: org.h2.Driver
+        username: embedded
+        password: embedded
+        driver-class-name: org.h2.Driver
         url: jdbc:h2:~/embeddedConfagridDb;DB_CLOSE_ON_EXIT=FALSE
+
     jpa:
         hibernate:
             ddl-auto: update
