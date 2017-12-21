@@ -31,9 +31,8 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
 
-    <web3j-version>2.3.1</web3j-version>
-    <spring-framework-version>4.2.0.RELEASE</spring-framework-version>
-    <spring-boot-version>1.2.2.RELEASE</spring-boot-version>
+    <spring-framework-version>5.0.2.RELEASE</spring-framework-version>
+    <spring-boot-version>1.5.9.RELEASE</spring-boot-version>
 
     <commons-cli.version>1.4</commons-cli.version>
     <junit.version>4.12</junit.version>
