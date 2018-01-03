@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class RouteController {
 
     @RequestMapping({
+        "/login",
         "/create",
         "/existing",
         "/intro",
