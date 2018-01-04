@@ -23,6 +23,10 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+    <spring-framework-version>5.0.2.RELEASE</spring-framework-version>
+    <spring-security-version>5.0.0.RELEASE</spring-security-version>
+    <spring-boot-version>1.5.9.RELEASE</spring-boot-version>
+
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
 
@@ -32,6 +36,20 @@
 
   <dependencyManagement>
     <dependencies>
+
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-framework-bom</artifactId>
+        <version>5.0.2.RELEASE</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-web</artifactId>
+        <version>${spring-security-version}</version>
+      </dependency>
 
       <!-- https://mvnrepository.com/artifact/commons-cli/commons-cli -->
       <dependency>

@@ -31,10 +31,8 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
 
-    <spring-framework-version>5.0.2.RELEASE</spring-framework-version>
-    <spring-boot-version>1.5.9.RELEASE</spring-boot-version>
-
     <commons-cli.version>1.4</commons-cli.version>
+    <jjwt-version>0.9.0</jjwt-version>
     <junit.version>4.12</junit.version>
   </properties>
 
@@ -60,9 +58,27 @@
     </dependency>
 
     <dependency>
-       <groupId>org.springframework.boot</groupId>
-       <artifactId>spring-boot-starter-data-jpa</artifactId>
-       <version>${spring-boot-version}</version>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+      <version>${spring-boot-version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.springframework/spring-expression -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-expression</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-web</artifactId>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.9.3</version>
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
@@ -84,6 +100,13 @@
       <groupId>org.yaml</groupId>
       <artifactId>snakeyaml</artifactId>
       <version>1.19</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt</artifactId>
+      <version>${jjwt-version}</version>
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/junit/junit -->
