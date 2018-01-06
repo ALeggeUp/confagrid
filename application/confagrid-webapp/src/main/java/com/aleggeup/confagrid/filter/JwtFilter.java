@@ -13,17 +13,22 @@ import java.io.IOException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.web.filter.GenericFilterBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureException;
+import io.jsonwebtoken.impl.DefaultClaims;
 
-public class JwtFilter extends GenericFilterBean {
+public class JwtFilter extends OncePerRequestFilter {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(JwtFilter.class);
 
     public static final String ATTRIBUTE_CLAIMS = "claims";
     public static final String BEARER_PREFIX = "Bearer ";
@@ -31,26 +36,28 @@ public class JwtFilter extends GenericFilterBean {
     public static final String SECRET_KEY = "secretkey";
 
     @Override
-    public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain)
-            throws IOException, ServletException {
+    protected void doFilterInternal(final HttpServletRequest request, final HttpServletResponse response, final FilterChain chain)
+            throws ServletException, IOException {
 
-        final HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-
-        final String authHeader = httpServletRequest.getHeader(HEADER_AUTHORIZATION);
+        final String authHeader = request.getHeader(HEADER_AUTHORIZATION);
+        Claims claims = null;
+        SecurityContextHolder.getContext().setAuthentication(null);
         if (authHeader == null || !authHeader.startsWith(BEARER_PREFIX)) {
-            throw new ServletException("Missing or invalid Authorization header.");
+            LOGGER.info("Missing or invalid Authorization header.");
+            claims = new DefaultClaims().setSubject("anonymous");
+        } else {
+            try {
+                final String token = authHeader.substring(BEARER_PREFIX.length());
+                claims = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+            } catch(final JwtException e) {
+                LOGGER.warn("Unable to get claims from bearer token", e);
+                claims = new DefaultClaims().setSubject("anonymous");
+            }
         }
 
-        final String token = authHeader.substring(BEARER_PREFIX.length());
-
-        try {
-            final Claims claims = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+        if (claims != null) {
             request.setAttribute(ATTRIBUTE_CLAIMS, claims);
         }
-        catch (final SignatureException e) {
-            throw new ServletException("Invalid token.");
-        }
-
-        chain.doFilter(httpServletRequest, response);
+        chain.doFilter(request, response);
     }
 }
