@@ -41,7 +41,7 @@ public class ApiController {
 
         return getRoles(claims).stream().anyMatch(map -> map.containsValue(role));
     }
-    
+
     @SuppressWarnings("unchecked")
     private List<LinkedHashMap<String, String>> getRoles(final Claims claims) {
         final Object roles = claims.get("roles");
