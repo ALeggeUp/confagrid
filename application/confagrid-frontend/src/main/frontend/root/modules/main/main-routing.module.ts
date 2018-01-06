@@ -23,13 +23,13 @@ import { AuthGuardService } from './services/auth-guard.service';
 export const routes: Routes = [
   { path: '', redirectTo: '/intro', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'contact', component: ContactComponent, canActivate: [AuthGuardService] },
+  { path: 'contact', component: ContactComponent },
+  { path: 'existing', component: ExistingComponent },
+  { path: 'intro', component: IntroComponent },
+  { path: 'more', component: MoreComponent },
   { path: 'create', component: CreateComponent, canActivate: [AuthGuardService] },
   { path: 'create/:title', component: CreateComponent, canActivate: [AuthGuardService] },
   { path: 'edit/:id', component: EditComponent, canActivate: [AuthGuardService] },
-  { path: 'existing', component: ExistingComponent, canActivate: [AuthGuardService] },
-  { path: 'intro', component: IntroComponent, canActivate: [AuthGuardService] },
-  { path: 'more', component: MoreComponent, canActivate: [AuthGuardService] },
 ];
 
 @NgModule({
