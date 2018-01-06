@@ -9,6 +9,7 @@
 
 package com.aleggeup.confagrid.controller;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -43,6 +44,11 @@ public class ApiController {
     
     @SuppressWarnings("unchecked")
     private List<LinkedHashMap<String, String>> getRoles(final Claims claims) {
-        return (List<LinkedHashMap<String, String>>)claims.get("roles");
+        final Object roles = claims.get("roles");
+        if (roles != null) {
+            return (List<LinkedHashMap<String, String>>)claims.get("roles");
+        } else {
+            return Collections.EMPTY_LIST;
+        }
     }
 }
