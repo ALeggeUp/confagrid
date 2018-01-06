@@ -46,7 +46,7 @@ public class ApiController {
     private List<LinkedHashMap<String, String>> getRoles(final Claims claims) {
         final Object roles = claims.get("roles");
         if (roles != null) {
-            return (List<LinkedHashMap<String, String>>)claims.get("roles");
+            return (List<LinkedHashMap<String, String>>)roles;
         } else {
             return Collections.EMPTY_LIST;
         }
