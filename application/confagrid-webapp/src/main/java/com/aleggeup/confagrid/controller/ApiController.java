@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.aleggeup.confagrid.filter.JwtFilter;
+
 import io.jsonwebtoken.Claims;
 
 @RestController
@@ -29,7 +31,8 @@ public class ApiController {
     @RequestMapping(value = "role/{role}", method = RequestMethod.GET)
     public Boolean login(@PathVariable final String role,
             final HttpServletRequest request) throws ServletException {
-        final Claims claims = (Claims) request.getAttribute("claims");
+
+        final Claims claims = (Claims) request.getAttribute(JwtFilter.ATTRIBUTE_CLAIMS);
 
         if (claims == null || claims.isEmpty()) {
             return false;

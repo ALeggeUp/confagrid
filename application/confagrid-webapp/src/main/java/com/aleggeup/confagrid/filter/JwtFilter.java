@@ -25,10 +25,10 @@ import io.jsonwebtoken.SignatureException;
 
 public class JwtFilter extends GenericFilterBean {
 
-    private static final String HEADER_AUTHORIZATION = "Authorization";
-    private static final String BEARER_PREFIX = "Bearer ";
-    private static final String SECRET_KEY = "secretkey";
-    private static final String ATTRIBUTE_CLAIMS = "claims";
+    public static final String ATTRIBUTE_CLAIMS = "claims";
+    public static final String BEARER_PREFIX = "Bearer ";
+    public static final String HEADER_AUTHORIZATION = "Authorization";
+    public static final String SECRET_KEY = "secretkey";
 
     @Override
     public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain)

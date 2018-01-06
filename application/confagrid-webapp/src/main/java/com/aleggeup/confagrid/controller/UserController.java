@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aleggeup.confagrid.controller.exception.InvalidLoginException;
+import com.aleggeup.confagrid.filter.JwtFilter;
 import com.aleggeup.confagrid.model.LoginResponse;
 import com.aleggeup.confagrid.model.UserLogin;
 import com.aleggeup.confagrid.repository.entity.User;
@@ -53,7 +54,7 @@ public class UserController {
         return new LoginResponse(Jwts.builder().setSubject(login.getName())
             .claim("roles", user.getRoles())
             .setIssuedAt(new Date())
-            .signWith(SignatureAlgorithm.HS256, "secretkey")
+            .signWith(SignatureAlgorithm.HS256, JwtFilter.SECRET_KEY)
             .compact());
     }
 }
