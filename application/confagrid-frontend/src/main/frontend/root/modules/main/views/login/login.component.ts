@@ -9,6 +9,8 @@
 
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { AuthGuardService } from '../../services/auth-guard.service';
 
@@ -20,7 +22,20 @@ import { AuthGuardService } from '../../services/auth-guard.service';
 
 export class LoginComponent {
 
-    constructor(private authGuardService: AuthGuardService, private router: Router) {
+    loginForm: FormGroup;
+
+    constructor(private http: HttpClient,
+            private authGuardService: AuthGuardService,
+            private router: Router,
+            private formBuilder: FormBuilder) {
+        this.createForm();
+    }
+
+    createForm() {
+        this.loginForm = this.formBuilder.group({
+            name: '',
+            password: ''
+        });
     }
 
     toggleLogin() {
@@ -32,5 +47,12 @@ export class LoginComponent {
         } else {
             this.router.navigate(['/intro']);
         }
+    }
+
+    onSubmit() {
+        this.http.post('/user/login', this.loginForm.value).subscribe(data => {
+            console.log(data);
+            this.toggleLogin();
+        });
     }
 }
