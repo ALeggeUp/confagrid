@@ -53,7 +53,7 @@ export class LoginComponent {
 
     onSubmit() {
         this.authService
-            .login(this.loginForm.value.name, this.loginForm.value.password)
+            .login(this.loginForm.value)
             .subscribe(data => {
                 console.log('token: ' + data.token);
                 this.toggleLogin();

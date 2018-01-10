@@ -23,13 +23,9 @@ export class AuthenticationService {
     constructor(private http:Http) {
     }
 
-    login(username: string, password: string): Observable<LoginResponseModel> {
+    login(data: any): Observable<LoginResponseModel> {
         let cpHeaders = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: cpHeaders });
-        let data = {
-            name: username,
-            password: password
-        };
 
         return this.http.post(this.loginUrl, data, options)
             .map(this.extractData)
