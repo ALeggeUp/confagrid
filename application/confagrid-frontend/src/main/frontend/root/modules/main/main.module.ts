@@ -8,9 +8,11 @@
  */
 
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 
 import { MainRoutingModule } from './main-routing.module';
 import { SharedModule } from '../shared/shared.module';
@@ -23,6 +25,7 @@ import { ExistingComponent } from './views/existing/existing.component';
 import { IntroComponent } from './views/intro/intro.component';
 import { MoreComponent } from './views/more/more.component';
 
+import { AuthenticationService } from './services/authentication.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { LoggerService } from './services/logger.service';
 
@@ -37,6 +40,8 @@ import { LoggerService } from './services/logger.service';
     MoreComponent
   ],
   imports: [
+    BrowserModule,
+    HttpModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -46,6 +51,7 @@ import { LoggerService } from './services/logger.service';
   exports: [
   ],
   providers: [
+    AuthenticationService,
     AuthGuardService,
     LoggerService
   ]

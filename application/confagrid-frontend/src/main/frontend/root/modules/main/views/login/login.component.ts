@@ -13,6 +13,7 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { AuthGuardService } from '../../services/auth-guard.service';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
     selector: 'app-login-content',
@@ -27,7 +28,8 @@ export class LoginComponent {
     constructor(private http: HttpClient,
             private authGuardService: AuthGuardService,
             private router: Router,
-            private formBuilder: FormBuilder) {
+            private formBuilder: FormBuilder,
+            private authService: AuthenticationService) {
         this.createForm();
     }
 
@@ -50,9 +52,11 @@ export class LoginComponent {
     }
 
     onSubmit() {
-        this.http.post('/user/login', this.loginForm.value).subscribe(data => {
-            console.log(data);
-            this.toggleLogin();
-        });
+        this.authService
+            .login(this.loginForm.value.name, this.loginForm.value.password)
+            .subscribe(data => {
+                console.log('token: ' + data.token);
+                this.toggleLogin();
+            });
     }
 }
