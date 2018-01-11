@@ -28,6 +28,7 @@ import { MoreComponent } from './views/more/more.component';
 import { AuthenticationService } from './services/authentication.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { LoggerService } from './services/logger.service';
+import { WordGridService } from './services/word-grid.service';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { LoggerService } from './services/logger.service';
   providers: [
     AuthenticationService,
     AuthGuardService,
-    LoggerService
+    LoggerService,
+    WordGridService
   ]
 })
 

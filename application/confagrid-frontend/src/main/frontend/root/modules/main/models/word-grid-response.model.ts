@@ -1,5 +1,5 @@
 /*
- * word-grid.model.ts
+ * word-grid-response.model.ts
  *
  * Copyright (C) 2017 [ A Legge Up ]
  *
@@ -7,9 +7,9 @@
  * of the MIT license.  See the LICENSE file for details.
  */
 
-export class WordGridModel {
-  id = 0;
-  title = '';
-  dimensions = '';
-  description = '';
+export interface WordGridResponseItem {
+  title: string;
+  dimensionWidth: number;
+  dimensionHeight: number;
+  description: string;
 }
