@@ -19,8 +19,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.aleggeup.confagrid.repository.entity.Role;
-import com.aleggeup.confagrid.repository.entity.User;
+import com.aleggeup.confagrid.model.Role;
+import com.aleggeup.confagrid.model.User;
 import com.aleggeup.confagrid.service.UserService;
 
 @Component

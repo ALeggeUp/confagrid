@@ -1,5 +1,5 @@
 /*
- * UserLogin.java
+ * LoginRequest.java
  *
  * Copyright (C) 2017 [ A Legge Up ]
  *
@@ -9,17 +9,17 @@
 
 package com.aleggeup.confagrid.model;
 
-public class UserLogin {
+public class LoginRequest {
 
     private String name;
 
     private String password;
 
-    public UserLogin() {
-        // Intentionally empty
+    public LoginRequest() {
+        // Intentionally left empty
     }
 
-    public UserLogin(final String name, final String password) {
+    public LoginRequest(final String name, final String password) {
         this.name = name;
         this.password = password;
     }

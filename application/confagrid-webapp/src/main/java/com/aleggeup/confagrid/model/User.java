@@ -7,7 +7,7 @@
  * of the MIT license.  See the LICENSE file for details.
  */
 
-package com.aleggeup.confagrid.repository.entity;
+package com.aleggeup.confagrid.model;
 
 import java.util.Set;
 

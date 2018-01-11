@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.aleggeup.confagrid.controller.exception.InvalidLoginException;
 import com.aleggeup.confagrid.filter.JwtFilter;
 import com.aleggeup.confagrid.model.LoginResponse;
-import com.aleggeup.confagrid.model.UserLogin;
-import com.aleggeup.confagrid.repository.entity.User;
+import com.aleggeup.confagrid.model.User;
+import com.aleggeup.confagrid.model.LoginRequest;
 import com.aleggeup.confagrid.service.UserService;
 
 import io.jsonwebtoken.Jwts;
@@ -39,7 +39,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public LoginResponse login(@RequestBody final UserLogin login) throws InvalidLoginException {
+    public LoginResponse login(@RequestBody final LoginRequest login) throws InvalidLoginException {
 
         if (login == null || login.getName() == null || !userService.containsKey(login.getName()) ||
                 login.getPassword() == null || login.getPassword().isEmpty()) {

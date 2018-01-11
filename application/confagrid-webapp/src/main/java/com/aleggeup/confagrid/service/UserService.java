@@ -9,7 +9,7 @@
 
 package com.aleggeup.confagrid.service;
 
-import com.aleggeup.confagrid.repository.entity.User;
+import com.aleggeup.confagrid.model.User;
 
 public interface UserService {
 
