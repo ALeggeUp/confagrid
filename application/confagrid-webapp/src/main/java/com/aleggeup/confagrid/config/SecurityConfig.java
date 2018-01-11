@@ -1,5 +1,5 @@
 /*
- * SecurityBeans.java
+ * SecurityConfig.java
  *
  * Copyright (C) 2017 [ A Legge Up ]
  *
