@@ -11,7 +11,7 @@ package com.aleggeup.confagrid.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.aleggeup.confagrid.repository.entity.User;
+import com.aleggeup.confagrid.model.User;
 
 public interface UserRepository extends CrudRepository<User, String> {
 }

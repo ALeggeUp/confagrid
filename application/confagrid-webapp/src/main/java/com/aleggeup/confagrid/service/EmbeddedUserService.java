@@ -15,8 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.aleggeup.confagrid.model.User;
 import com.aleggeup.confagrid.repository.UserRepository;
-import com.aleggeup.confagrid.repository.entity.User;
 
 @Service
 public class EmbeddedUserService implements UserService {
