@@ -13,7 +13,8 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import { LoginResponseModel } from '../models/login-response.model';
+import { LoginRequest } from '../models/login-request.model';
+import { LoginResponse } from '../models/login-response.model';
 
 @Injectable()
 export class AuthenticationService {
@@ -23,11 +24,11 @@ export class AuthenticationService {
     constructor(private http:Http) {
     }
 
-    login(data: any): Observable<LoginResponseModel> {
+    login(request: LoginRequest): Observable<LoginResponse> {
         let cpHeaders = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: cpHeaders });
 
-        return this.http.post(this.loginUrl, data, options)
+        return this.http.post(this.loginUrl, request, options)
             .map(this.extractData)
             .catch(this.handleError);
     }

@@ -1,5 +1,5 @@
 /*
- * login-response.model.ts
+ * login-request.model.ts
  *
  * Copyright (C) 2017 [ A Legge Up ]
  *
@@ -7,6 +7,7 @@
  * of the MIT license.  See the LICENSE file for details.
  */
 
-export interface LoginResponse {
-  token: string;
+export interface LoginRequest {
+  name: string;
+  password: string;
 }
