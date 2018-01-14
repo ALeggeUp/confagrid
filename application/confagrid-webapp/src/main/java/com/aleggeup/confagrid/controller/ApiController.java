@@ -97,10 +97,17 @@ public class ApiController {
 
     public void paint(final Graphics2D g2d) {
         g2d.setPaint(new Color(0, 0, 0, 0.1f));
-        g2d.fill(new Rectangle(0, 0, 1000, 1000));
-        g2d.setStroke(new BasicStroke());
+        g2d.fill(new Rectangle(0, 0, 800, 600));
+        g2d.setStroke(new BasicStroke(4.0f));
         g2d.setPaint(new Color(0, 0, 0, 1.0f));
-        g2d.drawRect(10, 10, 980, 980);
-        g2d.drawLine(100, 10, 100, 990);
+
+        g2d.drawRect(0, 0, 800, 600);
+        for (int i = 0; i < 16 + 1; ++i) {
+            g2d.drawLine(i * 50, 0, i * 50, 600);
+        }
+        for (int i = 0; i < 12 + 1; ++i) {
+            g2d.drawLine(0, i * 50, 800, i * 50);
+        }
+
       }
 }
