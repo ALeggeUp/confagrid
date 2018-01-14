@@ -81,6 +81,20 @@
       <version>2.9.3</version>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/batik/batik-rasterizer -->
+    <dependency>
+      <groupId>batik</groupId>
+      <artifactId>batik-rasterizer</artifactId>
+      <version>1.6-1</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/batik/batik-svggen -->
+    <dependency>
+      <groupId>batik</groupId>
+      <artifactId>batik-svggen</artifactId>
+      <version>1.6-1</version>
+    </dependency>
+
     <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
     <dependency>
        <groupId>com.h2database</groupId>
