@@ -70,8 +70,8 @@ public class ApiController {
     @RequestMapping(value = "test", method = RequestMethod.GET, produces = "image/svg+xml")
     public @ResponseBody String test() throws SVGGraphics2DIOException, UnsupportedEncodingException {
 
+        final String svgNS = SVGDOMImplementation.SVG_NAMESPACE_URI;
         final DOMImplementation domImpl = GenericDOMImplementation.getDOMImplementation();
-        final String svgNS = "http://www.w3.org/2000/svg";
         final Document document = domImpl.createDocument(svgNS, "svg", null);
 
         final SVGGeneratorContext context = SVGGeneratorContext.createDefault(document);
@@ -95,6 +95,29 @@ public class ApiController {
         return baos.toString("UTF-8");
     }
 
+    private void setupFont(final Element defs, SVGGraphics2D svgGenerator, final Document document, final Element svg) {
+        final String svgNS = "http://www.w3.org/2000/svg";
+        // SVGSVGElement root = (SVGSVGElement)svgGenerator.getRoot();
+
+        Element fontface = document.createElementNS(svgNS, "font-face");
+        fontface.setAttributeNS(null, "font-family", "DroidSansRegular");
+
+        Element fontfacesrc = document.createElementNS(svgNS, "font-face-src");
+        Element fontfaceuri = document.createElementNS(svgNS, "font-face-uri");
+
+        fontfaceuri.setAttributeNS(svgNS, "xlink:href", "fonts/DroidSans-webfont.svg#DroidSansRegular");
+
+        Element fontfaceformat = document.createElementNS(svgNS, "font-face-format");
+        fontfaceformat.setAttributeNS(svgNS, "string", "svg");
+
+        fontfaceuri.appendChild(fontfaceformat);
+        fontfacesrc.appendChild(fontfaceuri);
+        fontface.appendChild(fontfacesrc);
+        defs.appendChild(fontface);
+
+        // svgRoot.appendChild(defs);
+    }
+
     public void paint(final Graphics2D g2d) {
         g2d.setPaint(new Color(0, 0, 0, 0.1f));
         g2d.fill(new Rectangle(0, 0, 800, 600));
@@ -108,6 +131,6 @@ public class ApiController {
         for (int i = 0; i < 12 + 1; ++i) {
             g2d.drawLine(0, i * 50, 800, i * 50);
         }
+    }
 
-      }
 }

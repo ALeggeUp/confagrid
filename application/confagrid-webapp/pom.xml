@@ -81,18 +81,32 @@
       <version>2.9.3</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/batik/batik-rasterizer -->
+    <!-- https://mvnrepository.com/artifact/org.apache.xmlgraphics/batik-dom -->
     <dependency>
-      <groupId>batik</groupId>
-      <artifactId>batik-rasterizer</artifactId>
-      <version>1.6-1</version>
+      <groupId>org.apache.xmlgraphics</groupId>
+      <artifactId>batik-dom</artifactId>
+      <version>1.9.1</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/batik/batik-svggen -->
+    <!-- https://mvnrepository.com/artifact/org.apache.xmlgraphics/batik-anim -->
     <dependency>
-      <groupId>batik</groupId>
+      <groupId>org.apache.xmlgraphics</groupId>
+      <artifactId>batik-anim</artifactId>
+      <version>1.9.1</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.apache.xmlgraphics/batik-svg-dom -->
+    <dependency>
+      <groupId>org.apache.xmlgraphics</groupId>
+      <artifactId>batik-svg-dom</artifactId>
+      <version>1.9.1</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.apache.xmlgraphics/batik-svggen -->
+    <dependency>
+      <groupId>org.apache.xmlgraphics</groupId>
       <artifactId>batik-svggen</artifactId>
-      <version>1.6-1</version>
+      <version>1.9.1</version>
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
