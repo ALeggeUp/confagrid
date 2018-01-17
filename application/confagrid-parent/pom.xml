@@ -30,6 +30,7 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
 
+    <apache-batik.version>1.9.1</apache-batik.version>
     <commons-cli.version>1.4</commons-cli.version>
     <junit.version>4.12</junit.version>
   </properties>
@@ -49,6 +50,34 @@
         <groupId>org.springframework.security</groupId>
         <artifactId>spring-security-web</artifactId>
         <version>${spring-security-version}</version>
+      </dependency>
+
+      <!-- https://mvnrepository.com/artifact/org.apache.xmlgraphics/batik-dom -->
+      <dependency>
+        <groupId>org.apache.xmlgraphics</groupId>
+        <artifactId>batik-dom</artifactId>
+        <version>${apache-batik.version}</version>
+      </dependency>
+
+      <!-- https://mvnrepository.com/artifact/org.apache.xmlgraphics/batik-anim -->
+      <dependency>
+        <groupId>org.apache.xmlgraphics</groupId>
+        <artifactId>batik-anim</artifactId>
+        <version>${apache-batik.version}</version>
+      </dependency>
+
+      <!-- https://mvnrepository.com/artifact/org.apache.xmlgraphics/batik-svg-dom -->
+      <dependency>
+        <groupId>org.apache.xmlgraphics</groupId>
+        <artifactId>batik-svg-dom</artifactId>
+        <version>${apache-batik.version}</version>
+      </dependency>
+
+      <!-- https://mvnrepository.com/artifact/org.apache.xmlgraphics/batik-svggen -->
+      <dependency>
+        <groupId>org.apache.xmlgraphics</groupId>
+        <artifactId>batik-svggen</artifactId>
+        <version>${apache-batik.version}</version>
       </dependency>
 
       <!-- https://mvnrepository.com/artifact/commons-cli/commons-cli -->
