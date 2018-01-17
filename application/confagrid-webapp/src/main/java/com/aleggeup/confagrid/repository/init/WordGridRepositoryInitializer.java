@@ -7,7 +7,7 @@
  * of the MIT license.  See the LICENSE file for details.
  */
 
-package com.aleggeup.confagrid.data;
+package com.aleggeup.confagrid.repository.init;
 
 import java.util.Iterator;
 
@@ -19,16 +19,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.aleggeup.confagrid.model.WordGrid;
+import com.aleggeup.confagrid.repository.WordGridRepository;
 
 @Component
-public class WordGridInitializer {
+public class WordGridRepositoryInitializer {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(WordGridInitializer.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(WordGridRepositoryInitializer.class);
 
     private final WordGridRepository wordGridRepository;
 
     @Autowired
-    public WordGridInitializer(final WordGridRepository wordGridRepository) {
+    public WordGridRepositoryInitializer(final WordGridRepository wordGridRepository) {
         this.wordGridRepository = wordGridRepository;
     }
 

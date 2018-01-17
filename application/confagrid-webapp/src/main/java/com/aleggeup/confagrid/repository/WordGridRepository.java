@@ -7,7 +7,7 @@
  * of the MIT license.  See the LICENSE file for details.
  */
 
-package com.aleggeup.confagrid.data;
+package com.aleggeup.confagrid.repository;
 
 import org.springframework.data.repository.CrudRepository;
 

@@ -7,7 +7,7 @@
  * of the MIT license.  See the LICENSE file for details.
  */
 
-package com.aleggeup.confagrid.repository;
+package com.aleggeup.confagrid.repository.init;
 
 import java.util.HashSet;
 import java.util.Set;
