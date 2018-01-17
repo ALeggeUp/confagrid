@@ -7,7 +7,7 @@
  * of the MIT license.  See the LICENSE file for details.
  */
 
-package com.aleggeup.confagrid.service;
+package com.aleggeup.confagrid.service.impl;
 
 import java.security.SecureRandom;
 
@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import com.aleggeup.confagrid.model.User;
 import com.aleggeup.confagrid.repository.UserRepository;
+import com.aleggeup.confagrid.service.UserService;
 
 @Service
 public class EmbeddedUserService implements UserService {
