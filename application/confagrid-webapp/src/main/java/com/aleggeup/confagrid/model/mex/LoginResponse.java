@@ -7,7 +7,7 @@
  * of the MIT license.  See the LICENSE file for details.
  */
 
-package com.aleggeup.confagrid.model;
+package com.aleggeup.confagrid.model.mex;
 
 public class LoginResponse {
 

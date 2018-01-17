@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.aleggeup.confagrid.controller.exception.InvalidLoginException;
 import com.aleggeup.confagrid.filter.JwtFilter;
-import com.aleggeup.confagrid.model.LoginResponse;
 import com.aleggeup.confagrid.model.User;
-import com.aleggeup.confagrid.model.LoginRequest;
+import com.aleggeup.confagrid.model.mex.LoginRequest;
+import com.aleggeup.confagrid.model.mex.LoginResponse;
 import com.aleggeup.confagrid.service.UserService;
 
 import io.jsonwebtoken.Jwts;
