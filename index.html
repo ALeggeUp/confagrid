@@ -18,3 +18,12 @@ title: index
         <h3 id="credits">Credits</h3>
         <p><a href="https://github.com/slegge" class="btn btn-github"><span class="icon"></span>Stephen Legge on GitHub</a></p>
       </section>
+
+
+  <ul>
+    {% for post in site.posts %}
+      <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
