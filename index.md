@@ -1,8 +1,8 @@
 ---
 layout: page
-title: Welcome
+title: '[ A Legge Up ] Github Log'
 show-avatar: true
-subtitle: ...to A Legge Up Labs projects.
+subtitle: 'Public FOSS and OSHW Repository'
 bigimg:
   - 'img/bigimg/bg-home.jpg': "Photo by Dariusz Sankowski on Unsplash"
 use-site-title: true
