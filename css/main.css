@@ -2,7 +2,7 @@
 layout: null
 ---
 
-@import url("pygment_highlights.css");
+@import url("rouge-theme_monokai.css");
 
 /* --- General --- */
 
@@ -640,6 +640,10 @@ table tr {
 table tr:nth-child(2n) {
   background-color: #f8f8f8;
 }
+table tbody tr:hover {
+  background-color: #eaeaea;
+}
+
 table tr th {
   font-weight: bold;
   border: 1px solid #cccccc;
@@ -665,20 +669,24 @@ table tr td :last-child {
 /* --- Code blocks --- */
 
 pre {
-  font-size: 16px;
-  line-height: 1.5em;
+  font-size: 14px;
+  line-height: 1.2em;
 }
 pre code {
   white-space: pre;
 }
+
 pre.highlight, .highlight > pre, td.code pre {
-  background-color: #FAFAFA;
+  /*
+  background: #FAFAFA;
   background-image: linear-gradient(#F9F9F9 50%, #FDFDFD 50%);
   background-repeat: repeat;
   background-size: 3em 3em;
   background-position: 0px 10px;
+  */
   border-left: 7px solid #444;
 }
+/*
 code table, code table td, code table th, code table tbody, code table tr,
 td.gutter pre {
   padding: 0;
@@ -697,7 +705,7 @@ td.code pre {
 td.gutter {
   padding-top: 3px;
 }
-
+*/
 /* --- Social media sharing section --- */
 
 #social-share-section {
@@ -736,6 +744,143 @@ td.gutter {
 
 .gist, .gist-file table tr td {
   border: unset;
+}
+
+/* Icon Colors */
+.icon-blue {
+  color: #2980b9;
+}
+
+.icon-yellow {
+color: #f1c40f;
+}
+
+.icon-red{
+  color: #c0392b;
+}
+
+
+
+/* ----- About Container ----- */
+
+.about-container {
+  margin: 0px;
+  position: relative;
+}
+
+.about-container p {
+  margin: 0px;
+}
+
+.about-container-header {
+  opacity: 0.95;
+  background-color: #394034;
+  border-color: #7c7c7c;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 8px 8px 0px 0px;
+  padding: 2px 8px 2px 8px;
+}
+
+.about-container-header:hover {
+  cursor: pointer;
+}
+
+.about-container-heading {
+  font-family: 'Share Tech Mono', Consolas, monospace;
+  font-size: 16px;
+}
+
+.about-prompt {
+  color:#c7254e;
+  font-weight: 800;
+}
+
+.about-container-content {
+  opacity: 0.95;
+  position: absolute;
+  background-color: #394034;
+  font-family: 'Share Tech Mono', Consolas, monospace;
+  font-size: 16px;
+  border-color: #7c7c7c;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-radius: 0px 0px 8px 8px;
+  padding: 5px 8px 5px 8px;
+  margin-top: -1px;
+}
+
+.about-font-default {
+  color: #7c7c7c;
+}
+
+.about-font-cmd {
+  color: #b6b649;
+}
+
+.about-font-string {
+  color:#1a83a6;
+}
+
+.about-font-out {
+  color: #ffffff;
+}
+
+.blinking-cursor {
+  /*
+  font-weight: 100;
+  font-size: 30px; */
+  color: #ffffff;
+  -webkit-animation: 1s blink step-end infinite;
+  -moz-animation: 1s blink step-end infinite;
+  -ms-animation: 1s blink step-end infinite;
+  -o-animation: 1s blink step-end infinite;
+  animation: 1s blink step-end infinite;
+}
+
+@keyframes blink {
+  from, to {
+    color: transparent;
+  }
+  50% {
+    color: white;
+  }
+}
+
+@-moz-keyframes blink {
+  from, to {
+    color: transparent;
+  }
+  50% {
+    color: white;
+  }
+}
+
+@-webkit-keyframes blink {
+  from, to {
+    color: transparent;
+  }
+  50% {
+    color: white;
+  }
+}
+
+@-ms-keyframes blink {
+  from, to {
+    color: transparent;
+  }
+  50% {
+    color: white;
+  }
+}
+
+@-o-keyframes blink {
+  from, to {
+    color: transparent;
+  }
+  50% {
+    color: white;
+  }
 }
 
 /* Fix .navbar-toggle */

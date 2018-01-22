@@ -26,17 +26,22 @@
       <p class="copyright text-muted">
       {{ site.author.name }}
       &nbsp;&bull;&nbsp;
-      {{ site.time | date: '%Y' }}
+      <span data-toggle="tooltip" title="Last build: {{ "now" | date: "%Y-%m-%d %H:%M" -}}">{{ site.time | date: '%Y' }}</span>
 
       {% if site.url-pretty %}
       &nbsp;&bull;&nbsp;
       <a href="{{ site.url }}">{{ site.url-pretty }}</a>
       {% endif %}
+      &nbsp;&bull;&nbsp;
+      <a href="{{ '/impressum' | prepend: site.baseurl }}"> Impressum </a>
+      &nbsp;&bull;&nbsp;
+      <a href="{{ '/sitemap' | prepend: site.baseurl }}"> Sitemap </a>
       </p>
           <!-- Please don't remove this, keep my open source work credited :) -->
     <p class="theme-by text-muted">
-      Theme by
-      <a href="http://deanattali.com/beautiful-jekyll/">beautiful-jekyll</a>
+      Theme based on
+      <a href="http://deanattali.com/beautiful-jekyll/">beautiful-jekyll</a>.</br>
+      Background pattern from <a href="https://www.toptal.com/designers/subtlepatterns/">Subtle Patterns</a>
     </p>
       </div>
     </div>

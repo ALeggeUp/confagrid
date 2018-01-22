@@ -3,7 +3,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>{% if page.use-site-title %}{{ site.title }} {{ site.title-separator }} {{ site.description }}{% elsif page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <title>{% if page.use-site-title %}{{ site.title }} {{ site.title-separator }} {{ site.description }}{% elsif page.title %}{{ site.title }} {{ site.title-separator }} {{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
 
   <meta name="author" content="{{ site.author.name }}" />
 
@@ -14,6 +14,10 @@
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }} {{ site.title-separator }} {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
 
   {% include gtm_head.html %}
+
+  {% if site.google-site-verification %}
+  <meta name="google-site-verification" content="{{ site.google-site-verification }}" />
+  {% endif %}
 
   {% if layout.common-ext-css %}
     {% for css in layout.common-ext-css %}
@@ -83,12 +87,12 @@
   <link rel="canonical" href="{{ site.url }}{{ page.url | remove: '/index.html' | remove: '.html' }}" />
   {% endif %}
 
-  {% if page.share-img %}
-  <meta property="og:image" content="{{ page.share-img }}" />
+  {% if page.image %}
+  <meta property="og:image" content="{{ site.url }}{{ page.image }}" />
   {% elsif site.avatar %}
   <meta property="og:image" content="{{ site.url }}{{ site.avatar }}" />
   {% endif %}
-  
+
 
   <!-- Twitter summary cards -->
   <meta name="twitter:card" content="summary" />
@@ -111,10 +115,12 @@
   <meta name="twitter:description" content="{{ page.content | strip_html | xml_escape | truncatewords: 50 }}">
   {% endif %}
 
-  {% if page.share-img %}
-  <meta name="twitter:image" content="{{ page.share-img }}" />
+  {% if page.image %}
+  <meta name="twitter:image" content="{{ site.url }}{{ page.image }}" />
   {% elsif site.avatar %}
   <meta name="twitter:image" content="{{ site.url }}{{ site.avatar }}" />
   {% endif %}
+
+  {% include piwik.html %}
 
 </head>

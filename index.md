@@ -1,8 +1,12 @@
 ---
 layout: page
-title: [ A Legge Up ] Project Website
-subtitle: Projects and posts for [ A Legge Up ] Maker Lab
+title: Welcome
+show-avatar: true
+subtitle: ...to A Legge Up Labs projects.
+bigimg:
+  - 'img/bigimg/bg-home.jpg': "Photo by Dariusz Sankowski on Unsplash"
 use-site-title: true
+css: '/css/extend-home.css'
 ---
 
 <h1 class="text-center">Current Projects</h1>
@@ -55,7 +59,7 @@ use-site-title: true
         </span>
         <h4>{{- gh-project -}}</h4>
         <hr class="seperator">
-        <p class="text-muted">Custom audio amplifier hardware project.</p>
+        <p class="text-muted">Custom audio amplifier Open Source hardware project.</p>
         <hr class="seperator">
         <img src="https://img.shields.io/github/forks/{{- gh-user -}}/{{- gh-project -}}.svg?style=social&label=Fork" alt="Github" title="Github Forks">
         <img src="https://img.shields.io/github/stars/{{- gh-user -}}/{{- gh-project -}}.svg?style=social&label=Stars" alt="Github" title="Github Stars">
@@ -64,24 +68,22 @@ use-site-title: true
   </div>
 </div>
 
-
-<div class="spacer"></div>
-<br />
+----
 
 <h1 class="text-center">Recent Posts</h1>
 <div class="spacer"></div>
 
 <div class="posts-list">
-  {% for post in paginator.posts %}
+  {% for post in site.posts limit:5 %}
   <article class="post-preview">
     <a href="{{ post.url | prepend: site.baseurl }}">
-	  <h2 class="post-title">{{ post.title }}</h2>
+      <h2 class="post-title">{{ post.title }}</h2>
 
-	  {% if post.subtitle %}
-	  <h3 class="post-subtitle">
-	    {{ post.subtitle }}
-	  </h3>
-	  {% endif %}
+      {% if post.subtitle %}
+      <h3 class="post-subtitle">
+        {{ post.subtitle }}
+      </h3>
+      {% endif %}
     </a>
 
     <p class="post-meta">
@@ -110,7 +112,7 @@ use-site-title: true
       Tags:
       {% if site.link-tags %}
       {% for tag in post.tags %}
-      <a href="{{ site.baseurl }}/tags#{{- tag -}}">{{- tag -}}</a>
+      <a href="{{ site.baseurl }}/tags#{{ tag }}">{{ tag }}</a>
       {% endfor %}
       {% else %}
         {{ post.tags | join: ", " }}
@@ -122,17 +124,8 @@ use-site-title: true
   {% endfor %}
 </div>
 
-{% if paginator.total_pages > 1 %}
 <ul class="pager main-pager">
-  {% if paginator.previous_page %}
-  <li class="previous">
-    <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; Newer Posts</a>
+  <li>
+    <a href="{{site.baseurl}}/blog">Archive </a>
   </li>
-  {% endif %}
-  {% if paginator.next_page %}
-  <li class="next">
-    <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older Posts &rarr;</a>
-  </li>
-  {% endif %}
 </ul>
-{% endif %}

@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://ocram85.github.io/sitemap.xml

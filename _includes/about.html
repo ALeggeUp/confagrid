@@ -1,0 +1,56 @@
+<div class="about-container" >
+    <div class="about-container-header" data-toggle="tooltip" data-toggle="collapse"  data-target="#aboutcontent"  title="Display a summary about this page.">
+        <p class = "about-container-heading about-font-default">
+            <i class="fa fa-paperclip about-font-out" aria-hidden="true"></i>
+            <span class="about-prompt">
+                ~>
+            </span>
+            <span class="about-font-cmd">
+                Get-Help
+            </span>
+            -Name
+            <span class="about-font-string">
+                {%- if include.caption-%}
+                    {{ include.caption }}
+                {%- else -%}
+                    {%- assign about_size = page.title | size -%}
+                    {%- if about_size >= 35 -%}
+                        {% assign about = "ThisPage" %}
+                    {% else %}
+                        {% assign about = page.title | camelcase | replace: " ", "" %}
+                    {% endif %}
+                    'About_{{ about }}'
+                {%- endif -%}
+            </span>
+        </p>
+    </div>
+    <div class="about-container-content  collapse" id="aboutcontent">
+        <p class="about-font-out">
+            {% if include.content %}
+                {{ include.content}}
+            {% else %}
+                {{ page.excerpt }}
+            {% endif %}
+            <span class="blinking-cursor">|</span>
+        </p>
+        {%- if include.footer -%}
+            <p class="about-font-default text-right">
+                {%- if include.readingtime -%}
+                    {%- assign words = page.content | number_of_words -%}
+                    <i class="fa fa-eye about-font-default" aria-hidden="true" title="Average reading time"></i>
+                    {%- if words < 360 -%}
+                        &nbsp; 1 min &nbsp;
+                    {%- else -%}
+                        &nbsp;{{- words | divided_by:180 -}}&nbsp;mins&nbsp;
+                    {%- endif -%}
+                {%- endif -%}
+                {%- if page.edit -%}
+                    <i class="fa fa-calendar-check-o about-font-default" aria-hidden="true" title="Last update"></i>&nbsp;{{- page.edit -}}
+                {%- endif -%}
+                {%- if site.author.name -%}
+                    &nbsp;<i class="fa fa-user about-font-default" aria-hidden="true" title="Author"></i>&nbsp;{{- site.author.name -}}
+                {%- endif -%}
+            </p>
+        {%- endif -%}
+    </div>
+</div>

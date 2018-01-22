@@ -23,7 +23,12 @@ description: Projects and posts for [ A Legge Up ]
 
 # List of links in the navigation bar
 navbar-links:
-  About A Legge Up: "aboutme"
+  About:
+    - Me: "aboutme"
+    - A Legge Up: "aboutaleggeup"
+  Blog:
+    - Posts: "blog"
+    - Tags: "tags"
   Resources:
     - Beautiful Jekyll: "http://deanattali.com/beautiful-jekyll/"
     - Learn markdown: "http://www.markdowntutorial.com/"
@@ -34,9 +39,17 @@ navbar-links:
 # Remove this parameter if you don't want an image in the navbar
 avatar: "/img/aleggeup-avatar.png"
 
+# --- Google custom search config --- #
+# search page name search -> /seach.md
+nav-search: "search"
+# google-site-verification
+
+# Image to show in the navigation bar - image must be a square (width = height)
+# Remove this parameter if you don't want an image in the navbar
+
 # If you want to have an image logo in the top-left corner instead of the title text,
 # then specify the following parameter
-# title-img: /path/to/image
+#title-img: "/img/avatar-icon.png"
 
 # --- Background colour/image options --- #
 
@@ -55,8 +68,8 @@ footer-link-col: "#404040"
 # Alternatively, the navbar, footer, and page background can be set to use background images
 # instead of colour
 
-# navbar-img: "/img/bgimage.png"
-# footer-img: "/img/bgimage.png"
+navbar-img: "/img/concrete-texture.png"
+footer-img: "/img/concrete-texture.png"
 # page-img: "/img/bgimage.png"
 
 # --- Footer options --- #
@@ -71,16 +84,19 @@ author:
 # You can reorder the items to define the link order.
 # If you want to add a new link that isn't here, you'll need to also edit the file _data/SocialNetworks.yml
 social-network-links:
-  rss: true
-  email: "stephen+github@aleggeup.com"
-#  facebook: daattali
   github: aleggeup
   twitter: aleggeup
+  email: "stephen+github@aleggeup.com"
+  linkedin: stephenalegge
+  rss: true
+#  facebook: daattali
+  github: aleggeup
 #  reddit: yourname
 #  google-plus: +DeanAttali
-  linkedin: stephenalegge
+#  facebook: daattali
+#  reddit: yourname
+#  google-plus: +DeanAttali
 #  xing: yourname
-#  stackoverflow: "3943160/daattali"
 #  snapchat: deanat78
 #  instagram: deanat78
 #  youtube: user/deanat78
@@ -103,13 +119,13 @@ url-pretty: "ALeggeUp.github.io"  # eg. "deanattali.com/beautiful-jekyll"
 
 # --- Misc --- #
 # Fill in your Disqus shortname (NOT the userid) if you want to support Disqus comments
-#disqus: ""
+#disqus: "OCram85"
 
 # Fill in your Google Analytics ID to track your website using GA
 #google_analytics: ""
 
 # Google Tag Manager ID
-#gtm: ""
+#gtm: "GTM-TKDTDKW"
 
 # Facebook App ID
 # fb_app_id: ""
@@ -130,6 +146,7 @@ markdown: kramdown
 highlighter: rouge
 permalink: /:year-:month-:day-:title/
 paginate: 5
+paginate_path: "/blog/page:num/"
 
 kramdown:
   input: GFM
@@ -149,7 +166,7 @@ defaults:
       path: "" # all files
     values:
       layout: "page"
-      show-avatar: true
+      show-avatar: false
 
 # Use tags index page and make tags on each post clickable
 link-tags: true
@@ -164,61 +181,21 @@ exclude:
   - LICENSE
   - README.md
   - Vagrantfile
+  - appveyor.yml
+  - tools/
 
-# prose.io config
-prose:
-  rooturl: '_posts'
-  media: 'img'
-  ignore:
-    - 404.html
-    - LICENSE
-    - feed.xml
-    - _config.yml
-    - /_layouts
-    - /_includes
-    - /css
-    - /img
-    - /js
-  metadata:
-    _posts:
-      - name: "layout"
-        field:
-          element: "hidden"
-          value: "post"
-      - name: "title"
-        field:
-          element: "text"
-          label: "Post title"
-          placeholder: "Title"
-          alterable: true
-      - name: "subtitle"
-        field:
-          element: "textarea"
-          label: "Subtitle"
-          placeholder: "A description of your post."
-          alterable: true
-      - name: "date"
-        field:
-          element: "text"
-          label: "Date"
-          help: "Enter date of post."
-          placeholder: "yyyy-mm-dd"
-          alterable: true
-      - name: "image"
-        field:
-          element: "text"
-          label: "Image"
-          help: "Add a thumbnail image to your post."
-          placeholder: "Thumbnail"
-          alterable: true
-      - name: "published"
-        field:
-          element: "checkbox"
-          label: "Publish"
-          help: "Check to publish post, uncheck to hide."
+# --- Piwik Integration --- #
+piwik:
+  site_id: "2"
+  uri: "piwik.beaver-net.ovh"
+
+gist:
+  noscript: false
 
 plugins:
   - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-gist
 
 # Beautiful Jekyll / Dean Attali
 # 2fc73a3a967e97599c9763d05e564189

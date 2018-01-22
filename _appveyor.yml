@@ -1,0 +1,35 @@
+version: 1.0.{build}
+
+branches:
+  only:
+    - jekyll
+    - dev
+
+skip_tags: true
+
+#image: WMF 5
+# Test ne build image:
+image: Visual Studio 2017
+
+
+# Install pester module and init the Appveyor support.
+install:
+  - ps: Import-Module .\tools\AppVeyor.psm1
+  - ps: Invoke-Install -Verbose
+  - ps: Invoke-GitConfig
+
+environment:
+  access_token:
+    secure: cGuc72ahUzAFaNNZN7IpACbyzmqfZPIUfhq4+fd/bfn9Iq7dnX2zXMjPSQIUOpc+
+
+build: false
+
+before_build:
+  - ps: Invoke-BeforeBuild
+  - ps: Invoke-BumpBuildNumber
+
+build_script:
+  - ps: Invoke-BuildScript -verbose
+
+deploy_script:
+  - ps: Invoke-Deploy -verbose
