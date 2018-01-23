@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://ocram85.github.io/sitemap.xml
+Sitemap: http://github.aleggeup.com/sitemap.xml
