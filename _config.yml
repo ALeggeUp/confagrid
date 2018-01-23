@@ -120,7 +120,7 @@ url-pretty: "github.ALeggeUp.com"  # eg. "deanattali.com/beautiful-jekyll"
 
 # --- Misc --- #
 # Fill in your Disqus shortname (NOT the userid) if you want to support Disqus comments
-#disqus: "OCram85"
+disqus: "aleggeup"
 
 # Fill in your Google Analytics ID to track your website using GA
 #google_analytics: ""
