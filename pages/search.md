@@ -12,7 +12,7 @@ css: "/css/search.css"
 <div id="google-custom-search">
 <script>
   (function() {
-    var cx = '0119_8551.7388.6850.0:lox.g6.o-wy';
+    var cx = '017042657838417403464:rvi04y-ud9c';
     var gcse = document.createElement('script');
     gcse.type = 'text/javascript';
     gcse.async = true;
