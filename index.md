@@ -2,7 +2,7 @@
 layout: page
 title: '[ A Legge Up ] Github Pages'
 show-avatar: true
-subtitle: 'Public FOSS and OSHW Repository'
+subtitle: 'Public FOSS and OSHW Repositories'
 bigimg:
   - 'img/bigimg/aleggeup_banner_1500x500.png': ""
 use-site-title: true
