@@ -24,7 +24,6 @@ description: Projects and posts for [ A Legge Up ]
 # List of links in the navigation bar
 navbar-links:
   About:
-    - Me: "aboutme"
     - A Legge Up: "aboutaleggeup"
   Blog:
     - Posts: "blog"
