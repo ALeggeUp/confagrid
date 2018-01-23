@@ -41,6 +41,11 @@ linkedin:
   baseURL: "https://linkedin.com/in/"
   icon: "fa-linkedin"
 
+linkedin_company:
+  name: "LinkedIn Company Page"
+  baseURL: "https://www.linkedin.com/company/"
+  icon: "fa-linkedin-square"
+
 xing:
   name: "Xing"
   baseURL: "https://www.xing.com/profile/"

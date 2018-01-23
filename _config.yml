@@ -87,6 +87,7 @@ social-network-links:
   twitter: aleggeup
   email: "stephen+github@aleggeup.com"
   linkedin: stephenalegge
+  linkedin_company: 27213423
   rss: true
 #  facebook: daattali
   github: aleggeup
@@ -111,6 +112,7 @@ share-links-active:
   facebook: false
   google: false
   linkedin: true
+  linkedin_company: false
 
 # How to display the link to the website in the footer
 # Remove this if you don't want a link in the footer
