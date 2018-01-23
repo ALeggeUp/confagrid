@@ -4,7 +4,7 @@ title: '[ A Legge Up ] Github Pages'
 show-avatar: true
 subtitle: 'Public FOSS and OSHW Repository'
 bigimg:
-  - 'img/bigimg/bg-home.jpg': "Photo by Dariusz Sankowski on Unsplash"
+  - 'img/bigimg/aleggeup_banner_1500x500.png': ""
 use-site-title: true
 css: '/css/extend-home.css'
 ---
