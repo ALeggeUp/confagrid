@@ -1,6 +1,6 @@
 ---
 layout: page
-title: '[ A Legge Up ] Github Pages'
+title: '[&nbsp;A Legge Up&nbsp;] Github Pages'
 show-avatar: true
 subtitle: 'Public FOSS and OSHW Repositories'
 bigimg:
