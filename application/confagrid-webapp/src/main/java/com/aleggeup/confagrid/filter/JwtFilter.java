@@ -35,6 +35,7 @@ public class JwtFilter extends OncePerRequestFilter {
     public static final String HEADER_AUTHORIZATION = "Authorization";
     public static final String HEADER_CLAIMS_SUBJECT = "X-Claims-Subject";
     public static final String SECRET_KEY = "secretkey";
+    public static final String SUBJECT_ANONYMOUS = "anonymous";
 
     @Override
     protected void doFilterInternal(final HttpServletRequest request, final HttpServletResponse response, final FilterChain chain)
@@ -45,14 +46,14 @@ public class JwtFilter extends OncePerRequestFilter {
         SecurityContextHolder.getContext().setAuthentication(null);
         if (authHeader == null || !authHeader.startsWith(BEARER_PREFIX)) {
             LOGGER.info("Missing or invalid Authorization header.");
-            claims = new DefaultClaims().setSubject("anonymous");
+            claims = new DefaultClaims().setSubject(SUBJECT_ANONYMOUS);
         } else {
             try {
                 final String token = authHeader.substring(BEARER_PREFIX.length());
                 claims = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
             } catch(final JwtException e) {
                 LOGGER.warn("Unable to get claims from bearer token", e);
-                claims = new DefaultClaims().setSubject("anonymous");
+                claims = new DefaultClaims().setSubject(SUBJECT_ANONYMOUS);
             }
         }
 
