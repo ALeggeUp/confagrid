@@ -33,6 +33,7 @@ public class JwtFilter extends OncePerRequestFilter {
     public static final String ATTRIBUTE_CLAIMS = "claims";
     public static final String BEARER_PREFIX = "Bearer ";
     public static final String HEADER_AUTHORIZATION = "Authorization";
+    public static final String HEADER_CLAIMS_SUBJECT = "X-Claims-Subject";
     public static final String SECRET_KEY = "secretkey";
 
     @Override
@@ -56,8 +57,9 @@ public class JwtFilter extends OncePerRequestFilter {
         }
 
         if (claims != null) {
-            request.setAttribute(ATTRIBUTE_CLAIMS, claims);
+            response.setHeader(HEADER_CLAIMS_SUBJECT, claims.getSubject());
         }
+
         chain.doFilter(request, response);
     }
 }
