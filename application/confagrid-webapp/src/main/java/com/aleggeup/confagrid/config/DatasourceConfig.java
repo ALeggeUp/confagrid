@@ -14,12 +14,14 @@ import javax.sql.DataSource;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 @Configuration
 public class DatasourceConfig {
 
     @Bean
+    @Primary
     DataSource datasource(final DataSourceProperties datasourceProperties) {
         final DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(datasourceProperties.getDriverClassName());
