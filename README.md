@@ -1,5 +1,6 @@
 # Confagrid
 
+[![Build Status](https://travis-ci.org/ALeggeUp/confagrid.svg?branch=master)](https://travis-ci.org/ALeggeUp/confagrid)
 
 What is it?
 -----------
