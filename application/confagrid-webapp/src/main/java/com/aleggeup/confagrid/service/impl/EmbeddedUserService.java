@@ -24,11 +24,12 @@ public class EmbeddedUserService implements UserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final int BCRYPT_ROUNDS = 12;
 
     @Autowired
     public EmbeddedUserService(final UserRepository userRepository, final SecureRandom secureRandom) {
         this.userRepository = userRepository;
-        this.passwordEncoder = new BCryptPasswordEncoder(10, secureRandom);
+        this.passwordEncoder = new BCryptPasswordEncoder(BCRYPT_ROUNDS, secureRandom);
     }
 
     @Override
