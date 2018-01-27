@@ -13,7 +13,7 @@ cache:
   - $HOME/.m2/repository
 
 install:
-  - echo 'mvn clean install -B -V 2> .build.stderr | tee .build.stdout' > .build.sh
+  - echo 'mvn clean install -B -V 1> .build.stdout 2> .build.stderr' > .build.sh
   - chmod 0755 .build.sh
 
 script:
@@ -29,5 +29,3 @@ after_failure:
 branches:
   except:
     - /^[0-9]/
-
-
