@@ -36,7 +36,7 @@ public class EmbeddedUserServiceTest {
     private static final User TEST_USER = new User("test", "test", null);
     private static final Long COUNT = 10L;
     private static final String UNENCRYPTED_PASSWORD = "password";
-    private static final String ENCRYPTED_PASSWORD = "$2a$10$OiHAOiHAOiHAOiHAOiHAOehLzin.PCr5u8B6hQBu6qg6UZhG5CZZG";
+    private static final String ENCRYPTED_PASSWORD = "$2a$12$OiHAOiHAOiHAOiHAOiHAOek2Bn3t./pRbHo5UYYCAx.Htp/SiLvay";
 
     @Mock
     private UserRepository mockUserRepository;
