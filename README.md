@@ -27,7 +27,7 @@ License
 
 MIT License
 
-Copyright (c) 2017 [ A Legge Up ]
+Copyright (c) 2017-2018 [ A Legge Up ]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
