@@ -1,7 +1,7 @@
 /*
  * JwtFilter.java
  *
- * Copyright (C) 2017 [ A Legge Up ]
+ * Copyright (C) 2017-2018 [ A Legge Up ]
  *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
@@ -41,9 +41,11 @@ public class JwtFilter extends OncePerRequestFilter {
     protected void doFilterInternal(final HttpServletRequest request, final HttpServletResponse response, final FilterChain chain)
             throws ServletException, IOException {
 
-        final String authHeader = request.getHeader(HEADER_AUTHORIZATION);
         Claims claims = null;
+
+        final String authHeader = request.getHeader(HEADER_AUTHORIZATION);
         SecurityContextHolder.getContext().setAuthentication(null);
+
         if (authHeader == null || !authHeader.startsWith(BEARER_PREFIX)) {
             LOGGER.info("Missing or invalid Authorization header.");
             claims = new DefaultClaims().setSubject(SUBJECT_ANONYMOUS);
@@ -52,15 +54,15 @@ public class JwtFilter extends OncePerRequestFilter {
                 final String token = authHeader.substring(BEARER_PREFIX.length());
                 claims = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
             } catch(final JwtException e) {
-                LOGGER.warn("Unable to get claims from bearer token", e);
+                LOGGER.warn("Unable to get claims from bearer token: {}", e.getMessage());
+            }
+
+            if (claims == null || claims.getSubject() == null) {
                 claims = new DefaultClaims().setSubject(SUBJECT_ANONYMOUS);
             }
         }
 
-        if (claims != null) {
-            response.setHeader(HEADER_CLAIMS_SUBJECT, claims.getSubject());
-        }
-
+        response.setHeader(HEADER_CLAIMS_SUBJECT, claims.getSubject());
         chain.doFilter(request, response);
     }
 }
