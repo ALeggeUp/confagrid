@@ -17,12 +17,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class SystemConfig {
 
+    protected static final String CORS_MAPPING = "/**";
+    protected static final String CORS_ALLOWED_ORIGINS = "http://localhost:4200";
+
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(final CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("http://localhost:4200");
+                registry.addMapping(CORS_MAPPING).allowedOrigins(CORS_ALLOWED_ORIGINS);
             }
         };
     }
