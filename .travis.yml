@@ -5,6 +5,10 @@ language: java
 jdk:
 - oraclejdk8
 
+env:
+  global:
+    - CODECOV_TOKEN=d8f2c1f8-3ab1-4800-9871-bf9de95f9678
+
 before_install:
   - echo "MAVEN_OPTS='-Xms1g -Xmx2g -XX:PermSize=512m -XX:MaxPermSize=1g'" > ~/.mavenrc
 
@@ -21,6 +25,7 @@ script:
 
 after_success:
   - tail -n  200 .build.stdout
+  - bash <(curl -s https://codecov.io/bash)
 
 after_failure:
   - tail -n  300 .build.stderr
