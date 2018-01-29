@@ -1,6 +1,6 @@
 # Confagrid
 
-[![Build Status](https://travis-ci.org/ALeggeUp/confagrid.svg?branch=master)](https://travis-ci.org/ALeggeUp/confagrid)
+[![Build Status](https://travis-ci.org/ALeggeUp/confagrid.svg?branch=master)](https://travis-ci.org/ALeggeUp/confagrid) [![codecov](https://codecov.io/gh/ALeggeUp/confagrid/branch/master/graph/badge.svg)](https://codecov.io/gh/ALeggeUp/confagrid)
 
 What is it?
 -----------
