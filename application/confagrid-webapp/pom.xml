@@ -162,7 +162,10 @@
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
-        </plugin>
+        <configuration>
+          <excludes>com/aleggeup/confagrid/model/**/*</excludes>
+        </configuration>
+      </plugin>
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
