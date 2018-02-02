@@ -115,7 +115,7 @@ public class UserControllerTest {
     @Test
     public void testPasswordNoMatch() {
         Mockito.when(mockUserService.containsKey(USERNAME)).thenReturn(true);
-        
+
         final User user = new User(USERNAME, PASSWORD, null);
         Mockito.when(mockUserService.getById(USERNAME)).thenReturn(user);
         Mockito.when(mockUserService.matches(PASSWORD, PASSWORD)).thenReturn(false);
@@ -141,7 +141,7 @@ public class UserControllerTest {
     @Test
     public void testPasswordMatch() {
         Mockito.when(mockUserService.containsKey(USERNAME)).thenReturn(true);
-        
+
         final User user = new User(USERNAME, PASSWORD, null);
         Mockito.when(mockUserService.getById(USERNAME)).thenReturn(user);
         Mockito.when(mockUserService.matches(PASSWORD, PASSWORD)).thenReturn(true);
@@ -162,5 +162,45 @@ public class UserControllerTest {
         Mockito.verify(mockUserService).containsKey(USERNAME);
         Mockito.verify(mockUserService).getById(USERNAME);
         Mockito.verify(mockUserService).matches(PASSWORD, PASSWORD);
+    }
+
+    @Test
+    public void testValidUserWithEmptyPassword() {
+        Mockito.when(mockUserService.containsKey(USERNAME)).thenReturn(true);
+
+        final LoginRequest loginRequest = new LoginRequest();
+        loginRequest.setName(USERNAME);
+        loginRequest.setPassword("");
+
+        boolean exceptionThrown = false;
+        try {
+            userController.login(loginRequest);
+        } catch (final InvalidLoginException e) {
+            exceptionThrown = true;
+        }
+
+        assertTrue(exceptionThrown);
+
+        Mockito.verify(mockUserService).containsKey(USERNAME);
+    }
+
+    @Test
+    public void testValidUserWithNullPassword() {
+        Mockito.when(mockUserService.containsKey(USERNAME)).thenReturn(true);
+
+        final LoginRequest loginRequest = new LoginRequest();
+        loginRequest.setName(USERNAME);
+        loginRequest.setPassword(null);
+
+        boolean exceptionThrown = false;
+        try {
+            userController.login(loginRequest);
+        } catch (final InvalidLoginException e) {
+            exceptionThrown = true;
+        }
+
+        assertTrue(exceptionThrown);
+
+        Mockito.verify(mockUserService).containsKey(USERNAME);
     }
 }
