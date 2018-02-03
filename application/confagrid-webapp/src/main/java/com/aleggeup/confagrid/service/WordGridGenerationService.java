@@ -17,5 +17,5 @@ import org.apache.batik.svggen.SVGGraphics2DIOException;
 
 public interface WordGridGenerationService {
 
-    String test() throws SVGGraphics2DIOException, UnsupportedEncodingException, TransformerException;
+    String svgTest() throws SVGGraphics2DIOException, UnsupportedEncodingException, TransformerException;
 }

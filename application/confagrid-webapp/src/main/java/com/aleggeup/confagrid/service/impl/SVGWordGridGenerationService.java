@@ -17,8 +17,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
-import java.util.Iterator;
-import java.util.Map;
 
 import javax.xml.transform.TransformerException;
 
@@ -27,7 +25,6 @@ import org.apache.batik.svggen.SVGGeneratorContext;
 import org.apache.batik.svggen.SVGGraphics2D;
 import org.apache.batik.svggen.SVGGraphics2DIOException;
 import org.apache.batik.svggen.SVGSyntax;
-import org.apache.batik.svggen.StyleHandler;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.DOMImplementation;
@@ -41,7 +38,7 @@ import com.aleggeup.confagrid.service.WordGridGenerationService;
 @Service
 public class SVGWordGridGenerationService implements WordGridGenerationService {
 
-    public String test() throws SVGGraphics2DIOException, UnsupportedEncodingException, TransformerException {
+    public String svgTest() throws SVGGraphics2DIOException, UnsupportedEncodingException, TransformerException {
 
         final String svgNS = SVGDOMImplementation.SVG_NAMESPACE_URI;
         DOMImplementation domImpl = SVGDOMImplementation.getDOMImplementation();
@@ -92,6 +89,7 @@ public class SVGWordGridGenerationService implements WordGridGenerationService {
         return baos.toString("UTF-8");
     }
 
+/*
     private void setupFont(final Element defs, SVGGraphics2D svgGenerator, final Document document, final Element svg) {
         final String svgNS = "http://www.w3.org/2000/svg";
         // SVGSVGElement root = (SVGSVGElement)svgGenerator.getRoot();
@@ -114,6 +112,7 @@ public class SVGWordGridGenerationService implements WordGridGenerationService {
 
         // svgRoot.appendChild(defs);
     }
+*/
 
     public void paint(final Graphics2D g2d) {
         g2d.setPaint(new Color(0, 0, 0, 0.1f));
@@ -129,7 +128,7 @@ public class SVGWordGridGenerationService implements WordGridGenerationService {
             g2d.drawLine(0, i * 50, 800, i * 50);
         }
     }
-
+/*
     private class StyleSheetStyleHandler implements StyleHandler {
 
         // The CDATA section that holds the CSS stylesheet.
@@ -165,4 +164,5 @@ public class SVGWordGridGenerationService implements WordGridGenerationService {
             element.setAttributeNS(null, "class", id);
         }
     }
+*/
 }
