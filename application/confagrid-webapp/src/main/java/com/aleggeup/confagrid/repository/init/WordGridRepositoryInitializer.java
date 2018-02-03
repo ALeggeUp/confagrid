@@ -9,8 +9,6 @@
 
 package com.aleggeup.confagrid.repository.init;
 
-import java.util.Iterator;
-
 import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
@@ -34,24 +32,18 @@ public class WordGridRepositoryInitializer {
     }
 
     @PostConstruct
-    public void postContruct() {
+    public void postConstruct() {
         if (this.wordGridRepository.count() == 0) {
+            LOGGER.info("WordGrid Repository is Being Initialized.");
             initialize();
         } else {
-            findAll();
+            LOGGER.info("WordGrid Repository is Already Initialized.");
         }
     }
 
     private void initialize() {
         LOGGER.info("-> Initializing WordGrid list with seed data");
-        this.wordGridRepository.save(new WordGrid("title 1", 16, 12, "description 1"));
-        this.wordGridRepository.save(new WordGrid("title 2", 12, 16, "description 2"));
-    }
-
-    private void findAll() {
-        for (final Iterator<WordGrid> iterator = this.wordGridRepository.findAll().iterator(); iterator.hasNext();) {
-            final WordGrid wordGrid = iterator.next();
-            LOGGER.info(wordGrid.toString());
-        }
+        wordGridRepository.save(new WordGrid("title 1", 16, 12, "description 1"));
+        wordGridRepository.save(new WordGrid("title 2", 12, 16, "description 2"));
     }
 }
