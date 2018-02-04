@@ -67,7 +67,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "role/{role}", method = RequestMethod.GET)
-    public Boolean login(@PathVariable final String role,
+    public Boolean claimContainsRole(@PathVariable final String role,
             final HttpServletRequest request) throws ServletException {
 
         final Claims claims = (Claims) request.getAttribute(JwtFilter.ATTRIBUTE_CLAIMS);
