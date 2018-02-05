@@ -13,29 +13,19 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
+import { AbstractHttpService } from './abstract-http.service';
 import { WordGridResponseItem } from '../models/word-grid-response.model';
 
 @Injectable()
-export class WordGridService {
+export class WordGridService extends AbstractHttpService {
 
     url = "http://localhost:8080/api/v1/word-grids";
 
-    constructor(private http:Http) {
+    constructor(http:Http) {
+        super(http);
     }
 
     wordGrids(): Observable<WordGridResponseItem[]> {
-        return this.http.get(this.url)
-            .map(this.extractData)
-            .catch(this.handleError);
-    }
-
-    private extractData(res: Response) {
-        let body = res.json();
-        return body || {};
-    }
-
-    private handleError(error: Response | any) {
-        console.error(error.message || error);
-        return Observable.throw(error.status);
+        return this.getRequest<WordGridResponseItem[]>("/api/v1/word-grids");
     }
 }

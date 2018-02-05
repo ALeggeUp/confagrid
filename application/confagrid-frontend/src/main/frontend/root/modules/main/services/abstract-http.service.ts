@@ -25,6 +25,12 @@ export class AbstractHttpService {
             .catch(this.handleError);
     }
 
+    protected getRequest<RESP>(path: string): Observable<RESP> {
+        return this.http.get(this.baseUrl + path)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
     protected standardOptions(): RequestOptions {
         let cpHeaders = new Headers({ 'Content-Type': 'application/json' });
 
