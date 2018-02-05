@@ -15,31 +15,16 @@ import 'rxjs/add/operator/catch';
 
 import { LoginRequest } from '../models/login-request.model';
 import { LoginResponse } from '../models/login-response.model';
+import { AbstractHttpService } from './abstract-http.service';
 
 @Injectable()
-export class AuthenticationService {
+export class AuthenticationService extends AbstractHttpService {
 
-    loginUrl = "http://localhost:8080/user/login";
-
-    constructor(private http:Http) {
+    constructor(http:Http) {
+        super(http);
     }
 
     login(request: LoginRequest): Observable<LoginResponse> {
-        let cpHeaders = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: cpHeaders });
-
-        return this.http.post(this.loginUrl, request, options)
-            .map(this.extractData)
-            .catch(this.handleError);
-    }
-
-    private extractData(res: Response) {
-        let body = res.json();
-        return body || {};
-    }
-
-    private handleError (error: Response | any) {
-        console.error(error.message || error);
-        return Observable.throw(error.status);
+        return this.postRequest<LoginRequest, LoginResponse>("/user/login", request);
     }
 }
