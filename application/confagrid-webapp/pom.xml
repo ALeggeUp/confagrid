@@ -119,6 +119,13 @@
        <scope>runtime</scope>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
+    <dependency>
+      <groupId>javax.validation</groupId>
+      <artifactId>validation-api</artifactId>
+      <version>1.1.0.Final</version>
+    </dependency>
+
     <!-- https://mvnrepository.com/artifact/commons-cli/commons-cli -->
     <dependency>
       <groupId>commons-cli</groupId>
