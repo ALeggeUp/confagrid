@@ -19,8 +19,6 @@ import { WordGridResponseItem } from '../models/word-grid-response.model';
 @Injectable()
 export class WordGridService extends AbstractHttpService {
 
-    url = "http://localhost:8080/api/v1/word-grids";
-
     constructor(http:Http) {
         super(http);
     }
