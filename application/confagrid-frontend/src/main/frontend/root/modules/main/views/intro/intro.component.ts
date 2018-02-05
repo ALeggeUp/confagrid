@@ -27,8 +27,4 @@ export class IntroComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit() {
     }
-
-    scratch() {
-        alert('app-component-scratch');
-    }
 }
