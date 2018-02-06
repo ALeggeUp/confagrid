@@ -26,6 +26,7 @@ import { IntroComponent } from './views/intro/intro.component';
 import { MoreComponent } from './views/more/more.component';
 
 import { AuthenticationService } from './services/authentication.service';
+import { BrowserStorageService } from './services/browser-storage.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { LoggerService } from './services/logger.service';
 import { WordGridService } from './services/word-grid.service';
@@ -53,6 +54,7 @@ import { WordGridService } from './services/word-grid.service';
   ],
   providers: [
     AuthenticationService,
+    BrowserStorageService,
     AuthGuardService,
     LoggerService,
     WordGridService
