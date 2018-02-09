@@ -1,13 +1,13 @@
 /*
  * footer.component.ts
  *
- * Copyright (C) 2017 [ A Legge Up ]
+ * Copyright (C) 2017-2018 [ A Legge Up ]
  *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-footer',
@@ -15,11 +15,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.css'],
 })
 
-export class FooterComponent implements OnInit {
+export class FooterComponent {
 
   constructor() {
-  }
-
-  ngOnInit() {
   }
 }
