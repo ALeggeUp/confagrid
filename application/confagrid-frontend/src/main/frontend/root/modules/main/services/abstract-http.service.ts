@@ -8,15 +8,15 @@
  */
 
 import { Http, Response, Headers, URLSearchParams, RequestOptions } from '@angular/http';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 export class AbstractHttpService {
 
-    baseUrl = "http://localhost:8080";
+    protected baseUrl = 'http://localhost:8080';
 
-    constructor(private http:Http) {
+    constructor(private http: Http) {
     }
 
     protected postRequest<REQ, RESP>(path: string, request: REQ): Observable<RESP> {
@@ -32,13 +32,13 @@ export class AbstractHttpService {
     }
 
     protected standardOptions(): RequestOptions {
-        let cpHeaders = new Headers({ 'Content-Type': 'application/json' });
+        const cpHeaders = new Headers({ 'Content-Type': 'application/json' });
 
         return new RequestOptions({ headers: cpHeaders });
     }
 
     protected extractData(res: Response) {
-        let body = res.json();
+        const body = res.json();
         return body || {};
     }
 

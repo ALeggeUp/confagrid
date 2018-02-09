@@ -9,7 +9,7 @@
 
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, URLSearchParams, RequestOptions } from '@angular/http';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
@@ -19,11 +19,11 @@ import { WordGridResponseItem } from '../models/word-grid-response.model';
 @Injectable()
 export class WordGridService extends AbstractHttpService {
 
-    constructor(http:Http) {
+    constructor(http: Http) {
         super(http);
     }
 
     wordGrids(): Observable<WordGridResponseItem[]> {
-        return this.getRequest<WordGridResponseItem[]>("/api/v1/word-grids");
+        return this.getRequest<WordGridResponseItem[]>('/api/v1/word-grids');
     }
 }

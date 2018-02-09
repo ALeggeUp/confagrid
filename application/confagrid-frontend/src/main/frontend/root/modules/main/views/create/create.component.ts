@@ -45,8 +45,8 @@ export class CreateComponent implements OnInit {
     }
 
     onSubmit() {
-        let wordGrid = this.wordGridForm.value;
-        let dimensions = wordGrid['dimensions'].split('x');
+        const wordGrid = this.wordGridForm.value;
+        const dimensions = wordGrid['dimensions'].split('x');
         wordGrid['dimensionWidth'] = dimensions[0];
         wordGrid['dimensionHeight'] = dimensions[1];
         this.http.post('/api/v1/word-grids', this.wordGridForm.value).subscribe(data => {

@@ -8,7 +8,7 @@
  */
 
 import { Component, Inject, OnInit, AfterViewInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Rx';
 
 import { WordGridService } from '../../services/word-grid.service';
 import { WordGridResponseItem } from '../../models/word-grid-response.model';

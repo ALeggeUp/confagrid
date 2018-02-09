@@ -9,7 +9,7 @@
 
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, URLSearchParams, RequestOptions } from '@angular/http';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
@@ -20,11 +20,11 @@ import { AbstractHttpService } from './abstract-http.service';
 @Injectable()
 export class AuthenticationService extends AbstractHttpService {
 
-    constructor(http:Http) {
+    constructor(http: Http) {
         super(http);
     }
 
     login(request: LoginRequest): Observable<LoginResponse> {
-        return this.postRequest<LoginRequest, LoginResponse>("/user/login", request);
+        return this.postRequest<LoginRequest, LoginResponse>('/user/login', request);
     }
 }

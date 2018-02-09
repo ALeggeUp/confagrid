@@ -9,7 +9,7 @@
 
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, URLSearchParams, RequestOptions } from '@angular/http';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
@@ -19,7 +19,7 @@ export class BrowserStorageService {
     private readonly DEFAULT_EXPIRY_HOURS = 1;
     private readonly HOUR_IN_MILLIS: number = 60 * 60 * 1000;
 
-    protected localStorageAvailable: boolean = false;
+    protected localStorageAvailable = false;
 
     constructor() {
         if (localStorage) {
@@ -44,9 +44,9 @@ export class BrowserStorageService {
     }
 
     private createCookie(key: string, value: string, expiryHours: number = this.DEFAULT_EXPIRY_HOURS) {
-        let date: Date = new Date();
+        const date: Date = new Date();
         date.setTime(date.getTime() + (expiryHours * this.HOUR_IN_MILLIS));
-        let expires: string = "expires=" + date.toUTCString();
-        document.cookie = encodeURIComponent(key) + "=" + encodeURIComponent(value) + "; " + expires + "; path=/";
+        const expires: string = 'expires=' + date.toUTCString();
+        document.cookie = encodeURIComponent(key) + '=' + encodeURIComponent(value) + '; ' + expires + '; path=/';
     }
 }
