@@ -24,7 +24,6 @@ public class SecurityConfig {
     public FilterRegistrationBean jwtFilter() {
         final FilterRegistrationBean registrationBean = new FilterRegistrationBean();
         registrationBean.setFilter(new JwtFilter());
-        registrationBean.addUrlPatterns("/api/*");
 
         return registrationBean;
     }
