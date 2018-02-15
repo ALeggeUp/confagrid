@@ -18,7 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.lang.NonNull;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import io.jsonwebtoken.Claims;
@@ -28,41 +29,49 @@ import io.jsonwebtoken.impl.DefaultClaims;
 
 public class JwtFilter extends OncePerRequestFilter {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(JwtFilter.class);
-
     public static final String ATTRIBUTE_CLAIMS = "claims";
     public static final String BEARER_PREFIX = "Bearer ";
     public static final String HEADER_AUTHORIZATION = "Authorization";
     public static final String HEADER_CLAIMS_SUBJECT = "X-Claims-Subject";
     public static final String SECRET_KEY = "secretkey";
     public static final String SUBJECT_ANONYMOUS = "anonymous";
+    public static final String JWT_TOKEN = "X-JWT-Token";
+    private static final Logger LOGGER = LoggerFactory.getLogger(JwtFilter.class);
+    private static final String JWT_ATTRIBUTE = "x-jwt-attribute";
 
     @Override
-    protected void doFilterInternal(final HttpServletRequest request, final HttpServletResponse response, final FilterChain chain)
-            throws ServletException, IOException {
+    protected void doFilterInternal(@NonNull final HttpServletRequest request,
+        @NonNull final HttpServletResponse response, @NonNull final FilterChain chain)
+        throws ServletException, IOException {
 
         Claims claims = null;
+        String token = "";
 
-        final String authHeader = request.getHeader(HEADER_AUTHORIZATION);
-        SecurityContextHolder.getContext().setAuthentication(null);
+        if (!RequestMethod.OPTIONS.toString().equals(request.getMethod())) {
 
-        if (authHeader == null || !authHeader.startsWith(BEARER_PREFIX)) {
-            LOGGER.info("Missing or invalid Authorization header.");
-            claims = new DefaultClaims().setSubject(SUBJECT_ANONYMOUS);
-        } else {
-            try {
-                final String token = authHeader.substring(BEARER_PREFIX.length());
-                claims = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
-            } catch(final JwtException e) {
-                LOGGER.warn("Unable to get claims from bearer token: {}", e.getMessage());
-            }
+            final String authHeader = request.getHeader(HEADER_AUTHORIZATION);
 
-            if (claims == null || claims.getSubject() == null) {
+            if (authHeader == null || !authHeader.startsWith(BEARER_PREFIX)) {
+                LOGGER.info("Missing or invalid Authorization header.");
                 claims = new DefaultClaims().setSubject(SUBJECT_ANONYMOUS);
+            } else {
+                try {
+                    token = authHeader.substring(BEARER_PREFIX.length());
+                    claims = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+                } catch (final JwtException e) {
+                    LOGGER.warn("Unable to get claims from bearer token: {}", e.getMessage());
+                }
+
+                if (claims == null || claims.getSubject() == null) {
+                    claims = new DefaultClaims().setSubject(SUBJECT_ANONYMOUS);
+                }
             }
+
+            request.setAttribute(JWT_ATTRIBUTE, claims);
+            response.setHeader(JWT_TOKEN, token);
+            response.setHeader(HEADER_CLAIMS_SUBJECT, claims.getSubject());
         }
 
-        response.setHeader(HEADER_CLAIMS_SUBJECT, claims.getSubject());
         chain.doFilter(request, response);
     }
 }
