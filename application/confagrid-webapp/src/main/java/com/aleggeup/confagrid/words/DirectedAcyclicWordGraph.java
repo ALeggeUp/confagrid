@@ -19,8 +19,8 @@ import java.util.concurrent.atomic.AtomicIntegerArray;
 public class DirectedAcyclicWordGraph {
 
     private final WordList wordList;
-    private int verticiesCount;
     private final List<List<Integer>> adjacentVerticies;
+    private int verticiesCount;
     private AtomicIntegerArray indegrees;
 
     private int edgesCount;
@@ -40,7 +40,7 @@ public class DirectedAcyclicWordGraph {
     public void addEdgesFromPhrase(final Phrase phrase) {
         Word tail = null;
         for (final Iterator<Word> iterator = phrase.iterator(); iterator.hasNext();) {
-            Word word = iterator.next();
+            final Word word = iterator.next();
 
             if (tail == null) {
                 tail = word;
@@ -53,7 +53,7 @@ public class DirectedAcyclicWordGraph {
     private Word safeAddEdge(final Word tail, final Word head) {
         final int tailId = wordList.getWordId(tail);
         int headId = wordList.getWordId(head);
-        int maxTries = 5;
+        final int maxTries = 5;
 
         for (int i = 0; i < maxTries; ++i) {
             if (safeAddEdge(tailId, headId)) {

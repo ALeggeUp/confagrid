@@ -34,7 +34,9 @@ public class ExperimentalController {
     }
 
     @RequestMapping(value = "svgtest", method = RequestMethod.GET, produces = "image/svg+xml")
-    public @ResponseBody String svgTest() throws SVGGraphics2DIOException, UnsupportedEncodingException, TransformerException {
+    public @ResponseBody
+    String svgTest()
+        throws SVGGraphics2DIOException, UnsupportedEncodingException, TransformerException {
         return wordGridGenerationService.svgTest();
     }
 }

@@ -10,7 +10,6 @@
 package com.aleggeup.confagrid.controller;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,18 +38,18 @@ public class WordGridController {
     public List<WordGrid> allWordGrids() {
         final List<WordGrid> wordGrids = new ArrayList<>();
 
-        for (final Iterator<WordGrid> iterator = this.wordGridRepository.findAll().iterator(); iterator.hasNext();) {
-            wordGrids.add(iterator.next());
+        for (final WordGrid wordGrid : wordGridRepository.findAll()) {
+            wordGrids.add(wordGrid);
         }
 
         return wordGrids;
     }
 
-    @RequestMapping(method = RequestMethod.POST, value="/word-grids")
+    @RequestMapping(method = RequestMethod.POST, value = "/word-grids")
     @ResponseBody
-    public List<WordGrid> create(@RequestBody WordGrid wordGrid) {
+    public List<WordGrid> create(@RequestBody final WordGrid wordGrid) {
         final List<WordGrid> wordGrids = new ArrayList<>();
-        final WordGrid savedWordGrid = this.wordGridRepository.save(wordGrid);
+        final WordGrid savedWordGrid = wordGridRepository.save(wordGrid);
         wordGrids.add(savedWordGrid);
 
         return wordGrids;

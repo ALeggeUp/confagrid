@@ -14,8 +14,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 
-public class WordList
-{
+public class WordList {
+
     private final Map<Word, Integer> wordIndex = new TreeMap<>();
     private final Map<String, Integer> dupList = new TreeMap<>();
 
@@ -31,7 +31,7 @@ public class WordList
     }
 
     protected void addWord(final Word word) {
-        if (!dupList.containsKey(word.getWord()) || dupList.get(word.getWord()).intValue() < word.getOccurrence()) {
+        if (!dupList.containsKey(word.getWord()) || dupList.get(word.getWord()) < word.getOccurrence()) {
             dupList.put(word.getWord(), word.getOccurrence());
         }
 
@@ -66,7 +66,7 @@ public class WordList
     public int getWordId(final Word word) {
         final Integer wordValue = wordIndex.get(word);
         if (wordValue != null) {
-            return wordIndex.get(word).intValue();
+            return wordIndex.get(word);
         } else {
             return -1;
         }
@@ -78,9 +78,6 @@ public class WordList
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder("WordList [wordIndex=");
-        builder.append(wordIndex);
-        builder.append("]");
-        return builder.toString();
+        return String.format("WordList [wordIndex=%s]", wordIndex);
     }
 }

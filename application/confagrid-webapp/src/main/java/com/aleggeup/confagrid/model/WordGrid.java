@@ -19,7 +19,7 @@ import javax.persistence.Id;
 public class WordGrid {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column
@@ -37,7 +37,8 @@ public class WordGrid {
     public WordGrid() {
     }
 
-    public WordGrid(final String title, final Integer dimensionWidth, final Integer dimensionHeight, final String description) {
+    public WordGrid(final String title, final Integer dimensionWidth, final Integer dimensionHeight,
+        final String description) {
         this.title = title;
         this.dimensionWidth = dimensionWidth;
         this.dimensionHeight = dimensionHeight;
@@ -48,41 +49,41 @@ public class WordGrid {
         return id;
     }
 
-    public void setTitle(final String title) {
-        this.title = title;
-    }
-
     public String getTitle() {
         return title;
     }
 
-    public void setDimensionWidth(final Integer dimensionWidth) {
-        this.dimensionWidth = dimensionWidth;
+    public void setTitle(final String title) {
+        this.title = title;
     }
 
     public int getDimensionWidth() {
         return dimensionWidth;
     }
 
-    public void setDimensionHeight(final Integer dimensionHeight) {
-        this.dimensionHeight = dimensionHeight;
+    public void setDimensionWidth(final Integer dimensionWidth) {
+        this.dimensionWidth = dimensionWidth;
     }
 
     public int getDimensionHeight() {
         return dimensionHeight;
     }
 
-    public void setDescription(final String description) {
-        this.description = description;
+    public void setDimensionHeight(final Integer dimensionHeight) {
+        this.dimensionHeight = dimensionHeight;
     }
 
     public String getDescription() {
         return description;
     }
 
+    public void setDescription(final String description) {
+        this.description = description;
+    }
+
     @Override
     public String toString() {
         return "WordGrid [id=" + id + ", title=" + title + ", dimensionWidth=" + dimensionWidth +
-                ", dimensionHeight=" + dimensionHeight + ", description=" + description + "]";
+            ", dimensionHeight=" + dimensionHeight + ", description=" + description + "]";
     }
 }

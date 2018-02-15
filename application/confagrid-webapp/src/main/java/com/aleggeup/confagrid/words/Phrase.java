@@ -15,8 +15,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-public class Phrase
-{
+public class Phrase {
+
     private final Set<Word> words = new LinkedHashSet<>();
     private final Map<String, Integer> dups = new TreeMap<>();
 
@@ -28,8 +28,8 @@ public class Phrase
                     dups.put(phraseWord, 0);
                     words.add(new Word(phraseWord));
                 } else {
-                    final int dupCount = dups.get(phraseWord).intValue();
-                    dups.replace(phraseWord, Integer.valueOf(dupCount + 1));
+                    final int dupCount = dups.get(phraseWord);
+                    dups.replace(phraseWord, dupCount + 1);
                     words.add(new Word(phraseWord, dupCount + 1));
                 }
             }
@@ -61,7 +61,7 @@ public class Phrase
     }
 
     public int getDupValue(final String phraseWord) {
-        return dups.get(phraseWord).intValue();
+        return dups.get(phraseWord);
     }
 
     @Override
