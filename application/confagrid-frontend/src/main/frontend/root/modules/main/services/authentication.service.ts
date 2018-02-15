@@ -15,16 +15,33 @@ import 'rxjs/add/operator/catch';
 
 import { LoginRequest } from '../models/login-request.model';
 import { LoginResponse } from '../models/login-response.model';
-import { AbstractHttpService } from './abstract-http.service';
+
+import { BrowserStorageService } from './browser-storage.service';
+import { HttpService } from './http.service';
 
 @Injectable()
-export class AuthenticationService extends AbstractHttpService {
+export class AuthenticationService {
 
-    constructor(http: Http) {
-        super(http);
+    private _currentToken: string;
+
+    constructor(private httpService: HttpService, private browserStorageService: BrowserStorageService) {
+    }
+
+    set currentToken(token: string) {
+        this.httpService.currentToken = token;
+        this._currentToken = token;
+        this.browserStorageService.setString('token', token);
+    }
+
+    get currentToken(): string {
+        return this._currentToken;
+    }
+
+    check(): Observable<LoginResponse> {
+        return this.httpService.getRequest('/user/check');
     }
 
     login(request: LoginRequest): Observable<LoginResponse> {
-        return this.postRequest<LoginRequest, LoginResponse>('/user/login', request);
+        return this.httpService.postRequest<LoginRequest, LoginResponse>('/user/login', request);
     }
 }

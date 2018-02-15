@@ -56,6 +56,7 @@ export class LoginComponent {
             .login(this.loginForm.value)
             .subscribe(data => {
                 console.log('token: ' + data.token);
+                this.authService.currentToken = data.token;
                 this.toggleLogin();
             });
     }
