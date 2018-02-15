@@ -21,6 +21,7 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
+import com.aleggeup.confagrid.service.AuthenticationService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -49,13 +50,16 @@ public class UserControllerTest {
     private UserService mockUserService;
 
     @Mock
+    private AuthenticationService authenticationService;
+
+    @Mock
     private HttpServletRequest mockHttpServletRequest;
 
     private UserController userController;
 
     @Before
     public void setUp() {
-        userController = new UserController(mockUserService);
+        userController = new UserController(mockUserService, authenticationService);
     }
 
     @After
@@ -223,16 +227,10 @@ public class UserControllerTest {
 
     @Test
     public void testNullClaims() {
-        boolean exceptionThrown = false;
         boolean containsRole = true;
         Mockito.when(mockHttpServletRequest.getAttribute(JwtFilter.ATTRIBUTE_CLAIMS)).thenReturn(null);
-        try {
-            containsRole = userController.claimContainsRole(ROLE, mockHttpServletRequest);
-        } catch (final ServletException e) {
-            exceptionThrown = true;
-        }
+        containsRole = userController.claimContainsRole(ROLE, mockHttpServletRequest);
         assertFalse(containsRole);
-        assertFalse(exceptionThrown);
         Mockito.verify(mockHttpServletRequest).getAttribute(JwtFilter.ATTRIBUTE_CLAIMS);
     }
 
