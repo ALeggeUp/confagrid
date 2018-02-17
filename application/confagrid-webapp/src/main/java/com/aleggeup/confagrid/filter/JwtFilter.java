@@ -36,8 +36,8 @@ public class JwtFilter extends OncePerRequestFilter {
     public static final String SECRET_KEY = "secretkey";
     public static final String SUBJECT_ANONYMOUS = "anonymous";
     public static final String JWT_TOKEN = "X-JWT-Token";
+    public static final String JWT_ATTRIBUTE = "x-jwt-attribute";
     private static final Logger LOGGER = LoggerFactory.getLogger(JwtFilter.class);
-    private static final String JWT_ATTRIBUTE = "x-jwt-attribute";
 
     @Override
     protected void doFilterInternal(@NonNull final HttpServletRequest request,

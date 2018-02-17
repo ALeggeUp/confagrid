@@ -23,6 +23,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.impl.DefaultClaims;
 
 @RunWith(MockitoJUnitRunner.class)
 public class JwtFilterTest {
@@ -30,9 +34,9 @@ public class JwtFilterTest {
     private static final String HEADER_NOT_BEARER = "NOT BEARER";
     private static final String HEADER_BAD_BEARER = JwtFilter.BEARER_PREFIX + "GARBAGE";
     private static final String HEADER_EMPTY_CREDENTIALS = JwtFilter.BEARER_PREFIX +
-            "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IiIsImlhdCI6MH0.nEBg6Bj7PLGALFT2rs4wDfhvUfA91b7XLNog029crUA";
+        "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IiIsImlhdCI6MH0.nEBg6Bj7PLGALFT2rs4wDfhvUfA91b7XLNog029crUA";
     private static final String HEADER_VALID_CREDENTIALS = JwtFilter.BEARER_PREFIX +
-            "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2YWxpZCIsInJvbGVzIjoiIiwiaWF0IjowfQ.lzdLJW9bdkXZLc57_YcXm0cJL87ZFSrPLEOD1-nYR8Q";
+        "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2YWxpZCIsInJvbGVzIjoiIiwiaWF0IjowfQ.lzdLJW9bdkXZLc57_YcXm0cJL87ZFSrPLEOD1-nYR8Q";
     private static final String VALID_CREDENTIALS_SUBJECT = "valid";
 
     @Mock
@@ -60,6 +64,10 @@ public class JwtFilterTest {
     public void testNullAuthorizationHeader() throws ServletException, IOException {
         jwtFilter.doFilterInternal(mockHttpServletRequest, mockHttpServletResponse, mockFilterChain);
 
+        Mockito.verify(mockHttpServletRequest).getMethod();
+        Mockito.verify(mockHttpServletRequest).setAttribute(JwtFilter.JWT_ATTRIBUTE,
+            new DefaultClaims().setSubject(JwtFilter.SUBJECT_ANONYMOUS));
+        Mockito.verify(mockHttpServletResponse).setHeader(JwtFilter.JWT_TOKEN, "");
         Mockito.verify(mockHttpServletRequest).getHeader(JwtFilter.HEADER_AUTHORIZATION);
         Mockito.verify(mockHttpServletResponse).setHeader(JwtFilter.HEADER_CLAIMS_SUBJECT, JwtFilter.SUBJECT_ANONYMOUS);
         Mockito.verify(mockFilterChain).doFilter(mockHttpServletRequest, mockHttpServletResponse);
@@ -71,6 +79,10 @@ public class JwtFilterTest {
 
         jwtFilter.doFilterInternal(mockHttpServletRequest, mockHttpServletResponse, mockFilterChain);
 
+        Mockito.verify(mockHttpServletRequest).getMethod();
+        Mockito.verify(mockHttpServletRequest).setAttribute(JwtFilter.JWT_ATTRIBUTE,
+            new DefaultClaims().setSubject(JwtFilter.SUBJECT_ANONYMOUS));
+        Mockito.verify(mockHttpServletResponse).setHeader(JwtFilter.JWT_TOKEN, "");
         Mockito.verify(mockHttpServletRequest).getHeader(JwtFilter.HEADER_AUTHORIZATION);
         Mockito.verify(mockHttpServletResponse).setHeader(JwtFilter.HEADER_CLAIMS_SUBJECT, JwtFilter.SUBJECT_ANONYMOUS);
         Mockito.verify(mockFilterChain).doFilter(mockHttpServletRequest, mockHttpServletResponse);
@@ -78,10 +90,15 @@ public class JwtFilterTest {
 
     @Test
     public void testBadBearerAuthorizationHeader() throws ServletException, IOException {
+        Mockito.when(mockHttpServletRequest.getMethod()).thenReturn(RequestMethod.POST.name());
         Mockito.when(mockHttpServletRequest.getHeader(JwtFilter.HEADER_AUTHORIZATION)).thenReturn(HEADER_BAD_BEARER);
 
         jwtFilter.doFilterInternal(mockHttpServletRequest, mockHttpServletResponse, mockFilterChain);
 
+        Mockito.verify(mockHttpServletRequest).getMethod();
+        Mockito.verify(mockHttpServletRequest).setAttribute(JwtFilter.JWT_ATTRIBUTE,
+            new DefaultClaims().setSubject(JwtFilter.SUBJECT_ANONYMOUS));
+        Mockito.verify(mockHttpServletResponse).setHeader(JwtFilter.JWT_TOKEN, "GARBAGE");
         Mockito.verify(mockHttpServletRequest).getHeader(JwtFilter.HEADER_AUTHORIZATION);
         Mockito.verify(mockHttpServletResponse).setHeader(JwtFilter.HEADER_CLAIMS_SUBJECT, JwtFilter.SUBJECT_ANONYMOUS);
         Mockito.verify(mockFilterChain).doFilter(mockHttpServletRequest, mockHttpServletResponse);
@@ -89,10 +106,16 @@ public class JwtFilterTest {
 
     @Test
     public void testEmptyCredentials() throws ServletException, IOException {
-        Mockito.when(mockHttpServletRequest.getHeader(JwtFilter.HEADER_AUTHORIZATION)).thenReturn(HEADER_EMPTY_CREDENTIALS);
+        Mockito.when(mockHttpServletRequest.getHeader(JwtFilter.HEADER_AUTHORIZATION))
+            .thenReturn(HEADER_EMPTY_CREDENTIALS);
 
         jwtFilter.doFilterInternal(mockHttpServletRequest, mockHttpServletResponse, mockFilterChain);
 
+        Mockito.verify(mockHttpServletRequest).getMethod();
+        Mockito.verify(mockHttpServletRequest).setAttribute(JwtFilter.JWT_ATTRIBUTE,
+            new DefaultClaims().setSubject(JwtFilter.SUBJECT_ANONYMOUS));
+        Mockito.verify(mockHttpServletResponse).setHeader(JwtFilter.JWT_TOKEN,
+            "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IiIsImlhdCI6MH0.nEBg6Bj7PLGALFT2rs4wDfhvUfA91b7XLNog029crUA");
         Mockito.verify(mockHttpServletRequest).getHeader(JwtFilter.HEADER_AUTHORIZATION);
         Mockito.verify(mockHttpServletResponse).setHeader(JwtFilter.HEADER_CLAIMS_SUBJECT, JwtFilter.SUBJECT_ANONYMOUS);
         Mockito.verify(mockFilterChain).doFilter(mockHttpServletRequest, mockHttpServletResponse);
@@ -100,10 +123,18 @@ public class JwtFilterTest {
 
     @Test
     public void testNormalCredentials() throws ServletException, IOException {
-        Mockito.when(mockHttpServletRequest.getHeader(JwtFilter.HEADER_AUTHORIZATION)).thenReturn(HEADER_VALID_CREDENTIALS);
+        Mockito.when(mockHttpServletRequest.getHeader(JwtFilter.HEADER_AUTHORIZATION))
+            .thenReturn(HEADER_VALID_CREDENTIALS);
 
         jwtFilter.doFilterInternal(mockHttpServletRequest, mockHttpServletResponse, mockFilterChain);
+        final Claims expectedClaims = new DefaultClaims().setSubject(VALID_CREDENTIALS_SUBJECT);
+        expectedClaims.put("roles", "");
+        expectedClaims.put("iat", 0);
 
+        Mockito.verify(mockHttpServletRequest).getMethod();
+        Mockito.verify(mockHttpServletRequest).setAttribute(JwtFilter.JWT_ATTRIBUTE, expectedClaims);
+        Mockito.verify(mockHttpServletResponse).setHeader(JwtFilter.JWT_TOKEN,
+            "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2YWxpZCIsInJvbGVzIjoiIiwiaWF0IjowfQ.lzdLJW9bdkXZLc57_YcXm0cJL87ZFSrPLEOD1-nYR8Q");
         Mockito.verify(mockHttpServletRequest).getHeader(JwtFilter.HEADER_AUTHORIZATION);
         Mockito.verify(mockHttpServletResponse).setHeader(JwtFilter.HEADER_CLAIMS_SUBJECT, VALID_CREDENTIALS_SUBJECT);
         Mockito.verify(mockFilterChain).doFilter(mockHttpServletRequest, mockHttpServletResponse);
