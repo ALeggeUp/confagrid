@@ -9,14 +9,14 @@
 
 package com.aleggeup.confagrid.service.impl;
 
-import java.util.Date;
-
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.aleggeup.confagrid.filter.JwtFilter;
 import com.aleggeup.confagrid.model.User;
 import com.aleggeup.confagrid.service.AuthenticationService;
+import com.aleggeup.confagrid.service.DateTimeService;
 import com.aleggeup.confagrid.service.UserService;
 
 import io.jsonwebtoken.Jwts;
@@ -25,13 +25,16 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Service
 public class DefaultAuthenticationService implements AuthenticationService {
 
-    private static final long TOKEN_INTERVAL = 1000L * 60 * 60 * 24;
+    private static final int TOKEN_INTERVAL_DAYS = 1;
 
     private final UserService userService;
 
+    private final DateTimeService dateTimeService;
+
     @Autowired
-    public DefaultAuthenticationService(final UserService userService) {
+    public DefaultAuthenticationService(final UserService userService, final DateTimeService dateTimeService) {
         this.userService = userService;
+        this.dateTimeService = dateTimeService;
     }
 
     @Override
@@ -44,20 +47,23 @@ public class DefaultAuthenticationService implements AuthenticationService {
     @Override
     public String authenticationToken(final String username, final String password) {
         final User user = userService.getById(username);
+        final DateTime now = dateTimeService.now();
 
         return Jwts.builder().setSubject(user.getName())
             .claim("roles", user.getRoles())
-            .setIssuedAt(new Date())
-            .setExpiration(new Date(new Date().getTime() + TOKEN_INTERVAL))
+            .setIssuedAt(now.toDate())
+            .setExpiration(dateTimeService.plusDaysAsDate(now, TOKEN_INTERVAL_DAYS))
             .signWith(SignatureAlgorithm.HS256, JwtFilter.SECRET_KEY)
             .compact();
     }
 
     @Override
     public String anonymousToken() {
+        final DateTime now = dateTimeService.now();
+
         return Jwts.builder().setSubject("anonymous")
-            .setIssuedAt(new Date())
-            .setExpiration(new Date(new Date().getTime() + TOKEN_INTERVAL))
+            .setIssuedAt(now.toDate())
+            .setExpiration(dateTimeService.plusDaysAsDate(now, TOKEN_INTERVAL_DAYS))
             .signWith(SignatureAlgorithm.HS256, JwtFilter.SECRET_KEY)
             .compact();
     }
