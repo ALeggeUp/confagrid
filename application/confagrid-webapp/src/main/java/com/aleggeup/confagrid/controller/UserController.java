@@ -49,8 +49,8 @@ public class UserController {
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public LoginResponse login(@RequestBody final LoginRequest login) throws InvalidLoginException {
 
-        if (login == null || login.getName() == null || !userService.containsKey(login.getName()) ||
-            login.getPassword() == null || login.getPassword().isEmpty()) {
+        if (login == null || login.getName() == null || !userService.containsKey(login.getName())
+            || login.getPassword() == null || login.getPassword().isEmpty()) {
             throw new InvalidLoginException();
         }
 
@@ -62,7 +62,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "check", method = RequestMethod.GET)
-    public LoginResponse check(final HttpServletRequest request, final HttpServletResponse response) {
+    public LoginResponse check(final HttpServletResponse response) {
         if (JwtFilter.SUBJECT_ANONYMOUS.equals(response.getHeader(JwtFilter.HEADER_CLAIMS_SUBJECT))) {
             return new LoginResponse(authenticationService.anonymousToken());
         }
