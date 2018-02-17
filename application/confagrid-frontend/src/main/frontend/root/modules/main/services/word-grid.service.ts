@@ -13,17 +13,16 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import { AbstractHttpService } from './abstract-http.service';
+import { HttpService } from './http.service';
 import { WordGridResponseItem } from '../models/word-grid-response.model';
 
 @Injectable()
-export class WordGridService extends AbstractHttpService {
+export class WordGridService {
 
-    constructor(http: Http) {
-        super(http);
+    constructor(private httpService: HttpService) {
     }
 
     wordGrids(): Observable<WordGridResponseItem[]> {
-        return this.getRequest<WordGridResponseItem[]>('/api/v1/word-grids');
+        return this.httpService.getRequest<WordGridResponseItem[]>('/api/v1/word-grids');
     }
 }
