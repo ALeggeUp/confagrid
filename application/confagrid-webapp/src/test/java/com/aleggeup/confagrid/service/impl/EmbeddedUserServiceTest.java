@@ -21,7 +21,6 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 
@@ -84,16 +83,13 @@ public class EmbeddedUserServiceTest {
 
     @Test
     public void testEncrypt() {
-        Mockito.doAnswer(new Answer<Void>() {
-
-            @Override
-            public Void answer(InvocationOnMock mock) throws Throwable {
-                final byte[] bytes = mock.getArgument(0);
-                for (int i = 0; i < bytes.length; ++i) {
-                    bytes[i] = 0x42;
-                }
-                return null;
+        Mockito.doAnswer((Answer<Void>) mock -> {
+            final byte[] bytes = mock.getArgument(0);
+            for (int i = 0; i < bytes.length; ++i) {
+                bytes[i] = 0x42;
             }
+
+            return null;
         }).when(mockSecureRandom).nextBytes(ArgumentMatchers.any());
 
         assertEquals(ENCRYPTED_PASSWORD, userService.encrypt(UNENCRYPTED_PASSWORD));
