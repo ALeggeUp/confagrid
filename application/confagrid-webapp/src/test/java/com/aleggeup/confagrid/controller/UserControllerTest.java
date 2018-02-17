@@ -21,7 +21,6 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
-import com.aleggeup.confagrid.service.AuthenticationService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,8 +31,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import com.aleggeup.confagrid.controller.exception.InvalidLoginException;
 import com.aleggeup.confagrid.filter.JwtFilter;
-import com.aleggeup.confagrid.model.User;
 import com.aleggeup.confagrid.model.mex.LoginRequest;
+import com.aleggeup.confagrid.service.AuthenticationService;
 import com.aleggeup.confagrid.service.UserService;
 
 import io.jsonwebtoken.Claims;
@@ -50,7 +49,7 @@ public class UserControllerTest {
     private UserService mockUserService;
 
     @Mock
-    private AuthenticationService authenticationService;
+    private AuthenticationService mockAuthenticationService;
 
     @Mock
     private HttpServletRequest mockHttpServletRequest;
@@ -59,7 +58,7 @@ public class UserControllerTest {
 
     @Before
     public void setUp() {
-        userController = new UserController(mockUserService, authenticationService);
+        userController = new UserController(mockUserService, mockAuthenticationService);
     }
 
     @After
@@ -71,7 +70,7 @@ public class UserControllerTest {
     public void testNullLogin() {
         userController.login(null);
     }
-    
+
     @Test(expected = InvalidLoginException.class)
     public void testNullName() {
         final LoginRequest loginRequest = new LoginRequest();
@@ -135,11 +134,9 @@ public class UserControllerTest {
 
     @Test
     public void testPasswordNoMatch() {
-        Mockito.when(mockUserService.containsKey(USERNAME)).thenReturn(true);
 
-        final User user = new User(USERNAME, PASSWORD, null);
-        Mockito.when(mockUserService.getById(USERNAME)).thenReturn(user);
-        Mockito.when(mockUserService.matches(PASSWORD, PASSWORD)).thenReturn(false);
+        Mockito.when(mockUserService.containsKey(USERNAME)).thenReturn(true);
+        Mockito.when(mockAuthenticationService.userPasswordCheck(USERNAME, PASSWORD)).thenReturn(false);
 
         final LoginRequest loginRequest = new LoginRequest();
         loginRequest.setName(USERNAME);
@@ -155,17 +152,16 @@ public class UserControllerTest {
         assertTrue(exceptionThrown);
 
         Mockito.verify(mockUserService).containsKey(USERNAME);
-        Mockito.verify(mockUserService).getById(USERNAME);
-        Mockito.verify(mockUserService).matches(PASSWORD, PASSWORD);
+        Mockito.verify(mockAuthenticationService).userPasswordCheck(USERNAME, PASSWORD);
     }
 
     @Test
     public void testPasswordMatch() {
         Mockito.when(mockUserService.containsKey(USERNAME)).thenReturn(true);
 
-        final User user = new User(USERNAME, PASSWORD, null);
-        Mockito.when(mockUserService.getById(USERNAME)).thenReturn(user);
-        Mockito.when(mockUserService.matches(PASSWORD, PASSWORD)).thenReturn(true);
+        Mockito.when(mockUserService.containsKey(USERNAME)).thenReturn(true);
+        Mockito.when(mockAuthenticationService.userPasswordCheck(USERNAME, PASSWORD)).thenReturn(true);
+        Mockito.when(mockAuthenticationService.authenticationToken(USERNAME, PASSWORD)).thenReturn("");
 
         final LoginRequest loginRequest = new LoginRequest();
         loginRequest.setName(USERNAME);
@@ -181,8 +177,8 @@ public class UserControllerTest {
         assertFalse(exceptionThrown);
 
         Mockito.verify(mockUserService).containsKey(USERNAME);
-        Mockito.verify(mockUserService).getById(USERNAME);
-        Mockito.verify(mockUserService).matches(PASSWORD, PASSWORD);
+        Mockito.verify(mockAuthenticationService).userPasswordCheck(USERNAME, PASSWORD);
+        Mockito.verify(mockAuthenticationService).authenticationToken(USERNAME, PASSWORD);
     }
 
     @Test
