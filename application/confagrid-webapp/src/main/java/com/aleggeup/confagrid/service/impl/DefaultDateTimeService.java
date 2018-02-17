@@ -12,6 +12,7 @@ package com.aleggeup.confagrid.service.impl;
 import java.util.Date;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.springframework.stereotype.Service;
 
 import com.aleggeup.confagrid.service.DateTimeService;
@@ -21,12 +22,12 @@ public class DefaultDateTimeService implements DateTimeService {
 
     @Override
     public DateTime now() {
-        return DateTime.now();
+        return DateTime.now().withZone(DateTimeZone.UTC);
     }
 
     @Override
     public Date nowAsDate() {
-        return DateTime.now().toDate();
+        return DateTime.now().withZone(DateTimeZone.UTC).toDate();
     }
 
     @Override

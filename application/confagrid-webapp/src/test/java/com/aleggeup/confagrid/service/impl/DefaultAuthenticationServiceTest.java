@@ -13,6 +13,7 @@ import java.util.Collections;
 import java.util.Date;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.junit.After;
@@ -99,7 +100,7 @@ public class DefaultAuthenticationServiceTest {
         user.setPassword(VALID_PASSWORD);
         user.setRoles(Collections.emptySet());
         final DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
-        final DateTime now = formatter.parseDateTime("1985-10-26 01:24:00");
+        final DateTime now = formatter.parseDateTime("1985-10-26 01:24:00").withZone(DateTimeZone.UTC);
         final Date expiry = now.plusDays(1).toDate();
 
         Mockito.when(mockUserService.getById(VALID_USERNAME)).thenReturn(user);
@@ -120,7 +121,7 @@ public class DefaultAuthenticationServiceTest {
     @Test
     public void testAnonymousAuthenticationToken() {
         final DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
-        final DateTime now = formatter.parseDateTime("1985-10-26 01:24:00");
+        final DateTime now = formatter.parseDateTime("1985-10-26 01:24:00").withZone(DateTimeZone.UTC);
         final Date expiry = now.plusDays(1).toDate();
 
         Mockito.when(mockDateTimeService.now()).thenReturn(now);
