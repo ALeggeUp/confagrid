@@ -51,7 +51,7 @@ public class DefaultAuthenticationService implements AuthenticationService {
 
         return Jwts.builder().setSubject(user.getName())
             .claim("roles", user.getRoles())
-            .setIssuedAt(now.toDate())
+            .setIssuedAt(now.toLocalDateTime().toDate())
             .setExpiration(dateTimeService.plusDaysAsDate(now, TOKEN_INTERVAL_DAYS))
             .signWith(SignatureAlgorithm.HS256, JwtFilter.SECRET_KEY)
             .compact();
@@ -62,7 +62,7 @@ public class DefaultAuthenticationService implements AuthenticationService {
         final DateTime now = dateTimeService.now();
 
         return Jwts.builder().setSubject("anonymous")
-            .setIssuedAt(now.toDate())
+            .setIssuedAt(now.toLocalDateTime().toDate())
             .setExpiration(dateTimeService.plusDaysAsDate(now, TOKEN_INTERVAL_DAYS))
             .signWith(SignatureAlgorithm.HS256, JwtFilter.SECRET_KEY)
             .compact();

@@ -101,7 +101,7 @@ public class DefaultAuthenticationServiceTest {
         user.setRoles(Collections.emptySet());
         final DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
         final DateTime now = formatter.parseDateTime("1985-10-26 01:24:00").withZone(DateTimeZone.UTC);
-        final Date expiry = now.plusDays(1).toDate();
+        final Date expiry = now.plusDays(1).toLocalDateTime().toDate();
 
         Mockito.when(mockUserService.getById(VALID_USERNAME)).thenReturn(user);
         Mockito.when(mockDateTimeService.now()).thenReturn(now);
@@ -110,7 +110,7 @@ public class DefaultAuthenticationServiceTest {
         final String response = defaultAuthenticationService.authenticationToken(VALID_USERNAME, VALID_PASSWORD);
 
         Assert.assertEquals(
-            "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwicm9sZXMiOltdLCJpYXQiOjQ5OTE1MjI0MCwiZXhwIjo0OTkyMzg2NDB9.j5FSvwAEA_POeSsIJJ1-RJTW9EkIbh499K2TJzg3CiY",
+            "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwicm9sZXMiOltdLCJpYXQiOjQ5OTE2NjY0MCwiZXhwIjo0OTkyNTY2NDB9.3o14pE-7UC55nPf91Tj8rWWNfTO6pYtgfe9N3Np1q5w",
             response);
 
         Mockito.verify(mockUserService).getById(VALID_USERNAME);
@@ -122,7 +122,7 @@ public class DefaultAuthenticationServiceTest {
     public void testAnonymousAuthenticationToken() {
         final DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
         final DateTime now = formatter.parseDateTime("1985-10-26 01:24:00").withZone(DateTimeZone.UTC);
-        final Date expiry = now.plusDays(1).toDate();
+        final Date expiry = now.plusDays(1).toLocalDateTime().toDate();
 
         Mockito.when(mockDateTimeService.now()).thenReturn(now);
         Mockito.when(mockDateTimeService.plusDaysAsDate(now, 1)).thenReturn(expiry);
@@ -130,7 +130,7 @@ public class DefaultAuthenticationServiceTest {
         final String response = defaultAuthenticationService.anonymousToken();
 
         Assert.assertEquals(
-            "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbm9ueW1vdXMiLCJpYXQiOjQ5OTE1MjI0MCwiZXhwIjo0OTkyMzg2NDB9.rh_233OzRQ0dx9xEB2R6eP-Yz4_k_CB8dy5ZgufsBQ4",
+            "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbm9ueW1vdXMiLCJpYXQiOjQ5OTE2NjY0MCwiZXhwIjo0OTkyNTY2NDB9.ShRsgWxPu5hmn3UpJ64BurTOszM_EcpXF0AOpBVgfQI",
             response);
 
         Mockito.verify(mockDateTimeService).now();
