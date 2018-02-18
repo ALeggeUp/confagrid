@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: http://github.aleggeup.com/sitemap.xml

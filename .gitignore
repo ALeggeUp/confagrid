@@ -98,3 +98,11 @@ local.properties
 # Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
 !/.mvn/wrapper/maven-wrapper.jar
 
+# project
+_site
+.sass-cache
+.vagrant
+
+# general
+Thumbs.db
+ehthumbs.db
