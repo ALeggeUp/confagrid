@@ -10,7 +10,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { HttpService } from '../../services/http.service';
 
