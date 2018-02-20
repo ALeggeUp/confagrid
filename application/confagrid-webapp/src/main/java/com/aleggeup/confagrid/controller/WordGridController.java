@@ -45,7 +45,7 @@ public class WordGridController {
         return wordGrids;
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/word-grids")
+    @RequestMapping(value = "word-grids", method = RequestMethod.POST)
     @ResponseBody
     public List<WordGrid> create(@RequestBody final WordGrid wordGrid) {
         final List<WordGrid> wordGrids = new ArrayList<>();
