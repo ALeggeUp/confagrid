@@ -12,7 +12,10 @@ import { Router } from '@angular/router';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
+import { HttpService } from '../../services/http.service';
+
 import { WordGridModel } from '../../models/word-grid.model';
+import { WordGridResponseItem } from '../../models/word-grid-response.model';
 
 @Component({
     selector: 'app-create-grid',
@@ -27,7 +30,7 @@ export class CreateComponent implements OnInit {
 
     wordGridForm: FormGroup;
 
-    constructor(private http: HttpClient, private router: Router, private formBuilder: FormBuilder) {
+    constructor(private httpService: HttpService, private router: Router, private formBuilder: FormBuilder) {
         this.createForm();
     }
 
@@ -49,8 +52,10 @@ export class CreateComponent implements OnInit {
         const dimensions = wordGrid['dimensions'].split('x');
         wordGrid['dimensionWidth'] = dimensions[0];
         wordGrid['dimensionHeight'] = dimensions[1];
-        this.http.post('/api/v1/word-grids', this.wordGridForm.value).subscribe(data => {
-            this.router.navigate(['/edit', data[0]['id']]);
-        });
+        this.httpService
+            .postRequest<WordGridModel, WordGridResponseItem[]>('/api/v1/word-grids', this.wordGridForm.value)
+            .subscribe(data => {
+                this.router.navigate(['/edit'], data[0]['id']);
+            });
     }
 }
