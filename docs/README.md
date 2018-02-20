@@ -1,11 +1,10 @@
-# About
+# About (Confagrid Docs)
 
-This is repo contains the source files of my personal jekyll based blog.
-The theme is based on [beautiful-jekyll](https://github.com/daattali/beautiful-jekyll) by Dean Attali.
+This folder contains the source files of the Confagrid Docs.
 
-❓ **If you like my customization, start with cloning the origin repository by Dean and follow his readme article!**
+The published docs are located at [http://github.aleggeup.com/confagrid/](http://github.aleggeup.com/confagrid/).
 
-I contribute to his repository and try to create PRs for all the changes I did. Chances are good that these PRs are already merged...
+...
 
 
 ## ⚠️ Note: github-pages compatibility ⚠️
