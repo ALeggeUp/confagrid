@@ -7,7 +7,9 @@
  * of the MIT license.  See the LICENSE file for details.
  */
 
-export interface LoginRequest {
+import { BaseRequest } from './base-request';
+
+export interface LoginRequest extends BaseRequest {
   name: string;
   password: string;
 }
