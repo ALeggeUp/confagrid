@@ -15,7 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpService } from '../../services/http.service';
 
 import { WordGridModel } from '../../models/word-grid.model';
-import { WordGridResponseItem } from '../../models/word-grid-response.model';
+import { WordGridResponseItem } from '../../models/word-grid-response-item.model';
 
 @Component({
     selector: 'app-create-grid',

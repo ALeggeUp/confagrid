@@ -1,5 +1,5 @@
 /*
- * word-grid-response.model.ts
+ * login-response.ts
  *
  * Copyright (C) 2017 [ A Legge Up ]
  *
@@ -7,9 +7,6 @@
  * of the MIT license.  See the LICENSE file for details.
  */
 
-export interface WordGridResponseItem {
-  title: string;
-  dimensionWidth: number;
-  dimensionHeight: number;
-  description: string;
+export interface LoginResponse {
+  token: string;
 }

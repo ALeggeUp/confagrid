@@ -13,8 +13,8 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import { LoginRequest } from '../models/login-request.model';
-import { LoginResponse } from '../models/login-response.model';
+import { LoginRequest } from '../models/mex/login-request';
+import { LoginResponse } from '../models/mex/login-response';
 
 import { BrowserStorageService } from './browser-storage.service';
 import { HttpService } from './http.service';

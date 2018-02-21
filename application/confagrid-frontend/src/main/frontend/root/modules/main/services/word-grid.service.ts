@@ -14,7 +14,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import { HttpService } from './http.service';
-import { WordGridResponseItem } from '../models/word-grid-response.model';
+import { WordGridResponseItem } from '../models/word-grid-response-item.model';
 
 @Injectable()
 export class WordGridService {

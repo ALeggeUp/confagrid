@@ -1,5 +1,5 @@
 /*
- * login-request.model.ts
+ * login-request.ts
  *
  * Copyright (C) 2017 [ A Legge Up ]
  *

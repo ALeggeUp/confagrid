@@ -11,7 +11,7 @@ import { Component, Inject, OnInit, AfterViewInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
 import { WordGridService } from '../../services/word-grid.service';
-import { WordGridResponseItem } from '../../models/word-grid-response.model';
+import { WordGridResponseItem } from '../../models/word-grid-response-item.model';
 
 @Component({
     selector: 'app-existing-grid',

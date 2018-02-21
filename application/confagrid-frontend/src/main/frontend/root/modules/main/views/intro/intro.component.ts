@@ -10,7 +10,6 @@
 import { Component, Inject, OnInit, AfterViewInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { BrowserStorageService } from '../../services/browser-storage.service';
-import { LoginResponse } from '../../models/login-response.model';
 
 @Component({
     selector: 'app-intro-content',
