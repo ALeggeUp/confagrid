@@ -11,10 +11,15 @@ package com.aleggeup.confagrid.model;
 
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -26,6 +31,11 @@ public class WordGrid {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH
+    }, fetch = FetchType.EAGER, targetEntity = User.class)
+    @JoinColumn(foreignKey = @ForeignKey(name = "FK_USER"))
+    private User creator;
 
     @Column
     private String title;
@@ -42,9 +52,10 @@ public class WordGrid {
     public WordGrid() {
     }
 
-    public WordGrid(final String title, final Integer dimensionWidth, final Integer dimensionHeight,
+    public WordGrid(final String title, final User creator, final Integer dimensionWidth, final Integer dimensionHeight,
         final String description) {
         this.title = title;
+        this.creator = creator;
         this.dimensionWidth = dimensionWidth;
         this.dimensionHeight = dimensionHeight;
         this.description = description;
@@ -60,6 +71,14 @@ public class WordGrid {
 
     public void setTitle(final String title) {
         this.title = title;
+    }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(final User creator) {
+        this.creator = creator;
     }
 
     public int getDimensionWidth() {
@@ -88,7 +107,7 @@ public class WordGrid {
 
     @Override
     public String toString() {
-        return "WordGrid [id=" + id + ", title=" + title + ", dimensionWidth=" + dimensionWidth
+        return "WordGrid [id=" + id + ", title=" + title + ", creator=" + creator + ", dimensionWidth=" + dimensionWidth
             + ", dimensionHeight=" + dimensionHeight + ", description=" + description + "]";
     }
 }

@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.aleggeup.confagrid.model.WordGrid;
+import com.aleggeup.confagrid.repository.UserRepository;
 import com.aleggeup.confagrid.repository.WordGridRepository;
 
 @Component
@@ -26,14 +27,18 @@ public class WordGridRepositoryInitializer {
 
     private final WordGridRepository wordGridRepository;
 
+    private final UserRepository userRepository;
+
     @Autowired
-    public WordGridRepositoryInitializer(final WordGridRepository wordGridRepository) {
+    public WordGridRepositoryInitializer(final WordGridRepository wordGridRepository,
+        final UserRepository userRepository) {
         this.wordGridRepository = wordGridRepository;
+        this.userRepository = userRepository;
     }
 
     @PostConstruct
     public void postConstruct() {
-        if (this.wordGridRepository.count() == 0) {
+        if (wordGridRepository.count() == 0) {
             LOGGER.info("WordGrid Repository is Being Initialized.");
             initialize();
         } else {
@@ -43,7 +48,7 @@ public class WordGridRepositoryInitializer {
 
     private void initialize() {
         LOGGER.info("-> Initializing WordGrid list with seed data");
-        wordGridRepository.save(new WordGrid("title 1", 16, 12, "description 1"));
-        wordGridRepository.save(new WordGrid("title 2", 12, 16, "description 2"));
+        wordGridRepository.save(new WordGrid("title 1", userRepository.findByName("admin"), 16, 12, "description 1"));
+        wordGridRepository.save(new WordGrid("title 2", userRepository.findByName("user"), 12, 16, "description 2"));
     }
 }
