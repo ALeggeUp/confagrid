@@ -1,7 +1,7 @@
 /*
  * UserController.java
  *
- * Copyright (C) 2017 [ A Legge Up ]
+ * Copyright (C) 2017-2018 [ A Legge Up ]
  *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,9 +48,9 @@ public class UserController {
     }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public LoginResponse login(@RequestBody final LoginRequest login) throws InvalidLoginException {
+    public LoginResponse login(@NonNull @RequestBody final LoginRequest login) throws InvalidLoginException {
 
-        if (login == null || login.getName() == null || !userService.containsKey(login.getName())
+        if (login.getName() == null || !userService.containsName(login.getName())
             || login.getPassword() == null || login.getPassword().isEmpty()) {
             throw new InvalidLoginException();
         }

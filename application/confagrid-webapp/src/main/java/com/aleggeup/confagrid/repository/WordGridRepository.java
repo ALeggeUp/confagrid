@@ -9,9 +9,11 @@
 
 package com.aleggeup.confagrid.repository;
 
+import java.util.UUID;
+
 import org.springframework.data.repository.CrudRepository;
 
 import com.aleggeup.confagrid.model.WordGrid;
 
-public interface WordGridRepository extends CrudRepository<WordGrid, Long> {
+public interface WordGridRepository extends CrudRepository<WordGrid, UUID> {
 }

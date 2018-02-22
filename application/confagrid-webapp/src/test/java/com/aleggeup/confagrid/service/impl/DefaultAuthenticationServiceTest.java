@@ -62,12 +62,12 @@ public class DefaultAuthenticationServiceTest {
         final User user = new User();
         user.setPassword(VALID_PASSWORD);
 
-        Mockito.when(mockUserService.getById(VALID_USERNAME)).thenReturn(user);
+        Mockito.when(mockUserService.findByName(VALID_USERNAME)).thenReturn(user);
         Mockito.when(mockUserService.matches(VALID_PASSWORD, VALID_PASSWORD)).thenReturn(true);
 
         Assert.assertTrue(defaultAuthenticationService.userPasswordCheck(VALID_USERNAME, VALID_PASSWORD));
 
-        Mockito.verify(mockUserService).getById(VALID_USERNAME);
+        Mockito.verify(mockUserService).findByName(VALID_USERNAME);
         Mockito.verify(mockUserService).matches(VALID_PASSWORD, VALID_PASSWORD);
     }
 
@@ -76,22 +76,22 @@ public class DefaultAuthenticationServiceTest {
         final User user = new User();
         user.setPassword(VALID_PASSWORD);
 
-        Mockito.when(mockUserService.getById(VALID_USERNAME)).thenReturn(user);
+        Mockito.when(mockUserService.findByName(VALID_USERNAME)).thenReturn(user);
         Mockito.when(mockUserService.matches(INVALID_PASSWORD, VALID_PASSWORD)).thenReturn(false);
 
         Assert.assertFalse(defaultAuthenticationService.userPasswordCheck(VALID_USERNAME, INVALID_PASSWORD));
 
-        Mockito.verify(mockUserService).getById(VALID_USERNAME);
+        Mockito.verify(mockUserService).findByName(VALID_USERNAME);
         Mockito.verify(mockUserService).matches(INVALID_PASSWORD, VALID_PASSWORD);
     }
 
     @Test
     public void testUserCheckUserNotFound() {
-        Mockito.when(mockUserService.getById(VALID_USERNAME)).thenReturn(null);
+        Mockito.when(mockUserService.findByName(VALID_USERNAME)).thenReturn(null);
 
         Assert.assertFalse(defaultAuthenticationService.userPasswordCheck(VALID_USERNAME, VALID_PASSWORD));
 
-        Mockito.verify(mockUserService).getById(VALID_USERNAME);
+        Mockito.verify(mockUserService).findByName(VALID_USERNAME);
     }
 
     @Ignore("Remove until difference in time on build machine is figured out.")
@@ -105,7 +105,7 @@ public class DefaultAuthenticationServiceTest {
         final DateTime now = formatter.parseDateTime("1985-10-26 01:24:00").withZone(DateTimeZone.UTC);
         final Date expiry = new Date(1_000_000_000L);
 
-        Mockito.when(mockUserService.getById(VALID_USERNAME)).thenReturn(user);
+        Mockito.when(mockUserService.findByName(VALID_USERNAME)).thenReturn(user);
         Mockito.when(mockDateTimeService.now()).thenReturn(now);
         Mockito.when(mockDateTimeService.plusDaysAsDate(now, 1)).thenReturn(expiry);
 
@@ -115,7 +115,7 @@ public class DefaultAuthenticationServiceTest {
             "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwicm9sZXMiOltdLCJpYXQiOjQ5OTE2NjY0MCwiZXhwIjoxMDAwMDAwfQ.e14TR4Umu8UUz3GrYyXHQTkFickDFV1Vpgb8JaCz8EY",
             response);
 
-        Mockito.verify(mockUserService).getById(VALID_USERNAME);
+        Mockito.verify(mockUserService).findByName(VALID_USERNAME);
         Mockito.verify(mockDateTimeService).now();
         Mockito.verify(mockDateTimeService).plusDaysAsDate(now, 1);
     }

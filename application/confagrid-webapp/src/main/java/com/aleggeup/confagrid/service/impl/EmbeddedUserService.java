@@ -10,6 +10,7 @@
 package com.aleggeup.confagrid.service.impl;
 
 import java.security.SecureRandom;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -38,13 +39,23 @@ public class EmbeddedUserService implements UserService {
     }
 
     @Override
-    public User getById(final String key) {
+    public User getById(final UUID key) {
         return userRepository.findOne(key);
     }
 
     @Override
-    public boolean containsKey(final String key) {
+    public boolean containsKey(final UUID key) {
         return userRepository.exists(key);
+    }
+
+    @Override
+    public boolean containsName(final String name) {
+        return findByName(name) != null;
+    }
+
+    @Override
+    public User findByName(final String name) {
+        return userRepository.findByName(name);
     }
 
     @Override

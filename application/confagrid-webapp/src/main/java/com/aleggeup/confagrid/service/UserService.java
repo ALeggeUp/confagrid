@@ -9,15 +9,21 @@
 
 package com.aleggeup.confagrid.service;
 
+import java.util.UUID;
+
 import com.aleggeup.confagrid.model.User;
 
 public interface UserService {
 
     void save(User user);
 
-    User getById(String key);
+    User getById(UUID key);
 
-    boolean containsKey(String key);
+    boolean containsKey(UUID key);
+
+    boolean containsName(String name);
+
+    User findByName(String name);
 
     String encrypt(String raw);
 

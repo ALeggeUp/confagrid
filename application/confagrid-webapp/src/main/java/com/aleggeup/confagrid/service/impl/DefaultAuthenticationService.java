@@ -39,14 +39,14 @@ public class DefaultAuthenticationService implements AuthenticationService {
 
     @Override
     public boolean userPasswordCheck(final String username, final String password) {
-        final User user = userService.getById(username);
+        final User user = userService.findByName(username);
 
         return user != null && userService.matches(password, user.getPassword());
     }
 
     @Override
     public String authenticationToken(final String username, final String password) {
-        final User user = userService.getById(username);
+        final User user = userService.findByName(username);
         final DateTime now = dateTimeService.now();
 
         return Jwts.builder().setSubject(user.getName())

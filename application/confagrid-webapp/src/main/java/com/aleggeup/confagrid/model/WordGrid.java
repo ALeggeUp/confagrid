@@ -9,18 +9,23 @@
 
 package com.aleggeup.confagrid.model;
 
+import java.util.UUID;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class WordGrid {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(name = "id", updatable = false, nullable = false)
+    private UUID id;
 
     @Column
     private String title;
@@ -45,7 +50,7 @@ public class WordGrid {
         this.description = description;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
@@ -83,7 +88,7 @@ public class WordGrid {
 
     @Override
     public String toString() {
-        return "WordGrid [id=" + id + ", title=" + title + ", dimensionWidth=" + dimensionWidth +
-            ", dimensionHeight=" + dimensionHeight + ", description=" + description + "]";
+        return "WordGrid [id=" + id + ", title=" + title + ", dimensionWidth=" + dimensionWidth
+            + ", dimensionHeight=" + dimensionHeight + ", description=" + description + "]";
     }
 }

@@ -10,18 +10,27 @@
 package com.aleggeup.confagrid.model;
 
 import java.util.Set;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class User {
 
     @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(name = "id", updatable = false, nullable = false)
+    private UUID id;
+
     @Column
     private String name;
 
@@ -39,6 +48,10 @@ public class User {
         this.name = name;
         this.password = password;
         this.roles = roles;
+    }
+
+    public UUID getId() {
+        return id;
     }
 
     public String getName() {
@@ -67,6 +80,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "User [name=" + name + ", password=" + password + ", roles=" + roles + "]";
+        return "User [id=" + id + ", name=" + name + ", password=" + password + ", roles=" + roles + "]";
     }
 }

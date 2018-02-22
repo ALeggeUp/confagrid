@@ -13,6 +13,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.security.SecureRandom;
+import java.util.UUID;
 
 import org.junit.After;
 import org.junit.Before;
@@ -31,7 +32,7 @@ import com.aleggeup.confagrid.service.UserService;
 @RunWith(MockitoJUnitRunner.class)
 public class EmbeddedUserServiceTest {
 
-    private static final String USER_NAME = "username";
+    private static final UUID RANDOM_UUID = UUID.randomUUID();
     private static final User TEST_USER = new User("test", "test", null);
     private static final Long COUNT = 10L;
     private static final String UNENCRYPTED_PASSWORD = "password";
@@ -64,21 +65,21 @@ public class EmbeddedUserServiceTest {
 
     @Test
     public void testGetById() {
-        Mockito.when(mockUserRepository.findOne(USER_NAME)).thenReturn(TEST_USER);
-        final User user = userService.getById(USER_NAME);
+        Mockito.when(mockUserRepository.findOne(RANDOM_UUID)).thenReturn(TEST_USER);
+        final User user = userService.getById(RANDOM_UUID);
 
         assertEquals(TEST_USER, user);
 
-        Mockito.verify(mockUserRepository).findOne(USER_NAME);
+        Mockito.verify(mockUserRepository).findOne(RANDOM_UUID);
     }
 
     @Test
     public void testContainsKey() {
-        Mockito.when(mockUserRepository.exists(USER_NAME)).thenReturn(true);
+        Mockito.when(mockUserRepository.exists(RANDOM_UUID)).thenReturn(true);
 
-        assertTrue(userService.containsKey(USER_NAME));
+        assertTrue(userService.containsKey(RANDOM_UUID));
 
-        Mockito.verify(mockUserRepository).exists(USER_NAME);
+        Mockito.verify(mockUserRepository).exists(RANDOM_UUID);
     }
 
     @Test

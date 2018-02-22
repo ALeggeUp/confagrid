@@ -9,9 +9,15 @@
 
 package com.aleggeup.confagrid.repository;
 
+import java.util.UUID;
+
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.aleggeup.confagrid.model.User;
 
-public interface UserRepository extends CrudRepository<User, String> {
+@Transactional
+public interface UserRepository extends CrudRepository<User, UUID> {
+
+    User findByName(String name);
 }
