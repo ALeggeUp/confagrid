@@ -10,5 +10,7 @@
 import { BaseResponse } from './base-response';
 
 export interface LoginResponse extends BaseResponse {
+  userId: string;
+  userName: string;
   token: string;
 }

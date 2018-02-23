@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.aleggeup.confagrid.controller.exception.InvalidLoginException;
 import com.aleggeup.confagrid.filter.JwtFilter;
+import com.aleggeup.confagrid.model.User;
 import com.aleggeup.confagrid.model.mex.LoginRequest;
 import com.aleggeup.confagrid.model.mex.LoginResponse;
 import com.aleggeup.confagrid.service.AuthenticationService;
@@ -59,16 +60,21 @@ public class UserController {
             throw new InvalidLoginException();
         }
 
-        return new LoginResponse(authenticationService.authenticationToken(login.getName(), login.getPassword()));
+        final User user = userService.findByName(login.getName());
+
+        return new LoginResponse(user.getId().toString(), user.getName(),
+            authenticationService.authenticationToken(login.getName(), login.getPassword()));
     }
 
     @RequestMapping(value = "check", method = RequestMethod.GET)
     public LoginResponse check(final HttpServletResponse response) {
         if (JwtFilter.SUBJECT_ANONYMOUS.equals(response.getHeader(JwtFilter.HEADER_CLAIMS_SUBJECT))) {
-            return new LoginResponse(authenticationService.anonymousToken());
+            return new LoginResponse("", response.getHeader(JwtFilter.HEADER_CLAIMS_SUBJECT),
+                authenticationService.anonymousToken());
         }
 
-        return new LoginResponse(response.getHeader(JwtFilter.JWT_TOKEN));
+        return new LoginResponse("", response.getHeader(JwtFilter.HEADER_CLAIMS_SUBJECT),
+            response.getHeader(JwtFilter.JWT_TOKEN));
     }
 
     @RequestMapping(value = "role/{role}", method = RequestMethod.GET)

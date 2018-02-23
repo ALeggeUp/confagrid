@@ -11,7 +11,13 @@
 description: Login Response
 type: object
 properties:
+    userId:
+      type: string
+    userName:
+      type: string
     token:
       type: string
 required:
+  - userId
+  - userName
   - token
