@@ -20,6 +20,8 @@ import org.springframework.web.servlet.config.annotation.CorsRegistration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.aleggeup.confagrid.filter.JwtFilter;
+
 @RunWith(MockitoJUnitRunner.class)
 public class SystemConfigTest {
 
@@ -42,14 +44,20 @@ public class SystemConfigTest {
     }
 
     @Test
-    public void test() {
-        Mockito.when(mockCorsRegistration.allowedOrigins(SystemConfig.CORS_ALLOWED_ORIGINS)).thenReturn(mockCorsRegistration);
+    public void testCorsRegistration() {
+        Mockito.when(mockCorsRegistration.allowedOrigins(SystemConfig.CORS_ALLOWED_ORIGINS))
+            .thenReturn(mockCorsRegistration);
         Mockito.when(mockCorsRegistry.addMapping(SystemConfig.CORS_MAPPING)).thenReturn(mockCorsRegistration);
+        Mockito.when(mockCorsRegistration.allowedHeaders("*")).thenReturn(mockCorsRegistration);
+        Mockito.when(mockCorsRegistration.exposedHeaders(JwtFilter.HEADER_CLAIMS, JwtFilter.HEADER_CLAIMS_SUBJECT))
+            .thenReturn(mockCorsRegistration);
 
         final WebMvcConfigurer configurer = systemConfig.corsConfigurer();
         configurer.addCorsMappings(mockCorsRegistry);
 
         Mockito.verify(mockCorsRegistry).addMapping(SystemConfig.CORS_MAPPING);
         Mockito.verify(mockCorsRegistration).allowedOrigins(SystemConfig.CORS_ALLOWED_ORIGINS);
+        Mockito.verify(mockCorsRegistration).allowedHeaders("*");
+        Mockito.verify(mockCorsRegistration).exposedHeaders(JwtFilter.HEADER_CLAIMS, JwtFilter.HEADER_CLAIMS_SUBJECT);
     }
 }

@@ -20,6 +20,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -71,6 +72,8 @@ public class JwtFilterTest {
         Mockito.verify(mockHttpServletRequest).getHeader(JwtFilter.HEADER_AUTHORIZATION);
         Mockito.verify(mockHttpServletResponse).setHeader(JwtFilter.HEADER_CLAIMS_SUBJECT, JwtFilter.SUBJECT_ANONYMOUS);
         Mockito.verify(mockFilterChain).doFilter(mockHttpServletRequest, mockHttpServletResponse);
+        Mockito.verify(mockHttpServletResponse, Mockito.times(3)).setHeader(ArgumentMatchers.anyString(),
+            ArgumentMatchers.any());
     }
 
     @Test
@@ -86,6 +89,8 @@ public class JwtFilterTest {
         Mockito.verify(mockHttpServletRequest).getHeader(JwtFilter.HEADER_AUTHORIZATION);
         Mockito.verify(mockHttpServletResponse).setHeader(JwtFilter.HEADER_CLAIMS_SUBJECT, JwtFilter.SUBJECT_ANONYMOUS);
         Mockito.verify(mockFilterChain).doFilter(mockHttpServletRequest, mockHttpServletResponse);
+        Mockito.verify(mockHttpServletResponse, Mockito.times(3)).setHeader(ArgumentMatchers.anyString(),
+            ArgumentMatchers.any());
     }
 
     @Test
@@ -98,10 +103,13 @@ public class JwtFilterTest {
         Mockito.verify(mockHttpServletRequest).getMethod();
         Mockito.verify(mockHttpServletRequest).setAttribute(JwtFilter.JWT_ATTRIBUTE,
             new DefaultClaims().setSubject(JwtFilter.SUBJECT_ANONYMOUS));
-        Mockito.verify(mockHttpServletResponse).setHeader(JwtFilter.JWT_TOKEN, "GARBAGE");
         Mockito.verify(mockHttpServletRequest).getHeader(JwtFilter.HEADER_AUTHORIZATION);
-        Mockito.verify(mockHttpServletResponse).setHeader(JwtFilter.HEADER_CLAIMS_SUBJECT, JwtFilter.SUBJECT_ANONYMOUS);
         Mockito.verify(mockFilterChain).doFilter(mockHttpServletRequest, mockHttpServletResponse);
+
+        Mockito.verify(mockHttpServletResponse).setHeader(JwtFilter.HEADER_CLAIMS_SUBJECT, JwtFilter.SUBJECT_ANONYMOUS);
+        Mockito.verify(mockHttpServletResponse).setHeader(JwtFilter.JWT_TOKEN, "GARBAGE");
+        Mockito.verify(mockHttpServletResponse, Mockito.times(3)).setHeader(ArgumentMatchers.anyString(),
+            ArgumentMatchers.any());
     }
 
     @Test
@@ -119,6 +127,8 @@ public class JwtFilterTest {
         Mockito.verify(mockHttpServletRequest).getHeader(JwtFilter.HEADER_AUTHORIZATION);
         Mockito.verify(mockHttpServletResponse).setHeader(JwtFilter.HEADER_CLAIMS_SUBJECT, JwtFilter.SUBJECT_ANONYMOUS);
         Mockito.verify(mockFilterChain).doFilter(mockHttpServletRequest, mockHttpServletResponse);
+        Mockito.verify(mockHttpServletResponse, Mockito.times(3)).setHeader(ArgumentMatchers.anyString(),
+            ArgumentMatchers.any());
     }
 
     @Test
@@ -138,5 +148,7 @@ public class JwtFilterTest {
         Mockito.verify(mockHttpServletRequest).getHeader(JwtFilter.HEADER_AUTHORIZATION);
         Mockito.verify(mockHttpServletResponse).setHeader(JwtFilter.HEADER_CLAIMS_SUBJECT, VALID_CREDENTIALS_SUBJECT);
         Mockito.verify(mockFilterChain).doFilter(mockHttpServletRequest, mockHttpServletResponse);
+        Mockito.verify(mockHttpServletResponse, Mockito.times(3)).setHeader(ArgumentMatchers.anyString(),
+            ArgumentMatchers.any());
     }
 }

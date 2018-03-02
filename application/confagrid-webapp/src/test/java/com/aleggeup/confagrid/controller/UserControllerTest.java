@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,6 +34,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import com.aleggeup.confagrid.controller.exception.InvalidLoginException;
 import com.aleggeup.confagrid.filter.JwtFilter;
+import com.aleggeup.confagrid.model.User;
 import com.aleggeup.confagrid.model.mex.LoginRequest;
 import com.aleggeup.confagrid.model.mex.LoginResponse;
 import com.aleggeup.confagrid.service.AuthenticationService;
@@ -59,6 +61,9 @@ public class UserControllerTest {
 
     @Mock
     private HttpServletResponse mockHttpServletResponse;
+
+    @Mock
+    private User mockUser;
 
     private UserController userController;
 
@@ -166,7 +171,11 @@ public class UserControllerTest {
     public void testPasswordMatch() {
         Mockito.when(mockUserService.containsName(USERNAME)).thenReturn(true);
         Mockito.when(mockAuthenticationService.userPasswordCheck(USERNAME, PASSWORD)).thenReturn(true);
+        Mockito.when(mockUser.getId()).thenReturn(UUID.randomUUID());
+        Mockito.when(mockUser.getName()).thenReturn(USERNAME);
         Mockito.when(mockAuthenticationService.authenticationToken(USERNAME, PASSWORD)).thenReturn("");
+
+        Mockito.when(mockUserService.findByName(USERNAME)).thenReturn(mockUser);
 
         final LoginRequest loginRequest = new LoginRequest();
         loginRequest.setName(USERNAME);
@@ -184,6 +193,9 @@ public class UserControllerTest {
         Mockito.verify(mockUserService).containsName(USERNAME);
         Mockito.verify(mockAuthenticationService).userPasswordCheck(USERNAME, PASSWORD);
         Mockito.verify(mockAuthenticationService).authenticationToken(USERNAME, PASSWORD);
+        Mockito.verify(mockUser).getId();
+        Mockito.verify(mockUser).getName();
+        Mockito.verify(mockUserService).findByName(USERNAME);
     }
 
     @Test
@@ -292,7 +304,7 @@ public class UserControllerTest {
 
         assertNotNull(loginResponse);
 
-        Mockito.verify(mockHttpServletResponse).getHeader(JwtFilter.HEADER_CLAIMS_SUBJECT);
+        Mockito.verify(mockHttpServletResponse, Mockito.times(2)).getHeader(JwtFilter.HEADER_CLAIMS_SUBJECT);
         Mockito.verify(mockAuthenticationService).anonymousToken();
     }
 
@@ -305,7 +317,7 @@ public class UserControllerTest {
 
         assertNotNull(loginResponse);
 
-        Mockito.verify(mockHttpServletResponse).getHeader(JwtFilter.HEADER_CLAIMS_SUBJECT);
+        Mockito.verify(mockHttpServletResponse, Mockito.times(2)).getHeader(JwtFilter.HEADER_CLAIMS_SUBJECT);
         Mockito.verify(mockHttpServletResponse).getHeader(JwtFilter.JWT_TOKEN);
     }
 }
