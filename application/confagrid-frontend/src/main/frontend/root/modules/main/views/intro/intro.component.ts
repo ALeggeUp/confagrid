@@ -30,8 +30,15 @@ export class IntroComponent implements OnInit, AfterViewInit {
     ngAfterViewInit() {
         if (this.browserStorageService.getString('token')) {
             this.authenticationService.currentToken = this.browserStorageService.getString('token');
+
+            this.authenticationService.check()
+                .subscribe(data => {
+                    if (data.token !== this.authenticationService.currentToken) {
+                        console.log('token has changed: ' + data);
+                        this.authenticationService.currentToken = data.token;
+                    }
+                }
+            );
         }
-        this.authenticationService.check()
-            .subscribe(data => console.log(data));
     }
 }
