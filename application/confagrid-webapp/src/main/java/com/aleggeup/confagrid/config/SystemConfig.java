@@ -14,6 +14,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.aleggeup.confagrid.filter.JwtFilter;
+
 @Configuration
 public class SystemConfig {
 
@@ -25,7 +27,10 @@ public class SystemConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(final CorsRegistry registry) {
-                registry.addMapping(CORS_MAPPING).allowedOrigins(CORS_ALLOWED_ORIGINS);
+                registry.addMapping(CORS_MAPPING)
+                    .allowedOrigins(CORS_ALLOWED_ORIGINS)
+                    .allowedHeaders("*")
+                    .exposedHeaders(JwtFilter.HEADER_CLAIMS, JwtFilter.HEADER_CLAIMS_SUBJECT);
             }
         };
     }
