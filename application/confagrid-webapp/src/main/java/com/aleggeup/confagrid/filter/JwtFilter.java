@@ -32,11 +32,14 @@ public class JwtFilter extends OncePerRequestFilter {
     public static final String ATTRIBUTE_CLAIMS = "claims";
     public static final String BEARER_PREFIX = "Bearer ";
     public static final String HEADER_AUTHORIZATION = "Authorization";
+    public static final String HEADER_CLAIMS = "X-Claims";
     public static final String HEADER_CLAIMS_SUBJECT = "X-Claims-Subject";
     public static final String SECRET_KEY = "secretkey";
     public static final String SUBJECT_ANONYMOUS = "anonymous";
     public static final String JWT_TOKEN = "X-JWT-Token";
     public static final String JWT_ATTRIBUTE = "x-jwt-attribute";
+    public static final String ANONYMOUS_USER_ID = "b5a2918e-bd3f-48f5-8437-daf40fd3f323";
+
     private static final Logger LOGGER = LoggerFactory.getLogger(JwtFilter.class);
 
     @Override
@@ -70,6 +73,7 @@ public class JwtFilter extends OncePerRequestFilter {
             request.setAttribute(JWT_ATTRIBUTE, claims);
             response.setHeader(JWT_TOKEN, token);
             response.setHeader(HEADER_CLAIMS_SUBJECT, claims.getSubject());
+            response.setHeader(HEADER_CLAIMS, claims.toString());
         }
 
         chain.doFilter(request, response);

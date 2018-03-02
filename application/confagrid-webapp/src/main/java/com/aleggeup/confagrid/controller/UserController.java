@@ -69,7 +69,7 @@ public class UserController {
     @RequestMapping(value = "check", method = RequestMethod.GET)
     public LoginResponse check(final HttpServletResponse response) {
         if (JwtFilter.SUBJECT_ANONYMOUS.equals(response.getHeader(JwtFilter.HEADER_CLAIMS_SUBJECT))) {
-            return new LoginResponse("", response.getHeader(JwtFilter.HEADER_CLAIMS_SUBJECT),
+            return new LoginResponse(JwtFilter.ANONYMOUS_USER_ID, response.getHeader(JwtFilter.HEADER_CLAIMS_SUBJECT),
                 authenticationService.anonymousToken());
         }
 
