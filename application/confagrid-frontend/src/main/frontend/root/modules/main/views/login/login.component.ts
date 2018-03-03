@@ -14,6 +14,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { AuthGuardService } from '../../services/auth-guard.service';
 import { AuthenticationService } from '../../services/authentication.service';
+import { CurrentUserService } from '../../services/current-user.service';
 
 @Component({
     selector: 'app-login-content',
@@ -29,7 +30,8 @@ export class LoginComponent {
             private authGuardService: AuthGuardService,
             private router: Router,
             private formBuilder: FormBuilder,
-            private authService: AuthenticationService) {
+            private authService: AuthenticationService,
+            private currentUserService: CurrentUserService) {
         this.createForm();
     }
 
@@ -56,7 +58,7 @@ export class LoginComponent {
             .login(this.loginForm.value)
             .subscribe(data => {
                 console.log('token: ' + data.token);
-                this.authService.currentToken = data.token;
+                this.currentUserService.currentToken = data.token;
                 this.toggleLogin();
             });
     }

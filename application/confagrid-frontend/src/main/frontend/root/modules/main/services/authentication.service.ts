@@ -16,25 +16,12 @@ import 'rxjs/add/operator/catch';
 import { LoginRequest } from '../models/mex/login-request';
 import { LoginResponse } from '../models/mex/login-response';
 
-import { BrowserStorageService } from './browser-storage.service';
 import { HttpService } from './http.service';
 
 @Injectable()
 export class AuthenticationService {
 
-    private _currentToken: string;
-
-    constructor(private httpService: HttpService, private browserStorageService: BrowserStorageService) {
-    }
-
-    set currentToken(token: string) {
-        this.httpService.currentToken = token;
-        this._currentToken = token;
-        this.browserStorageService.setString('token', token);
-    }
-
-    get currentToken(): string {
-        return this._currentToken;
+    constructor(private httpService: HttpService) {
     }
 
     check(): Observable<LoginResponse> {

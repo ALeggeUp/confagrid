@@ -14,18 +14,14 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
+import { CurrentUserService } from './current-user.service';
+
 @Injectable()
 export class HttpService {
 
-    private _currentToken: string;
-
     protected baseUrl = 'http://localhost:8080';
 
-    constructor(private http: Http) {
-    }
-
-    set currentToken(token: string) {
-        this._currentToken = token;
+    constructor(private http: Http, private currentUserService: CurrentUserService) {
     }
 
     public postRequest<REQ, RESP>(path: string, request: REQ): Observable<RESP> {
@@ -43,13 +39,14 @@ export class HttpService {
     protected standardOptions(): RequestOptions {
         const cpHeaders = new Headers({ 'Content-Type': 'application/json' });
 
-        if (this._currentToken) {
-            cpHeaders.append('Authorization', 'Bearer ' + this._currentToken);
+        if (this.currentUserService.currentToken) {
+            cpHeaders.append('Authorization', 'Bearer ' + this.currentUserService.currentToken);
         }
         return new RequestOptions({ headers: cpHeaders });
     }
 
     protected extractData(res: Response) {
+        console.log(res);
         const body = res.json();
         return body || {};
     }

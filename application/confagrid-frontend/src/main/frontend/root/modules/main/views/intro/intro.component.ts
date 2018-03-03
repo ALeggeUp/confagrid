@@ -9,7 +9,7 @@
 
 import { Component, Inject, OnInit, AfterViewInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
-import { BrowserStorageService } from '../../services/browser-storage.service';
+import { CurrentUserService } from '../../services/current-user.service';
 
 @Component({
     selector: 'app-intro-content',
@@ -21,24 +21,21 @@ export class IntroComponent implements OnInit, AfterViewInit {
     title = 'Confagrid';
     subtitle = 'Word Grid Generator';
 
-    constructor(private authenticationService: AuthenticationService, private browserStorageService: BrowserStorageService) {
+    constructor(private authenticationService: AuthenticationService, private currentUserService: CurrentUserService) {
     }
 
     ngOnInit() {
     }
 
     ngAfterViewInit() {
-        if (this.browserStorageService.getString('token')) {
-            this.authenticationService.currentToken = this.browserStorageService.getString('token');
-
-            this.authenticationService.check()
-                .subscribe(data => {
-                    if (data.token !== this.authenticationService.currentToken) {
-                        console.log('token has changed: ' + data);
-                        this.authenticationService.currentToken = data.token;
-                    }
+        this.authenticationService.check()
+            .subscribe(data => {
+                if (data.token !== this.currentUserService.currentToken) {
+                    console.log('token has changed:');
+                    console.log(data);
+                    this.currentUserService.currentToken = data.token;
                 }
-            );
-        }
+            }
+        );
     }
 }
