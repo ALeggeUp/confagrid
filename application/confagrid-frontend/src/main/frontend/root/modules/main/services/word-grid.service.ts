@@ -31,4 +31,8 @@ export class WordGridService {
     wordGrids(): Observable<WordGridModel[]> {
         return this.httpService.getRequest<WordGridModel[]>('/api/v1/word-grids');
     }
+
+    get(id: string): Observable<WordGridModel> {
+        return this.httpService.getRequest<WordGridModel>('/api/v1/word-grid/' + id);
+    }
 }

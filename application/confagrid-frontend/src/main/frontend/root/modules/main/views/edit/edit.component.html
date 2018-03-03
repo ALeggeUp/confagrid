@@ -1,6 +1,10 @@
 <app-nav></app-nav>
 
 <div class="container" style="padding-top: 60px;">
+    <div *ngIf="wordGridObservable | async as wordGrid else loading">
+      <p>{{wordGrid.id}}</p>
+    </div>
+    <ng-template #loading><p>loading...</p></ng-template>
 </div>
 
 <app-footer-aside></app-footer-aside>

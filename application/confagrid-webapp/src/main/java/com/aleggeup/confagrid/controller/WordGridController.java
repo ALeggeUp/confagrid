@@ -11,9 +11,11 @@ package com.aleggeup.confagrid.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -53,5 +55,11 @@ public class WordGridController {
         wordGrids.add(savedWordGrid);
 
         return wordGrids;
+    }
+
+    @RequestMapping(value = "word-grid/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public WordGrid getWordGrid(@PathVariable("id") final String uuid) {
+        return wordGridRepository.findOne(UUID.fromString(uuid));
     }
 }
