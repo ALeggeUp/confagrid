@@ -54,7 +54,8 @@ export class BrowserStorageService {
 
     getUser(): LoginResponse {
         if (this.localStorageAvailable) {
-            return JSON.parse(localStorage[this.KEY_USER]);
+            const storedKey: string = localStorage[this.KEY_USER];
+            return storedKey ? JSON.parse(storedKey) : '{}';
         }
     }
 
