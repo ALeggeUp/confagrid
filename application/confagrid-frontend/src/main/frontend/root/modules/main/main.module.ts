@@ -21,7 +21,7 @@ import { LoginComponent } from './views/login/login.component';
 import { ContactComponent } from './views/contact/contact.component';
 import { CreateComponent } from './views/create/create.component';
 import { EditComponent } from './views/edit/edit.component';
-import { ExistingComponent } from './views/existing/existing.component';
+import { GalleryComponent } from './views/gallery/gallery.component';
 import { IntroComponent } from './views/intro/intro.component';
 import { MoreComponent } from './views/more/more.component';
 
@@ -39,7 +39,7 @@ import { WordGridService } from './services/word-grid.service';
     ContactComponent,
     CreateComponent,
     EditComponent,
-    ExistingComponent,
+    GalleryComponent,
     IntroComponent,
     MoreComponent
   ],

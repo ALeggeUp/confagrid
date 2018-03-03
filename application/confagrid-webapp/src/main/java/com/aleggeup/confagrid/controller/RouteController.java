@@ -20,7 +20,7 @@ public class RouteController {
     @RequestMapping({
         "/login",
         "/create",
-        "/existing",
+        "/gallery",
         "/intro",
         "/more"
     })

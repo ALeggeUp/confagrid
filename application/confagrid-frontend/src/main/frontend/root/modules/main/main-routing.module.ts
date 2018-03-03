@@ -14,7 +14,7 @@ import { LoginComponent } from './views/login/login.component';
 import { ContactComponent } from './views/contact/contact.component';
 import { CreateComponent } from './views/create/create.component';
 import { EditComponent } from './views/edit/edit.component';
-import { ExistingComponent } from './views/existing/existing.component';
+import { GalleryComponent } from './views/gallery/gallery.component';
 import { IntroComponent } from './views/intro/intro.component';
 import { MoreComponent } from './views/more/more.component';
 
@@ -24,7 +24,7 @@ export const routes: Routes = [
   { path: '', redirectTo: '/intro', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'contact', component: ContactComponent },
-  { path: 'existing', component: ExistingComponent },
+  { path: 'gallery', component: GalleryComponent },
   { path: 'intro', component: IntroComponent },
   { path: 'more', component: MoreComponent },
   { path: 'create', component: CreateComponent, canActivate: [AuthGuardService] },
