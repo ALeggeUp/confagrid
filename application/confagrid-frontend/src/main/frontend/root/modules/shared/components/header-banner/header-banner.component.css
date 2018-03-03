@@ -3,7 +3,7 @@ body, h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
 }
 
-.intro-header {
+.home-header {
   padding-top: 0px;
   padding-bottom: 0px;
   text-align: center;
@@ -12,33 +12,33 @@ body, h1, h2, h3, h4, h5, h6 {
   background-size: cover;
 }
 
-.intro-message {
+.home-message {
   position: relative;
   padding-top: 20%;
   padding-bottom: 20%;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.intro-shade {
+.home-shade {
 }
 
-.intro-message>h1 {
+.home-message>h1 {
   margin: 0;
   text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
   font-size: 5em;
 }
 
-.intro-divider {
+.home-divider {
   width: 400px;
   border-top: 1px solid #f8f8f8;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.intro-message>h3 {
+.home-message>h3 {
   text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
 }
 
-.intro-social-buttons i {
+.home-social-buttons i {
   font-size: 80%;
 }
 
@@ -50,21 +50,21 @@ body, h1, h2, h3, h4, h5, h6 {
 }
 
 @media(max-width:767px) {
-  .intro-message {
+  .home-message {
     padding-bottom: 15%;
   }
-  .intro-message>h1 {
+  .home-message>h1 {
     font-size: 3em;
   }
-  ul.intro-social-buttons>li {
+  ul.home-social-buttons>li {
     display: block;
     margin-bottom: 20px;
     padding: 0;
   }
-  ul.intro-social-buttons>li:last-child {
+  ul.home-social-buttons>li:last-child {
     margin-bottom: 0;
   }
-  .intro-divider {
+  .home-divider {
     width: 100%;
   }
 }

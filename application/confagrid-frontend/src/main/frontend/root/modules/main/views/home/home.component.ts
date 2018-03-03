@@ -1,5 +1,5 @@
 /*
- * intro.component.ts
+ * home.component.ts
  *
  * Copyright (C) 2017-2018 [ A Legge Up ]
  *
@@ -12,12 +12,12 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { CurrentUserService } from '../../services/current-user.service';
 
 @Component({
-    selector: 'app-intro-content',
-    templateUrl: './intro.component.html',
-    styleUrls: ['./intro.component.css']
+    selector: 'app-home-content',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.css']
 })
 
-export class IntroComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit, AfterViewInit {
     title = 'Confagrid';
     subtitle = 'Word Grid Generator';
 

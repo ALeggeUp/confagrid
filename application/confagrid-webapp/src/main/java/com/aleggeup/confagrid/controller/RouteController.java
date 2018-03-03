@@ -21,7 +21,7 @@ public class RouteController {
         "/login",
         "/create",
         "/gallery",
-        "/intro",
+        "/home",
         "/more"
     })
     public String router() {

@@ -43,13 +43,10 @@ export class LoginComponent {
     }
 
     toggleLogin() {
-        console.log('toggleLogin');
-        this.authGuardService.isLoggedIn = !this.authGuardService.isLoggedIn;
-        console.log('logged in ' + this.authGuardService.isLoggedIn);
-        if (!this.authGuardService.isLoggedIn) {
+        if (!this.currentUserService.currentUser || this.currentUserService.currentUser.userName !== 'anonymous') {
             this.router.navigate(['/login']);
         } else {
-            this.router.navigate(['/intro']);
+            this.router.navigate(['/home']);
         }
     }
 

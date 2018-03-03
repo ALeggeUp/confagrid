@@ -22,7 +22,7 @@ import { ContactComponent } from './views/contact/contact.component';
 import { CreateComponent } from './views/create/create.component';
 import { EditComponent } from './views/edit/edit.component';
 import { GalleryComponent } from './views/gallery/gallery.component';
-import { IntroComponent } from './views/intro/intro.component';
+import { HomeComponent } from './views/home/home.component';
 import { MoreComponent } from './views/more/more.component';
 
 import { AuthenticationService } from './services/authentication.service';
@@ -40,7 +40,7 @@ import { WordGridService } from './services/word-grid.service';
     CreateComponent,
     EditComponent,
     GalleryComponent,
-    IntroComponent,
+    HomeComponent,
     MoreComponent
   ],
   imports: [
