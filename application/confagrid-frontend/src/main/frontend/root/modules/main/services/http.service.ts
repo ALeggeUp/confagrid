@@ -39,8 +39,8 @@ export class HttpService {
     protected standardOptions(): RequestOptions {
         const cpHeaders = new Headers({ 'Content-Type': 'application/json' });
 
-        if (this.currentUserService.currentToken) {
-            cpHeaders.append('Authorization', 'Bearer ' + this.currentUserService.currentToken);
+        if (this.currentUserService.currentUser && this.currentUserService.currentUser.token) {
+            cpHeaders.append('Authorization', 'Bearer ' + this.currentUserService.currentUser.token);
         }
         return new RequestOptions({ headers: cpHeaders });
     }

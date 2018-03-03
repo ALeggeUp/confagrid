@@ -12,9 +12,12 @@ import { Http, Response, Headers, URLSearchParams, RequestOptions } from '@angul
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import { LoginResponse } from '../models/mex/login-response';
 
 @Injectable()
 export class BrowserStorageService {
+
+    private readonly KEY_USER = 'user';
 
     private readonly DEFAULT_EXPIRY_HOURS = 1;
     private readonly HOUR_IN_MILLIS: number = 60 * 60 * 1000;
@@ -40,6 +43,18 @@ export class BrowserStorageService {
             return localStorage[key];
         } else {
             return document.cookie;
+        }
+    }
+
+    setUser(value: LoginResponse) {
+        if (this.localStorageAvailable) {
+            localStorage[this.KEY_USER] = JSON.stringify(value);
+        }
+    }
+
+    getUser(): LoginResponse {
+        if (this.localStorageAvailable) {
+            return JSON.parse(localStorage[this.KEY_USER]);
         }
     }
 

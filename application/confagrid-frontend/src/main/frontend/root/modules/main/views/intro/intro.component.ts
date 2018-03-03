@@ -30,10 +30,10 @@ export class IntroComponent implements OnInit, AfterViewInit {
     ngAfterViewInit() {
         this.authenticationService.check()
             .subscribe(data => {
-                if (data.token !== this.currentUserService.currentToken) {
-                    console.log('token has changed:');
+                if (data !== this.currentUserService.currentUser) {
+                    console.log('user has changed:');
                     console.log(data);
-                    this.currentUserService.currentToken = data.token;
+                    this.currentUserService.currentUser = data;
                 }
             }
         );
