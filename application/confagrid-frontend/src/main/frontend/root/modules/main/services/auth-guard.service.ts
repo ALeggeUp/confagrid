@@ -15,8 +15,6 @@ import { CurrentUserService } from '../services/current-user.service';
 @Injectable()
 export class AuthGuardService implements CanActivate {
 
-    isLoggedIn = false;
-
     constructor(private router: Router, private currentUserService: CurrentUserService) {
     }
 
