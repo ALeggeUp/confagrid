@@ -24,11 +24,11 @@ export class WordGridService {
     constructor(private httpService: HttpService) {
     }
 
-    create(request: WordGridModel): Observable<WordGridResponseItem[]> {
-        return this.httpService.postRequest<WordGridModel, WordGridResponseItem[]>('/api/v1/word-grids', request);
+    create(request: WordGridModel): Observable<WordGridModel[]> {
+        return this.httpService.postRequest<WordGridModel, WordGridModel[]>('/api/v1/word-grids', request);
     }
 
-    wordGrids(): Observable<WordGridResponseItem[]> {
-        return this.httpService.getRequest<WordGridResponseItem[]>('/api/v1/word-grids');
+    wordGrids(): Observable<WordGridModel[]> {
+        return this.httpService.getRequest<WordGridModel[]>('/api/v1/word-grids');
     }
 }

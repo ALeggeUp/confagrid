@@ -57,7 +57,7 @@ export class CreateComponent implements OnInit {
 
         this.wordGridService.create(this.wordGridForm.value).subscribe(
             data => {
-                this.router.navigate(['/edit'], data[0]['id']);
+                this.router.navigate(['/edit', data[0].id]);
             }
         );
     }

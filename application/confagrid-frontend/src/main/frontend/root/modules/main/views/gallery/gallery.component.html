@@ -11,7 +11,12 @@
         <p class="card-text">
           {{item.description}} {{item.creator.name}}
         </p>
-        <p><a class="btn btn-outline-secondary" href="#" role="button">View details &raquo;</a></p>
+        <p *ngIf="isCurrentUser(item); else notOwner">
+          <a class="btn btn-outline-primary" [routerLink]="['/edit', item.id]" role="button">Edit Details &raquo;</a>
+        </p>
+        <ng-template #notOwner>
+          <p><a class="btn btn-outline-secondary" [routerLink]="['/view', item.id]" role="button">View Details &raquo;</a></p>
+        </ng-template>
       </div>
       <div class="card-footer"><small class="text-muted">Last updated 27 mins ago</small></div>
     </div>

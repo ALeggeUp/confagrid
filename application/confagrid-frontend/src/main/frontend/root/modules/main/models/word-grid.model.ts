@@ -8,8 +8,12 @@
  */
 
 export interface WordGridModel {
-  id: number;
+  id: string;
   title: string;
+  creator: {
+    id: string;
+    name: string;
+  };
   dimensions: string;
   description: string;
 }
