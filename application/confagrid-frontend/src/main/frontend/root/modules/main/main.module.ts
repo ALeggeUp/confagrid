@@ -24,6 +24,7 @@ import { EditComponent } from './views/edit/edit.component';
 import { GalleryComponent } from './views/gallery/gallery.component';
 import { HomeComponent } from './views/home/home.component';
 import { MoreComponent } from './views/more/more.component';
+import { ViewComponent } from './views/view/view.component';
 
 import { AuthenticationService } from './services/authentication.service';
 import { AuthGuardService } from './services/auth-guard.service';
@@ -41,7 +42,8 @@ import { WordGridService } from './services/word-grid.service';
     EditComponent,
     GalleryComponent,
     HomeComponent,
-    MoreComponent
+    MoreComponent,
+    ViewComponent
   ],
   imports: [
     BrowserModule,

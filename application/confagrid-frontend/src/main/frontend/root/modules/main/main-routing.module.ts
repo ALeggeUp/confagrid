@@ -17,6 +17,7 @@ import { EditComponent } from './views/edit/edit.component';
 import { GalleryComponent } from './views/gallery/gallery.component';
 import { HomeComponent } from './views/home/home.component';
 import { MoreComponent } from './views/more/more.component';
+import { ViewComponent } from './views/view/view.component';
 
 import { AuthGuardService } from './services/auth-guard.service';
 
@@ -27,6 +28,7 @@ export const routes: Routes = [
   { path: 'gallery', component: GalleryComponent },
   { path: 'home', component: HomeComponent },
   { path: 'more', component: MoreComponent },
+  { path: 'view/:id', component: ViewComponent },
   { path: 'create', component: CreateComponent, canActivate: [AuthGuardService] },
   { path: 'create/:title', component: CreateComponent, canActivate: [AuthGuardService] },
   { path: 'edit/:id', component: EditComponent, canActivate: [AuthGuardService] },
