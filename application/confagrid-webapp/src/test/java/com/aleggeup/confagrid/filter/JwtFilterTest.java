@@ -72,7 +72,7 @@ public class JwtFilterTest {
         Mockito.verify(mockHttpServletRequest).getHeader(JwtFilter.HEADER_AUTHORIZATION);
         Mockito.verify(mockHttpServletResponse).setHeader(JwtFilter.HEADER_CLAIMS_SUBJECT, JwtFilter.SUBJECT_ANONYMOUS);
         Mockito.verify(mockFilterChain).doFilter(mockHttpServletRequest, mockHttpServletResponse);
-        Mockito.verify(mockHttpServletResponse, Mockito.times(3)).setHeader(ArgumentMatchers.anyString(),
+        Mockito.verify(mockHttpServletResponse, Mockito.times(4)).setHeader(ArgumentMatchers.anyString(),
             ArgumentMatchers.any());
     }
 
@@ -89,7 +89,7 @@ public class JwtFilterTest {
         Mockito.verify(mockHttpServletRequest).getHeader(JwtFilter.HEADER_AUTHORIZATION);
         Mockito.verify(mockHttpServletResponse).setHeader(JwtFilter.HEADER_CLAIMS_SUBJECT, JwtFilter.SUBJECT_ANONYMOUS);
         Mockito.verify(mockFilterChain).doFilter(mockHttpServletRequest, mockHttpServletResponse);
-        Mockito.verify(mockHttpServletResponse, Mockito.times(3)).setHeader(ArgumentMatchers.anyString(),
+        Mockito.verify(mockHttpServletResponse, Mockito.times(4)).setHeader(ArgumentMatchers.anyString(),
             ArgumentMatchers.any());
     }
 
@@ -108,7 +108,7 @@ public class JwtFilterTest {
 
         Mockito.verify(mockHttpServletResponse).setHeader(JwtFilter.HEADER_CLAIMS_SUBJECT, JwtFilter.SUBJECT_ANONYMOUS);
         Mockito.verify(mockHttpServletResponse).setHeader(JwtFilter.JWT_TOKEN, "GARBAGE");
-        Mockito.verify(mockHttpServletResponse, Mockito.times(3)).setHeader(ArgumentMatchers.anyString(),
+        Mockito.verify(mockHttpServletResponse, Mockito.times(4)).setHeader(ArgumentMatchers.anyString(),
             ArgumentMatchers.any());
     }
 
@@ -127,7 +127,7 @@ public class JwtFilterTest {
         Mockito.verify(mockHttpServletRequest).getHeader(JwtFilter.HEADER_AUTHORIZATION);
         Mockito.verify(mockHttpServletResponse).setHeader(JwtFilter.HEADER_CLAIMS_SUBJECT, JwtFilter.SUBJECT_ANONYMOUS);
         Mockito.verify(mockFilterChain).doFilter(mockHttpServletRequest, mockHttpServletResponse);
-        Mockito.verify(mockHttpServletResponse, Mockito.times(3)).setHeader(ArgumentMatchers.anyString(),
+        Mockito.verify(mockHttpServletResponse, Mockito.times(4)).setHeader(ArgumentMatchers.anyString(),
             ArgumentMatchers.any());
     }
 
@@ -148,7 +148,7 @@ public class JwtFilterTest {
         Mockito.verify(mockHttpServletRequest).getHeader(JwtFilter.HEADER_AUTHORIZATION);
         Mockito.verify(mockHttpServletResponse).setHeader(JwtFilter.HEADER_CLAIMS_SUBJECT, VALID_CREDENTIALS_SUBJECT);
         Mockito.verify(mockFilterChain).doFilter(mockHttpServletRequest, mockHttpServletResponse);
-        Mockito.verify(mockHttpServletResponse, Mockito.times(3)).setHeader(ArgumentMatchers.anyString(),
+        Mockito.verify(mockHttpServletResponse, Mockito.times(4)).setHeader(ArgumentMatchers.anyString(),
             ArgumentMatchers.any());
     }
 }

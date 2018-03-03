@@ -73,7 +73,8 @@ public class UserController {
                 authenticationService.anonymousToken());
         }
 
-        return new LoginResponse("", response.getHeader(JwtFilter.HEADER_CLAIMS_SUBJECT),
+        return new LoginResponse(response.getHeader(JwtFilter.HEADER_CLAIMS_USER_ID),
+            response.getHeader(JwtFilter.HEADER_CLAIMS_SUBJECT),
             response.getHeader(JwtFilter.JWT_TOKEN));
     }
 
