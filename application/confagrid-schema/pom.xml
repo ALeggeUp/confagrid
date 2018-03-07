@@ -8,66 +8,68 @@
 -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>com.aleggeup.webapp</groupId>
-    <artifactId>confagrid-parent</artifactId>
-    <version>0.9.0-SNAPSHOT</version>
-    <relativePath>../confagrid-parent/pom.xml</relativePath>
-  </parent>
+    <parent>
+        <groupId>com.aleggeup.webapp</groupId>
+        <artifactId>confagrid-parent</artifactId>
+        <version>0.9.0-SNAPSHOT</version>
+        <relativePath>../confagrid-parent/pom.xml</relativePath>
+    </parent>
 
-  <artifactId>confagrid-schema</artifactId>
+    <artifactId>confagrid-schema</artifactId>
 
-  <packaging>jar</packaging>
+    <packaging>jar</packaging>
 
-  <name>${project.artifactId}::${project.version}</name>
+    <name>${project.artifactId}::${project.version}</name>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
-  <dependencies>
-    <dependency>
-      <groupId>org.jsonschema2pojo</groupId>
-      <artifactId>jsonschema2pojo-core</artifactId>
-      <version>0.5.1</version>
-    </dependency>
-  </dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>org.jsonschema2pojo</groupId>
+            <artifactId>jsonschema2pojo-core</artifactId>
+            <version>0.5.1</version>
+        </dependency>
+    </dependencies>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.jsonschema2pojo</groupId>
-        <artifactId>jsonschema2pojo-maven-plugin</artifactId>
-        <version>0.5.1</version>
-        <configuration>
-          <sourceDirectory>${basedir}/src/main/resources/schema/mex</sourceDirectory>
-          <targetPackage>com.aleggeup.confagrid.model.mex</targetPackage>
-          <sourceType>yamlschema</sourceType>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jsonschema2pojo</groupId>
+                <artifactId>jsonschema2pojo-maven-plugin</artifactId>
+                <version>0.5.1</version>
 
-          <includeConstructors>true</includeConstructors>
-          <constructorsRequiredPropertiesOnly>true</constructorsRequiredPropertiesOnly>
-          <annotationStyle>jackson2</annotationStyle>
-          <generateBuilders>true</generateBuilders>
-          <serializable>true</serializable>
-          <usePrimitives>true</usePrimitives>
-          <useCommonsLang3>true</useCommonsLang3>
-          <useJodaDates>true</useJodaDates>
-          <initializeCollections>true</initializeCollections>
-          <includeSetters>true</includeSetters>
+                <configuration>
+                    <sourceDirectory>${basedir}/src/main/resources/schema</sourceDirectory>
+                    <sourceSortOrder>FILES_FIRST</sourceSortOrder>
+                    <targetPackage>com.aleggeup.confagrid.model</targetPackage>
+                    <sourceType>yamlschema</sourceType>
 
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>generate</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+                    <includeConstructors>true</includeConstructors>
+                    <constructorsRequiredPropertiesOnly>true</constructorsRequiredPropertiesOnly>
+                    <annotationStyle>jackson2</annotationStyle>
+                    <generateBuilders>true</generateBuilders>
+                    <serializable>true</serializable>
+                    <usePrimitives>true</usePrimitives>
+                    <useCommonsLang3>true</useCommonsLang3>
+                    <useJodaDates>true</useJodaDates>
+                    <initializeCollections>true</initializeCollections>
+                    <includeSetters>true</includeSetters>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
