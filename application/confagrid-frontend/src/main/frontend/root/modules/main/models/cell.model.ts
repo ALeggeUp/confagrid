@@ -1,5 +1,5 @@
 /*
- * create-word-grid-request.ts
+ * cell.model.ts
  *
  * Copyright (C) 2018 [ A Legge Up ]
  *
@@ -7,8 +7,10 @@
  * of the MIT license.  See the LICENSE file for details.
  */
 
-import { BaseRequest } from './base-request';
+type IsSelected = () => boolean;
 
-export interface CreateWordGridRequest extends BaseRequest {
-    name: string;
+export interface CellModel {
+  cellHover: boolean;
+  character: string;
+  isSelected: IsSelected;
 }

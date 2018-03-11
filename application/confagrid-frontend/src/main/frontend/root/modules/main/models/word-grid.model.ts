@@ -14,6 +14,8 @@ export interface WordGridModel {
     id: string;
     name: string;
   };
+  dimensionHeight: number;
+  dimensionWidth: number;
   dimensions: string;
   description: string;
 }
