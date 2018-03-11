@@ -11,9 +11,10 @@ package com.aleggeup.confagrid.repository;
 
 import java.util.UUID;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 
 import com.aleggeup.confagrid.model.WordGrid;
 
-public interface WordGridRepository extends CrudRepository<WordGrid, UUID> {
+public interface WordGridRepository extends JpaRepository<WordGrid, UUID>, QueryDslPredicateExecutor<WordGrid> {
 }
