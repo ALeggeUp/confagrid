@@ -1,10 +1,38 @@
 <app-nav></app-nav>
 
+<ng-template #loading><p>loading...</p></ng-template>
+
 <div class="container" style="padding-top: 60px;">
+  <div class="row">
     <div *ngIf="wordGridObservable | async as wordGrid else loading">
-      <p>{{wordGrid.id}}</p>
+      <p>{{wordGrid.id}} {{wordGrid.dimensionWidth}}x{{wordGrid.dimensionHeight}}</p>
     </div>
-    <ng-template #loading><p>loading...</p></ng-template>
+  </div>
+  <div class="row">
+    <div class="col-7">
+      <div *ngIf="cells.length else loading" style="height: 500px;">
+        <div *ngFor="let cell of cells; index as i; first as first; odd as odd; trackBy: trackBy" [class.first]="first" [class.odd]="odd" [class.wrap]="wrap(i)" style="width: 500px;">
+          <div (mouseenter)="mouseenter(i)" (mouseleave)="mouseleave(i)" class="cell" [ngClass]="{ hover: cell.cellHover }">
+            <span class="cellvalue">{{cell.character}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-5">
+      <h3>Phrase List</h3>
+      <div class="input-group">
+        <input autofocus type="text" class="form-control" placeholder="Add a new phrase" [(ngModel)]="newItem" (keyup.enter)="addItem()" />
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button" (click)="addItem()">Add</button>
+        </span>
+      </div>
+      <div>
+        <ul>
+          <li *ngFor="let phrase of phrases">{{phrase}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
 
 <app-footer-aside></app-footer-aside>
