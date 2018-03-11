@@ -45,8 +45,8 @@ public class WordGridControllerTest {
 
     @Test
     public void testGetAllEmpty() {
-        final Iterable<WordGrid> iterable = new ArrayList<>();
-        Mockito.when(mockWordGridRepository.findAll()).thenReturn(iterable);
+        final List<WordGrid> list = new ArrayList<>();
+        Mockito.when(mockWordGridRepository.findAll()).thenReturn(list);
         final List<WordGrid> allwordGrids = wordGridController.allWordGrids();
         assertEquals(0, allwordGrids.size());
         Mockito.verify(mockWordGridRepository).findAll();
@@ -54,9 +54,9 @@ public class WordGridControllerTest {
 
     @Test
     public void testGetAll() {
-        final List<WordGrid> iterable = new ArrayList<>();
-        iterable.add(new WordGrid());
-        Mockito.when(mockWordGridRepository.findAll()).thenReturn(iterable);
+        final List<WordGrid> list = new ArrayList<>();
+        list.add(new WordGrid());
+        Mockito.when(mockWordGridRepository.findAll()).thenReturn(list);
         final List<WordGrid> allwordGrids = wordGridController.allWordGrids();
         assertEquals(1, allwordGrids.size());
         Mockito.verify(mockWordGridRepository).findAll();
