@@ -23,43 +23,43 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.aleggeup.confagrid.model.WordGrid;
-import com.aleggeup.confagrid.repository.WordGridRepository;
+import com.aleggeup.confagrid.service.WordGridService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class WordGridControllerTest {
 
     @Mock
-    private WordGridRepository mockWordGridRepository;
+    private WordGridService mockWordGridService;
 
     private WordGridController wordGridController;
 
     @Before
     public void setUp() {
-        wordGridController = new WordGridController(mockWordGridRepository);
+        wordGridController = new WordGridController(mockWordGridService);
     }
 
     @After
     public void tearDown() {
-        Mockito.verifyNoMoreInteractions(mockWordGridRepository);
+        Mockito.verifyNoMoreInteractions(mockWordGridService);
     }
 
     @Test
     public void testGetAllEmpty() {
         final List<WordGrid> list = new ArrayList<>();
-        Mockito.when(mockWordGridRepository.findAll()).thenReturn(list);
+        Mockito.when(mockWordGridService.findAll()).thenReturn(list);
         final List<WordGrid> allwordGrids = wordGridController.allWordGrids();
         assertEquals(0, allwordGrids.size());
-        Mockito.verify(mockWordGridRepository).findAll();
+        Mockito.verify(mockWordGridService).findAll();
     }
 
     @Test
     public void testGetAll() {
         final List<WordGrid> list = new ArrayList<>();
         list.add(new WordGrid());
-        Mockito.when(mockWordGridRepository.findAll()).thenReturn(list);
+        Mockito.when(mockWordGridService.findAll()).thenReturn(list);
         final List<WordGrid> allwordGrids = wordGridController.allWordGrids();
         assertEquals(1, allwordGrids.size());
-        Mockito.verify(mockWordGridRepository).findAll();
+        Mockito.verify(mockWordGridService).findAll();
     }
 
     @Test
@@ -67,6 +67,6 @@ public class WordGridControllerTest {
         final WordGrid wordGrid = new WordGrid();
         final List<WordGrid> result = wordGridController.create(wordGrid);
         assertEquals(1, result.size());
-        Mockito.verify(mockWordGridRepository).save(wordGrid);
+        Mockito.verify(mockWordGridService).save(wordGrid);
     }
 }

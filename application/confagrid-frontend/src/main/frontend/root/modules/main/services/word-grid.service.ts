@@ -13,6 +13,8 @@ import { Observable } from 'rxjs/Rx';
 import { HttpService } from './http.service';
 
 import { WordGridModel } from '../models/word-grid.model';
+
+import { WordGridUpdateRequest } from '../models/mex/word-grid-update-request';
 import { WordGridContentResponse } from '../models/mex/word-grid-content-response';
 
 @Injectable()
@@ -35,5 +37,9 @@ export class WordGridService {
 
     getContent(): Observable<WordGridContentResponse> {
         return this.httpService.getRequest<WordGridContentResponse>('/api/v1/word-grid/content');
+    }
+
+    update(id: string, request: WordGridUpdateRequest): Observable<WordGridContentResponse> {
+        return this.httpService.putRequest<WordGridUpdateRequest, WordGridContentResponse>('/api/v1/word-grid/' + id + '/update', request);
     }
 }

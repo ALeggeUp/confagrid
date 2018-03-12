@@ -9,6 +9,8 @@
 
 package com.aleggeup.confagrid.model;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
@@ -20,8 +22,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.GenericGenerator;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class WordGrid {
@@ -35,6 +40,7 @@ public class WordGrid {
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH
     }, fetch = FetchType.EAGER, targetEntity = User.class)
     @JoinColumn(foreignKey = @ForeignKey(name = "FK_USER"))
+    @JsonIgnoreProperties("password")
     private User creator;
 
     @Column
@@ -49,6 +55,9 @@ public class WordGrid {
     @Column
     private String description;
 
+    @OneToMany
+    private List<Phrase> phrases;
+
     public WordGrid() {
     }
 
@@ -59,6 +68,7 @@ public class WordGrid {
         this.dimensionWidth = dimensionWidth;
         this.dimensionHeight = dimensionHeight;
         this.description = description;
+        phrases = new LinkedList<>();
     }
 
     public UUID getId() {
@@ -105,9 +115,22 @@ public class WordGrid {
         this.description = description;
     }
 
+    public List<Phrase> getPhrases() {
+        return phrases;
+    }
+
+    public void setPhrases(final List<Phrase> phrases) {
+        this.phrases = phrases;
+    }
+
+    public void addPhrase(final Phrase phrase) {
+        phrases.add(phrase);
+    }
+
     @Override
     public String toString() {
         return "WordGrid [id=" + id + ", title=" + title + ", creator=" + creator + ", dimensionWidth=" + dimensionWidth
-            + ", dimensionHeight=" + dimensionHeight + ", description=" + description + "]";
+            + ", dimensionHeight=" + dimensionHeight + ", description=" + description + " phrases=" + phrases.size()
+            + "]";
     }
 }
