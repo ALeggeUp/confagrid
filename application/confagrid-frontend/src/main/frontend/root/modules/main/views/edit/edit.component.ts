@@ -18,6 +18,7 @@ import 'rxjs/add/operator/mergeMap';
 import { CellModel } from '../../models/cell.model';
 import { WordGridModel } from '../../models/word-grid.model';
 
+import { PhraseService } from '../../services/phrase.service';
 import { WordGridService } from '../../services/word-grid.service';
 import { Cell } from '../../models/impl/Cell';
 import { WordGridContentResponse } from '../../models/mex/word-grid-content-response';
@@ -29,6 +30,7 @@ import { WordGridContentResponse } from '../../models/mex/word-grid-content-resp
 })
 export class EditComponent implements OnInit, AfterViewInit {
 
+    id: string;
     wordGridObservable: Observable<WordGridModel>;
     wordGridContentResponse: WordGridContentResponse;
     cells: CellModel[] = Array<Cell>();
@@ -37,7 +39,7 @@ export class EditComponent implements OnInit, AfterViewInit {
     newItem = '';
     phrases: string[];
 
-    constructor(private route: ActivatedRoute, private wordGridService: WordGridService) {
+    constructor(private route: ActivatedRoute, private wordGridService: WordGridService, private phraseService: PhraseService) {
         this.width = 0;
         this.height = 0;
         this.newItem = '';
@@ -53,7 +55,11 @@ export class EditComponent implements OnInit, AfterViewInit {
         this.route.params
             .map(params => params['id'])
             .filter(id => id)
-            .flatMap(id => this.wordGridService.getContent())
+            .flatMap((id) => {
+                this.id = id;
+
+                return this.wordGridService.getContent();
+            })
             .subscribe((content) => this.transform(content));
     }
 
@@ -86,11 +92,21 @@ export class EditComponent implements OnInit, AfterViewInit {
     }
 
     addItem() {
-        console.log('addItem');
         console.log(this.newItem);
         if (this.newItem.trim() !== '') {
-            this.phrases.push(this.newItem.toLocaleUpperCase());
+            this.phraseService.create({
+                phrase: this.newItem.toLocaleUpperCase(),
+                additionalProperties: undefined
+            }).flatMap((response) => {
+                this.phrases.push(response.raw);
+                return this.wordGridService.update(this.id, {
+                    id: response.id,
+                    phrase: response.id,
+                    additionalProperties: undefined
+                });
+            }).subscribe((response) => {
+                this.newItem = '';
+            });
         }
-        this.newItem = '';
     }
 }
