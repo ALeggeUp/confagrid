@@ -9,13 +9,20 @@
 
 package com.aleggeup.confagrid.service;
 
+import java.util.List;
+import java.util.UUID;
+
 import com.aleggeup.confagrid.model.Phrase;
 
 public interface PhraseService {
+
+    List<Phrase> findAll();
 
     void save(Phrase phrase);
 
     Phrase phraseFromText(String text);
 
     long count();
+
+    Phrase findOne(UUID id);
 }

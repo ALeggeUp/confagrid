@@ -30,6 +30,12 @@ export class HttpService {
             .catch(this.handleError);
     }
 
+    public putRequest<REQ, RESP>(path: string, request: REQ): Observable<RESP> {
+        return this.http.put(this.baseUrl + path, request, this.standardOptions())
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
     public getRequest<RESP>(path: string): Observable<RESP> {
         return this.http.get(this.baseUrl + path, this.standardOptions())
             .map(this.extractData)

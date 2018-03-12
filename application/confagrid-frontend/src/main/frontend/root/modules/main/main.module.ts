@@ -32,6 +32,7 @@ import { BrowserStorageService } from './services/browser-storage.service';
 import { CurrentUserService } from './services/current-user.service';
 import { HttpService } from './services/http.service';
 import { LoggerService } from './services/logger.service';
+import { PhraseService } from './services/phrase.service';
 import { WordGridService } from './services/word-grid.service';
 
 @NgModule({
@@ -63,6 +64,7 @@ import { WordGridService } from './services/word-grid.service';
     CurrentUserService,
     HttpService,
     LoggerService,
+    PhraseService,
     WordGridService
   ]
 })

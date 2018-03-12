@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.UUID;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -45,6 +46,11 @@ public class DefaultPhraseService implements PhraseService {
     public DefaultPhraseService(final PhraseRepository phraseRepository, final WordRepository wordRepository) {
         this.phraseRepository = phraseRepository;
         this.wordRepository = wordRepository;
+    }
+
+    @Override
+    public List<Phrase> findAll() {
+        return phraseRepository.findAll();
     }
 
     @Override
@@ -110,6 +116,11 @@ public class DefaultPhraseService implements PhraseService {
     @Override
     public long count() {
         return phraseRepository.count();
+    }
+
+    @Override
+    public Phrase findOne(final UUID id) {
+        return phraseRepository.findOne(id);
     }
 
     private class PhraseElement {
