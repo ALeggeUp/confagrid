@@ -47,6 +47,7 @@ bin/
 tmp/
 *.tmp
 *.bck
+*.kicad_pcb-bak
 *.bak
 *.swp
 *~.nib
