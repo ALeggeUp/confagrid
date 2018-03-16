@@ -1,6 +1,6 @@
 # Confagrid
 
-[![Build Status](https://travis-ci.org/ALeggeUp/confagrid.svg?branch=master)](https://travis-ci.org/ALeggeUp/confagrid) [![codecov](https://codecov.io/gh/ALeggeUp/confagrid/branch/master/graph/badge.svg)](https://codecov.io/gh/ALeggeUp/confagrid) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/ALeggeUp/confagrid/blob/master/LICENSE)
+[![Build Status](https://travis-ci.org/ALeggeUp/confagrid.svg?branch=master)](https://travis-ci.org/ALeggeUp/confagrid) [![codecov](https://codecov.io/gh/ALeggeUp/confagrid/branch/master/graph/badge.svg)](https://codecov.io/gh/ALeggeUp/confagrid) [![License: MIT](https://img.shields.io/badge/SW%20License-MIT-yellow.svg)](https://github.com/ALeggeUp/confagrid/blob/master/LICENSE) [![License: CC-BY-SA-4.0](https://img.shields.io/badge/HW%20License-CC--BY--SA--4.0-blue.svg)](https://github.com/ALeggeUp/confagrid/blob/master/hardware/LICENSE.md)
 
 What is it?
 -----------
