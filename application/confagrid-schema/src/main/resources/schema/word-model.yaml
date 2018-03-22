@@ -1,5 +1,5 @@
 #
-# word-grid-cell-model.yaml
+# word-model.yaml
 #
 # Copyright (C) 2018 [ A Legge Up ]
 #
@@ -8,14 +8,14 @@
 #
 
 "$schema": "http://json-schema.org/draft-06/schema#"
-description: WordGrid Cell
+description: A Word
 type: object
-javaType: com.aleggeup.confagrid.model.WordGridCellModel
+javaType: com.aleggeup.confagrid.model.WordModel
 properties:
-    character:
+    text:
         type: string
-        minLength: 1
-        maxLength: 1
-        pattern: '^[A-Za-z0-9]$'
+    occurrence:
+        type: integer
 required:
-  - character
+  - text
+  - occurrence

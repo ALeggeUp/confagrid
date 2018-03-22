@@ -1,0 +1,35 @@
+#
+# word-grid-model.yaml
+#
+# Copyright (C) 2018 [ A Legge Up ]
+#
+# This software may be modified and distributed under the terms
+# of the MIT license.  See the LICENSE file for details.
+#
+
+"$schema": "http://json-schema.org/draft-06/schema#"
+description: A Word Grid
+type: object
+javaType: com.aleggeup.confagrid.model.WordGridModel
+properties:
+    id:
+        type: string
+    title:
+        type: string
+    width:
+        type: integer
+    height:
+        type: integer
+    description:
+        type: string
+    phrases:
+        type: array
+        items:
+            type: object
+            javaType: com.aleggeup.confagrid.model.PhraseModel
+required:
+  - id
+  - title
+  - width
+  - height
+  - phrases

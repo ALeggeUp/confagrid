@@ -1,0 +1,27 @@
+#
+# word-sequence-model.yaml
+#
+# Copyright (C) 2018 [ A Legge Up ]
+#
+# This software may be modified and distributed under the terms
+# of the MIT license.  See the LICENSE file for details.
+#
+
+"$schema": "http://json-schema.org/draft-06/schema#"
+description: A Word sequence
+type: object
+javaType: com.aleggeup.confagrid.model.WordSequenceModel
+properties:
+    sequenceId:
+        type: string
+    wordId:
+        type: string
+    text:
+        type: string
+    sequence:
+        type: integer
+required:
+  - sequenceId
+  - wordId
+  - text
+  - sequence

@@ -1,5 +1,5 @@
 #
-# word-grid-cell-model.yaml
+# phrase-model.yaml
 #
 # Copyright (C) 2018 [ A Legge Up ]
 #
@@ -8,14 +8,20 @@
 #
 
 "$schema": "http://json-schema.org/draft-06/schema#"
-description: WordGrid Cell
+description: A Phrase
 type: object
-javaType: com.aleggeup.confagrid.model.WordGridCellModel
+javaType: com.aleggeup.confagrid.model.PhraseModel
 properties:
-    character:
+    id:
         type: string
-        minLength: 1
-        maxLength: 1
-        pattern: '^[A-Za-z0-9]$'
+    raw:
+        type: string
+    words:
+        type: array
+        items:
+            type: object
+            $ref: 'word-sequence-model.yaml'
 required:
-  - character
+  - id
+  - raw
+  - word

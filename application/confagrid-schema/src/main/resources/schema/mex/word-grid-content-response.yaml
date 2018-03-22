@@ -11,6 +11,9 @@
 description: WordGrid Content
 type: object
 properties:
+    wordGrid:
+      type: object
+      javaType: com.aleggeup.confagrid.model.WordGridModel
     gridWidth:
       type: integer
     gridHeight:
@@ -19,9 +22,10 @@ properties:
       type: array
       items:
         type: object
-        javaType: com.aleggeup.confagrid.model.WordGridCell
+        javaType: com.aleggeup.confagrid.model.WordGridCellModel
 
 required:
+  - wordGrid
   - gridWidth
   - gridHeight
   - cells
