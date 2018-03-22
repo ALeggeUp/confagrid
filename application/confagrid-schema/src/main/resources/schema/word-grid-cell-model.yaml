@@ -10,7 +10,7 @@
 "$schema": "http://json-schema.org/draft-06/schema#"
 description: WordGrid Cell
 type: object
-javaType: com.aleggeup.confagrid.model.WordGridCell
+javaType: com.aleggeup.confagrid.model.WordGridCellModel
 properties:
     character:
         type: string

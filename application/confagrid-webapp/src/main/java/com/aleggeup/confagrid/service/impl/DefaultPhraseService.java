@@ -25,12 +25,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.aleggeup.confagrid.model.Phrase;
+import com.aleggeup.confagrid.model.PhraseWordSequence;
 import com.aleggeup.confagrid.model.QPhrase;
 import com.aleggeup.confagrid.model.QWord;
+import com.aleggeup.confagrid.model.QWordSequence;
 import com.aleggeup.confagrid.model.Word;
 import com.aleggeup.confagrid.model.WordSequence;
 import com.aleggeup.confagrid.repository.PhraseRepository;
 import com.aleggeup.confagrid.repository.WordRepository;
+import com.aleggeup.confagrid.repository.WordSequenceRepository;
 import com.aleggeup.confagrid.service.PhraseService;
 
 @Service
@@ -42,10 +45,14 @@ public class DefaultPhraseService implements PhraseService {
 
     private final WordRepository wordRepository;
 
+    private final WordSequenceRepository wordSequenceRepository;
+
     @Autowired
-    public DefaultPhraseService(final PhraseRepository phraseRepository, final WordRepository wordRepository) {
+    public DefaultPhraseService(final PhraseRepository phraseRepository, final WordRepository wordRepository,
+        final WordSequenceRepository wordSequenceRepository) {
         this.phraseRepository = phraseRepository;
         this.wordRepository = wordRepository;
+        this.wordSequenceRepository = wordSequenceRepository;
     }
 
     @Override
@@ -82,21 +89,28 @@ public class DefaultPhraseService implements PhraseService {
         final Phrase foundPhrase = phraseRepository.findOne(phrase.raw.equalsIgnoreCase(text));
 
         if (foundPhrase == null) {
-            final List<WordSequence> foundWords = new LinkedList<>();
+            final List<PhraseWordSequence> foundWords = new LinkedList<>();
             final Phrase newPhrase = new Phrase(text);
 
             phraseElements.forEach(phraseElement -> {
                 LOGGER.info(" ---> " + phraseElement.toString());
                 final QWord word = QWord.word;
-                final Word foundWord = wordRepository.findOne(word.text.eq(phraseElement.text)
+                Word foundWord = wordRepository.findOne(word.text.eq(phraseElement.text)
                     .and(word.occurrence.eq(phraseElement.occurrence)));
 
                 if (foundWord == null) {
-                    final Word newWord = wordRepository.save(new Word(phraseElement.text, phraseElement.occurrence));
-                    foundWords.add(new WordSequence(newPhrase, newWord, phraseElement.sequence));
-                } else {
-                    foundWords.add(new WordSequence(newPhrase, foundWord, phraseElement.sequence));
+                    foundWord = wordRepository.saveAndFlush(new Word(phraseElement.text, phraseElement.occurrence));
                 }
+
+                final QWordSequence wordSequence = QWordSequence.wordSequence;
+                WordSequence foundWordSequence = wordSequenceRepository.findOne(wordSequence.word.text
+                    .eq(phraseElement.text).and(wordSequence.sequence.eq(phraseElement.sequence)));
+                if (foundWordSequence == null) {
+                    foundWordSequence = wordSequenceRepository
+                        .save(new WordSequence(foundWord, phraseElement.sequence));
+                }
+
+                foundWords.add(new PhraseWordSequence(newPhrase, foundWordSequence));
             });
 
             foundWords.forEach(newPhrase::addWord);

@@ -34,8 +34,8 @@ public class Phrase {
     private String raw;
 
     @OneToMany(mappedBy = "phrase", cascade = CascadeType.ALL, orphanRemoval = true)
-    @OrderBy("sequence")
-    private List<WordSequence> words;
+    @OrderBy("sequenceOrder")
+    private List<PhraseWordSequence> words;
 
     private Phrase() {
     }
@@ -46,7 +46,7 @@ public class Phrase {
         words = new LinkedList<>();
     }
 
-    public Phrase(final String raw, final List<WordSequence> words) {
+    public Phrase(final String raw, final List<PhraseWordSequence> words) {
         id = UUID.randomUUID();
         setRaw(raw);
         this.words = words;
@@ -64,15 +64,15 @@ public class Phrase {
         this.raw = raw.trim().toUpperCase();
     }
 
-    public List<WordSequence> getWords() {
+    public List<PhraseWordSequence> getWords() {
         return words;
     }
 
-    public void setWords(final List<WordSequence> words) {
+    public void setWords(final List<PhraseWordSequence> words) {
         this.words = words;
     }
 
-    public void addWord(final WordSequence word) {
+    public void addWord(final PhraseWordSequence word) {
         words.add(word);
     }
 

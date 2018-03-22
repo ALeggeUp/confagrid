@@ -12,6 +12,7 @@ package com.aleggeup.confagrid.controller;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.aleggeup.confagrid.model.PhraseModel;
 import com.aleggeup.confagrid.model.WordGrid;
+import com.aleggeup.confagrid.model.WordGridModel;
+import com.aleggeup.confagrid.model.WordSequenceModel;
 import com.aleggeup.confagrid.model.mex.WordGridContentResponse;
 import com.aleggeup.confagrid.model.mex.WordGridUpdateRequest;
 import com.aleggeup.confagrid.service.WordGridService;
@@ -60,10 +64,32 @@ public class WordGridController {
         return wordGridService.findOne(UUID.fromString(uuid));
     }
 
-    @RequestMapping(value = "word-grid/content", method = RequestMethod.GET)
+    @RequestMapping(value = "word-grid/content/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public WordGridContentResponse getResponse() {
-        return new WordGridContentResponse().withGridWidth(DEFAULT_GRID_WIDTH).withGridHeight(DEFAULT_GRID_HEIGHT)
+    public WordGridContentResponse getResponse(@PathVariable("id") final String uuid) {
+        final WordGrid updated = wordGridService.findOne(UUID.fromString(uuid));
+
+        wordGridService.calculate(updated);
+
+        return new WordGridContentResponse()
+            .withWordGrid(new WordGridModel()
+                .withWidth(DEFAULT_GRID_WIDTH)
+                .withHeight(DEFAULT_GRID_HEIGHT)
+                .withId(updated.getId().toString())
+                .withTitle(updated.getTitle())
+                .withPhrases(updated
+                    .getPhrases()
+                    .stream()
+                    .map(phrase -> new PhraseModel(phrase.getId().toString(), phrase.getRaw())
+                        .withWords(phrase.getWords().stream()
+                            .map(phraseWordSequence -> new WordSequenceModel(
+                                phraseWordSequence.getWordSequence().getId().toString(),
+                                phraseWordSequence.getWordSequence().getWord().getId().toString(),
+                                phraseWordSequence.getWordSequence().getWord().getText(),
+                                phraseWordSequence.getWordSequence().getSequence()))
+                            .collect(Collectors.toList())))
+                    .collect(Collectors.toList())))
+            .withGridWidth(DEFAULT_GRID_WIDTH).withGridHeight(DEFAULT_GRID_HEIGHT)
             .withCells(Collections.emptyList());
     }
 
@@ -72,7 +98,20 @@ public class WordGridController {
     public WordGridContentResponse update(@PathVariable("id") final String uuid,
         @RequestBody final WordGridUpdateRequest request) {
         wordGridService.update(UUID.fromString(uuid), UUID.fromString(request.getPhrase()));
-        return new WordGridContentResponse().withGridWidth(DEFAULT_GRID_WIDTH).withGridHeight(DEFAULT_GRID_HEIGHT)
+        final WordGrid updated = wordGridService.findOne(UUID.fromString(uuid));
+
+        return new WordGridContentResponse()
+            .withWordGrid(new WordGridModel()
+                .withWidth(DEFAULT_GRID_WIDTH)
+                .withHeight(DEFAULT_GRID_HEIGHT)
+                .withId(updated.getId().toString())
+                .withTitle(updated.getTitle())
+                .withPhrases(updated
+                    .getPhrases()
+                    .stream()
+                    .map(phrase -> new PhraseModel(phrase.getId().toString(), phrase.getRaw()))
+                    .collect(Collectors.toList())))
+            .withGridWidth(DEFAULT_GRID_WIDTH).withGridHeight(DEFAULT_GRID_HEIGHT)
             .withCells(Collections.emptyList());
     }
 }

@@ -22,6 +22,7 @@ import com.aleggeup.confagrid.model.WordGrid;
 import com.aleggeup.confagrid.repository.WordGridRepository;
 import com.aleggeup.confagrid.service.PhraseService;
 import com.aleggeup.confagrid.service.WordGridService;
+import com.aleggeup.confagrid.util.GridCalculator;
 
 @Service
 public class DefaultWordGridService implements WordGridService {
@@ -59,5 +60,10 @@ public class DefaultWordGridService implements WordGridService {
         final Phrase phrase = phraseService.findOne(phraseId);
         wordGrid.addPhrase(phrase);
         wordGridRepository.saveAndFlush(wordGrid);
+    }
+
+    @Override
+    public void calculate(final WordGrid wordGrid) {
+        final GridCalculator gridCalculator = new GridCalculator(wordGrid);
     }
 }

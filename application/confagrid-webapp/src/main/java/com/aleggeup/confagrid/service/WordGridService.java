@@ -23,4 +23,6 @@ public interface WordGridService {
     List<WordGrid> findAll();
 
     void update(UUID wordGridId, UUID phraseId);
+
+    void calculate(WordGrid wordGrid);
 }

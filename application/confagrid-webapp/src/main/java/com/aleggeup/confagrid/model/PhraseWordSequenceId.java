@@ -1,5 +1,5 @@
 /*
- * WordSequenceId.java
+ * PhraseWordSequenceId.java
  *
  * Copyright (C) 2018 [ A Legge Up ]
  *
@@ -17,30 +17,31 @@ import javax.persistence.Embeddable;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Embeddable
-public class WordSequenceId implements Serializable {
+public class PhraseWordSequenceId implements Serializable {
 
     @Column
     private UUID phraseId;
 
     @Column
-    private UUID wordId;
+    private UUID wordSequenceId;
 
-    private WordSequenceId() {
+    private PhraseWordSequenceId() {
     }
 
-    public WordSequenceId(final Phrase phrase, final Word word) {
+    public PhraseWordSequenceId(final Phrase phrase, final WordSequence wordSequence) {
         phraseId = phrase.getId();
-        wordId = word.getId();
+        wordSequenceId = wordSequence.getId();
     }
 
-    public UUID getWordId() {
-        return wordId;
+    public UUID getWordSequenceId() {
+        return wordSequenceId;
     }
 
-    public void setWordId(final UUID wordId) {
-        this.wordId = wordId;
+    public void setWordSequenceId(final UUID wordId) {
+        wordSequenceId = wordSequenceId;
     }
 
     public UUID getPhraseId() {
@@ -61,10 +62,10 @@ public class WordSequenceId implements Serializable {
             return false;
         }
 
-        final WordSequenceId that = (WordSequenceId) o;
+        final PhraseWordSequenceId that = (PhraseWordSequenceId) o;
 
         return new EqualsBuilder()
-            .append(wordId, that.wordId)
+            .append(wordSequenceId, that.wordSequenceId)
             .append(phraseId, that.phraseId)
             .isEquals();
     }
@@ -72,8 +73,16 @@ public class WordSequenceId implements Serializable {
     @Override
     public int hashCode() {
         return new HashCodeBuilder(17, 37)
-            .append(wordId)
+            .append(wordSequenceId)
             .append(phraseId)
             .toHashCode();
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+            .append("phraseId", phraseId)
+            .append("wordSequenceId", wordSequenceId)
+            .toString();
     }
 }
