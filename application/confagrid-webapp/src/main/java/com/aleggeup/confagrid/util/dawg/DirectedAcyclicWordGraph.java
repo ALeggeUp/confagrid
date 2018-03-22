@@ -27,6 +27,7 @@ import com.aleggeup.confagrid.model.Phrase;
 import com.aleggeup.confagrid.model.PhraseWordSequence;
 import com.aleggeup.confagrid.model.Word;
 import com.aleggeup.confagrid.model.WordGrid;
+import com.aleggeup.confagrid.model.WordGridCellModel;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
@@ -65,6 +66,24 @@ public class DirectedAcyclicWordGraph {
             LOGGER.info("DEPTH : " + integer);
             vertices.stream().distinct().forEach(vertex -> LOGGER.info(vertex.toString()));
         });
+    }
+
+    public List<WordGridCellModel> asCharacters() {
+        final List<WordGridCellModel> result = new ArrayList<>();
+        final Map<Integer, List<Vertex>> groupsByDepth = groupByDepth(ROOT);
+        groupsByDepth.forEach(((integer, vertices) -> {
+            if (integer > 0) {
+                vertices.stream().distinct().forEach(vertex -> {
+                    final char[] chars = vertex.getWord().getText().toCharArray();
+                    for (final char c : chars) {
+                        result.add(new WordGridCellModel(String.valueOf(c)));
+                    }
+                    result.add(new WordGridCellModel(" "));
+                });
+            }
+        }));
+
+        return result;
     }
 
     public void enqueue(final Vertex vertex) {

@@ -66,7 +66,11 @@ export class EditComponent implements OnInit, AfterViewInit {
     transform(value: WordGridContentResponse) {
         this.width = value.gridWidth;
         const array: Cell[] = [];
-        for (let i = 0; i < value.gridWidth * value.gridHeight; ++i) {
+        let i = 0;
+        for (i = 0; i < value.cells.length; ++i) {
+            this.cells.push(new Cell(value.cells[i].character));
+        }
+        for (; i < value.gridWidth * value.gridHeight; ++i) {
             this.cells.push(new Cell(' '));
         }
         this.cells = Object.assign(this.cells, array);

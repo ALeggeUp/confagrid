@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.aleggeup.confagrid.model.WordGrid;
+import com.aleggeup.confagrid.model.WordGridCellModel;
 
 public interface WordGridService {
 
@@ -24,5 +25,5 @@ public interface WordGridService {
 
     void update(UUID wordGridId, UUID phraseId);
 
-    void calculate(WordGrid wordGrid);
+    List<WordGridCellModel> calculate(WordGrid wordGrid);
 }

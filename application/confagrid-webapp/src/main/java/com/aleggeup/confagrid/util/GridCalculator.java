@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.aleggeup.confagrid.model.WordGrid;
+import com.aleggeup.confagrid.model.WordGridCellModel;
 import com.aleggeup.confagrid.util.dawg.DirectedAcyclicWordGraph;
 
 public class GridCalculator {
@@ -21,10 +22,16 @@ public class GridCalculator {
 
     private final List<List<Integer>> adjacentVerticies;
 
+    private final DirectedAcyclicWordGraph directedAcyclicWordGraph;
+
     public GridCalculator(final WordGrid wordGrid) {
         this.wordGrid = wordGrid;
         adjacentVerticies = new ArrayList<>();
 
-        new DirectedAcyclicWordGraph(wordGrid);
+        directedAcyclicWordGraph = new DirectedAcyclicWordGraph(wordGrid);
+    }
+
+    public List<WordGridCellModel> asCharacters() {
+        return directedAcyclicWordGraph.asCharacters();
     }
 }

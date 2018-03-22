@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.aleggeup.confagrid.model.PhraseModel;
 import com.aleggeup.confagrid.model.WordGrid;
+import com.aleggeup.confagrid.model.WordGridCellModel;
 import com.aleggeup.confagrid.model.WordGridModel;
 import com.aleggeup.confagrid.model.WordSequenceModel;
 import com.aleggeup.confagrid.model.mex.WordGridContentResponse;
@@ -69,7 +70,7 @@ public class WordGridController {
     public WordGridContentResponse getResponse(@PathVariable("id") final String uuid) {
         final WordGrid updated = wordGridService.findOne(UUID.fromString(uuid));
 
-        wordGridService.calculate(updated);
+        final List<WordGridCellModel> cells = wordGridService.calculate(updated);
 
         return new WordGridContentResponse()
             .withWordGrid(new WordGridModel()
@@ -90,7 +91,7 @@ public class WordGridController {
                             .collect(Collectors.toList())))
                     .collect(Collectors.toList())))
             .withGridWidth(DEFAULT_GRID_WIDTH).withGridHeight(DEFAULT_GRID_HEIGHT)
-            .withCells(Collections.emptyList());
+            .withCells(cells);
     }
 
     @RequestMapping(value = "word-grid/{id}/update", method = RequestMethod.PUT)

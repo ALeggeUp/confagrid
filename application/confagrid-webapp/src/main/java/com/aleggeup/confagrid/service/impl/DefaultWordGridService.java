@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import com.aleggeup.confagrid.model.Phrase;
 import com.aleggeup.confagrid.model.WordGrid;
+import com.aleggeup.confagrid.model.WordGridCellModel;
 import com.aleggeup.confagrid.repository.WordGridRepository;
 import com.aleggeup.confagrid.service.PhraseService;
 import com.aleggeup.confagrid.service.WordGridService;
@@ -63,7 +64,8 @@ public class DefaultWordGridService implements WordGridService {
     }
 
     @Override
-    public void calculate(final WordGrid wordGrid) {
+    public List<WordGridCellModel> calculate(final WordGrid wordGrid) {
         final GridCalculator gridCalculator = new GridCalculator(wordGrid);
+        return gridCalculator.asCharacters();
     }
 }
