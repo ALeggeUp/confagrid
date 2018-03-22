@@ -34,7 +34,7 @@ public class DirectedAcyclicWordGraph {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DirectedAcyclicWordGraph.class);
 
-    protected static final Vertex ROOT = new Vertex(0, new Word("", 0), Vertex.VertexType.ROOT);
+    protected final Vertex ROOT;
 
     private final Deque<Vertex> stack = new ArrayDeque<>();
     final Multimap<Word, Vertex> registry = HashMultimap.create();
@@ -45,6 +45,7 @@ public class DirectedAcyclicWordGraph {
 
     public DirectedAcyclicWordGraph(final WordGrid wordGrid) {
         LOGGER.info("DirectedAcyclicWordGraph Start");
+        ROOT = new Vertex(0, new Word("", 0), Vertex.VertexType.ROOT);
         this.wordGrid = wordGrid;
 
         final List<List<PhraseWordSequence>> phrases = getPhrases();
