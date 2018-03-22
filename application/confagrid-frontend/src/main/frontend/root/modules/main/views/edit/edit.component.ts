@@ -58,7 +58,7 @@ export class EditComponent implements OnInit, AfterViewInit {
             .flatMap((id) => {
                 this.id = id;
 
-                return this.wordGridService.getContent();
+                return this.wordGridService.getContent(id);
             })
             .subscribe((content) => this.transform(content));
     }
@@ -70,6 +70,7 @@ export class EditComponent implements OnInit, AfterViewInit {
             this.cells.push(new Cell(' '));
         }
         this.cells = Object.assign(this.cells, array);
+        value.wordGrid.phrases.forEach(phrase => this.phrases.push(phrase.raw));
     }
 
     ngAfterViewInit() {

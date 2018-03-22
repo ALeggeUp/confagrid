@@ -11,7 +11,26 @@ import { BaseResponse } from './base-response';
 import { CellModel } from '../cell.model';
 
 export interface WordGridContentResponse extends BaseResponse {
+  wordGrid: {
+    id: string;
+    title: string;
+    width: number;
+    height: number;
+    phrases: WordGridContentPhraseItem[];
+  };
   gridWidth: number;
   gridHeight: number;
   cells: CellModel[];
+}
+
+export interface WordGridContentPhraseItem {
+  id: string;
+  raw: string;
+  words: WordGridContentWordItem[];
+}
+
+export interface WordGridContentWordItem {
+  wordId: string;
+  text: string;
+  sequence: number;
 }
