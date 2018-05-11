@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.aleggeup.confagrid.filter.JwtFilter;
+import com.aleggeup.confagrid.auth.JwtFilter;
 
 @Configuration
 public class SystemConfig {

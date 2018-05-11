@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
-@Entity
+@Entity(name = "WordSequence")
 public class WordSequence implements Serializable {
 
     @Id

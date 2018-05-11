@@ -22,8 +22,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.aleggeup.confagrid.content.WordGridController;
+import com.aleggeup.confagrid.content.WordGridService;
 import com.aleggeup.confagrid.model.WordGrid;
-import com.aleggeup.confagrid.service.WordGridService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class WordGridControllerTest {

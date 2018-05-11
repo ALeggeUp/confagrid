@@ -21,7 +21,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.aleggeup.confagrid.filter.JwtFilter;
+import com.aleggeup.confagrid.auth.JwtFilter;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SystemConfigTest {

@@ -11,6 +11,7 @@ package com.aleggeup.confagrid.controller.exception;
 
 import static org.junit.Assert.assertNotNull;
 
+import com.aleggeup.confagrid.auth.InvalidLoginException;
 import org.junit.Test;
 
 public class InvalidLoginExceptionTest {

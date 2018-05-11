@@ -26,9 +26,10 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.aleggeup.confagrid.user.UserEntity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@Entity
+@Entity(name = "WordGrid")
 public class WordGrid {
 
     @Id
@@ -38,10 +39,10 @@ public class WordGrid {
     private UUID id;
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH
-    }, fetch = FetchType.EAGER, targetEntity = User.class)
+    }, fetch = FetchType.EAGER, targetEntity = UserEntity.class)
     @JoinColumn(foreignKey = @ForeignKey(name = "FK_USER"))
     @JsonIgnoreProperties("password")
-    private User creator;
+    private UserEntity creator;
 
     @Column
     private String title;
@@ -61,7 +62,8 @@ public class WordGrid {
     public WordGrid() {
     }
 
-    public WordGrid(final String title, final User creator, final Integer dimensionWidth, final Integer dimensionHeight,
+    public WordGrid(final String title, final UserEntity creator, final Integer dimensionWidth,
+        final Integer dimensionHeight,
         final String description) {
         this.title = title;
         this.creator = creator;
@@ -83,11 +85,11 @@ public class WordGrid {
         this.title = title;
     }
 
-    public User getCreator() {
+    public UserEntity getCreator() {
         return creator;
     }
 
-    public void setCreator(final User creator) {
+    public void setCreator(final UserEntity creator) {
         this.creator = creator;
     }
 

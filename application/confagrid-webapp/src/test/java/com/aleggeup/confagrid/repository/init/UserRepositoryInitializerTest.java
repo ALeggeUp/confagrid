@@ -18,7 +18,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.aleggeup.confagrid.service.UserService;
+import com.aleggeup.confagrid.user.UserRepositoryInitializer;
+import com.aleggeup.confagrid.user.UserService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserRepositoryInitializerTest {

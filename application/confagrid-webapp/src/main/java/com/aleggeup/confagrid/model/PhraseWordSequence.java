@@ -24,7 +24,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@Entity
+@Entity(name = "PhraseWordSequence")
 public class PhraseWordSequence implements Serializable {
 
     @EmbeddedId

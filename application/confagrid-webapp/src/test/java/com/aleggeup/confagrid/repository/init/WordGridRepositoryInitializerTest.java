@@ -18,9 +18,11 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.aleggeup.confagrid.content.WordGridRepository;
+import com.aleggeup.confagrid.content.WordGridRepositoryInitializer;
 import com.aleggeup.confagrid.model.WordGrid;
-import com.aleggeup.confagrid.repository.UserRepository;
-import com.aleggeup.confagrid.repository.WordGridRepository;
+import com.aleggeup.confagrid.user.UserRepository;
+import com.aleggeup.confagrid.user.UserRepositoryInitializer;
 
 @RunWith(MockitoJUnitRunner.class)
 public class WordGridRepositoryInitializerTest {
@@ -31,11 +33,15 @@ public class WordGridRepositoryInitializerTest {
     @Mock
     private UserRepository mockUserRepository;
 
+    @Mock
+    private UserRepositoryInitializer mockUserRepositoryInitializer;
+
     private WordGridRepositoryInitializer wordGridRepositoryInitializer;
 
     @Before
     public void setUp() {
-        wordGridRepositoryInitializer = new WordGridRepositoryInitializer(mockWordGridRepository, mockUserRepository);
+        wordGridRepositoryInitializer = new WordGridRepositoryInitializer(mockWordGridRepository, mockUserRepository,
+            mockUserRepositoryInitializer);
     }
 
     @After

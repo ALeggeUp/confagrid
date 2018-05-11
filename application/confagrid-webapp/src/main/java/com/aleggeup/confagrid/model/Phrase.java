@@ -23,7 +23,7 @@ import javax.persistence.OrderBy;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-@Entity
+@Entity(name = "Phrase")
 public class Phrase {
 
     @Id
