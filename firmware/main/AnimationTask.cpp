@@ -14,12 +14,16 @@
 
 static char tag[] = "AnimationTask";
 
-AnimationTask::AnimationTask(std::string taskName) : Task(taskName) {
+AnimationTask::AnimationTask(std::string taskName)
+        : Task(taskName) {
 }
 
 AnimationTask::~AnimationTask() {
 }
 
 void AnimationTask::run(void *data) {
-    ESP_LOGW(tag, "AnimationTask::run");
+    while (1) {
+        ESP_LOGW(tag, "AnimationTask::run");
+        delay(1000);
+    }
 }
