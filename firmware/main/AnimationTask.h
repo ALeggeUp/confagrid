@@ -10,12 +10,12 @@
 #ifndef MAIN_ANIMATIONTASK_H_
 #define MAIN_ANIMATIONTASK_H_
 
-#include "Task.h"
+#include "Esp32RtosTask.h"
 
-class AnimationTask: public Task {
+class AnimationTask: public Esp32RtosTask {
 
     public:
-        AnimationTask(std::string taskName);
+        AnimationTask(const char* taskName);
         virtual ~AnimationTask();
         void run(void *data) override;
 };

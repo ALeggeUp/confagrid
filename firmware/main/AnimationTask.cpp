@@ -14,14 +14,14 @@
 
 static char tag[] = "AnimationTask";
 
-AnimationTask::AnimationTask(std::string taskName)
-        : Task(taskName) {
+AnimationTask::AnimationTask(const char* taskName)
+        : Esp32RtosTask(taskName) {
 }
 
 AnimationTask::~AnimationTask() {
 }
 
-void AnimationTask::run(void *data) {
+void AnimationTask::run(void* data) {
     while (1) {
         ESP_LOGW(tag, "AnimationTask::run");
         delay(1000);
