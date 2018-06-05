@@ -16,5 +16,5 @@ extern "C" void app_main()
 {
     HardwareConfig hardwareConfig(HardwareConfig::DEV0);
     AnimationTask *pAnimationTask = new AnimationTask("AnimationTask");
-    pAnimationTask->start();
+    pAnimationTask->start(0);
 }
