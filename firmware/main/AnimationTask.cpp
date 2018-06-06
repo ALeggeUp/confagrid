@@ -9,6 +9,12 @@
 
 #include <esp_log.h>
 
+#include "nvs_flash.h"
+#include "esp_wifi.h"
+#include "esp_system.h"
+#include "esp_event.h"
+#include "esp_event_loop.h"
+
 #include "AnimationTask.h"
 #include "sdkconfig.h"
 
@@ -22,8 +28,12 @@ AnimationTask::~AnimationTask() {
 }
 
 void AnimationTask::run(void* data) {
+    int i = 0;
     while (1) {
         ESP_LOGW(tag, "AnimationTask::run");
         delay(1000);
+        if (i++ == 10) {
+            esp_wifi_start();
+        }
     }
 }
