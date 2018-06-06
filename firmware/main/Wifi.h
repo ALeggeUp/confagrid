@@ -19,7 +19,7 @@ class Wifi {
         Wifi();
         virtual ~Wifi();
 
-        esp_err_t eventHandler(void *ctx, system_event_t *event);
+        static esp_err_t eventHandler(void *ctx, system_event_t *event);
 };
 
 #endif /* MAIN_WIFI_H_ */
