@@ -32,8 +32,5 @@ void AnimationTask::run(void* data) {
     while (1) {
         ESP_LOGW(tag, "AnimationTask::run");
         delay(1000);
-        if (i++ == 10) {
-            esp_wifi_start();
-        }
     }
 }

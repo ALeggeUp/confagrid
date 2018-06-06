@@ -43,8 +43,6 @@ Wifi::Wifi()
     *ap_config.ap.password = 0;
 
     ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_AP, &ap_config));
-    // ESP_ERROR_CHECK( esp_wifi_start() );
-    // ESP_ERROR_CHECK( esp_wifi_connect() );
 }
 
 Wifi::~Wifi()
@@ -53,4 +51,8 @@ Wifi::~Wifi()
 
 esp_err_t Wifi::eventHandler(void *ctx, system_event_t *event) {
     return ESP_OK;
+}
+
+void Wifi::start() {
+    esp_wifi_start();
 }

@@ -18,6 +18,7 @@ class Wifi {
     public:
         Wifi();
         virtual ~Wifi();
+        void start();
 
         static esp_err_t eventHandler(void *ctx, system_event_t *event);
 };
