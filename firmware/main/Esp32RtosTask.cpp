@@ -31,7 +31,7 @@ Esp32RtosTask::~Esp32RtosTask()
 void Esp32RtosTask::start(void* data) {
     ESP_LOGW(tag, "start");
     m_taskData = data;
-    ::xTaskCreate(Esp32RtosTask::runTask, "esp32_task_0", 2 * 1024, this, 10, &m_taskHandle);
+    ::xTaskCreate(Esp32RtosTask::runTask, "esp32_task_0", 8 * 1024, this, 10, &m_taskHandle);
 }
 
 void Esp32RtosTask::stop() {

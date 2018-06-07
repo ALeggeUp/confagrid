@@ -16,8 +16,9 @@
 #include "esp_event.h"
 #include "esp_event_loop.h"
 
-#include "HardwareConfig.h"
 #include "AnimationTask.h"
+#include "HardwareConfig.h"
+#include "HttpServerTask.h"
 #include "Wifi.h"
 
 #include "sdkconfig.h"
@@ -29,4 +30,6 @@ extern "C" void app_main()
     wifi->start();
     AnimationTask* pAnimationTask = new AnimationTask("AnimationTask");
     pAnimationTask->start(0);
+    HttpServerTask* pHttpServerTask = new HttpServerTask("HttpServerTask");
+    pHttpServerTask->start(0);
 }
