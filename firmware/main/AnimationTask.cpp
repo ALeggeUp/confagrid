@@ -28,7 +28,6 @@ AnimationTask::~AnimationTask() {
 }
 
 void AnimationTask::run(void* data) {
-    int i = 0;
     while (1) {
         ESP_LOGW(tag, "AnimationTask::run");
         delay(1000);
