@@ -20,8 +20,9 @@
 
 static char tag[] = "AnimationTask";
 
-AnimationTask::AnimationTask(const char* taskName)
-        : Esp32RtosTask(taskName) {
+AnimationTask::AnimationTask(const char* taskName, I2C* i2c)
+        : Esp32RtosTask(taskName),
+          m_i2c(i2c) {
 }
 
 AnimationTask::~AnimationTask() {
