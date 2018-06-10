@@ -26,7 +26,7 @@ HttpServerTask::~HttpServerTask()
 }
 
 void HttpServerTask::run(void* data) {
-    char buffer[1024] = {};
+    char buffer[1024] = { };
 
     while (1) {
         ESP_LOGW(tag, "HttpServerTask::run");
@@ -47,17 +47,16 @@ void HttpServerTask::run(void* data) {
             int client_sock = accept(server_sock, (struct sockaddr *) &client_addr, &sin_size);
             if (client_sock > 0) {
                 ESP_LOGW(tag, "ACCEPT");
-                int res = recv(client_sock, (void*)buffer, sizeof(buffer) - 1, 0);
+                int res = recv(client_sock, (void*) buffer, sizeof(buffer) - 1, 0);
                 if (res >= 3) {
                     ESP_LOG_BUFFER_HEXDUMP(tag, buffer, res, ESP_LOG_INFO);
                     const char get[] = "GET /";
                     char * pch;
-                    pch = strtok (buffer,"\r\n");
-                      while (pch != NULL)
-                      {
-                        ESP_LOGW (tag, "%s", pch);
-                        pch = strtok (NULL, "\r\n");
-                      }
+                    pch = strtok(buffer, "\r\n");
+                    while (pch != NULL) {
+                        ESP_LOGW(tag, "%s", pch);
+                        pch = strtok(NULL, "\r\n");
+                    }
                     char* r = strstr(buffer, get);
                     if (r != NULL) {
                         ESP_LOGW(tag, "NOT NULL");
@@ -69,14 +68,6 @@ void HttpServerTask::run(void* data) {
                             ESP_LOGW(tag, "NO MATCH %d", i);
                         }
                     }
-                    /*
-                    char* s = strstr(*buffer, "GET");
-                    if (s != NULL) {
-                        ESP_LOG_BUFFER_CHAR_LEVEL(tag, s, 10, ESP_LOG_INFO);
-                    } else {
-                        ESP_LOGW(tag, "NO MATCH");
-                    }
-                    */
                 } else {
                     ESP_LOGW(tag, "ERR");
                 }
