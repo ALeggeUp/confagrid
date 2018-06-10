@@ -20,6 +20,7 @@
 #include "CoapServerTask.h"
 #include "HardwareConfig.h"
 #include "HttpServerTask.h"
+#include "I2C.h"
 #include "Wifi.h"
 
 #include "sdkconfig.h"
@@ -27,9 +28,10 @@
 extern "C" void app_main()
 {
     HardwareConfig hardwareConfig(HardwareConfig::DEV0);
+    I2C i2c(&hardwareConfig);
     Wifi* wifi = new Wifi();
     wifi->start();
-    AnimationTask* pAnimationTask = new AnimationTask("AnimationTask");
+    AnimationTask* pAnimationTask = new AnimationTask("AnimationTask", &i2c);
     pAnimationTask->start(0);
     HttpServerTask* pHttpServerTask = new HttpServerTask("HttpServerTask");
     pHttpServerTask->start(0);
