@@ -29,8 +29,12 @@ AnimationTask::~AnimationTask() {
 }
 
 void AnimationTask::run(void* data) {
+    m_i2c->init(I2C_NUM_1, I2C_MODE_MASTER, GPIO_NUM_18, GPIO_NUM_19, GPIO_PULLUP_DISABLE, GPIO_PULLUP_DISABLE, 100000);
+    m_i2c->i2c_is31_init(I2C_NUM_1);
     while (1) {
         ESP_LOGW(tag, "AnimationTask::run");
+        m_i2c->i2c_is31_pwm(I2C_NUM_1);
+        m_i2c->i2c_is31_en(I2C_NUM_1);
         delay(1000);
     }
 }
