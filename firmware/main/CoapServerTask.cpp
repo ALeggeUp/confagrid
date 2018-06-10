@@ -26,9 +26,6 @@
 
 #include "sdkconfig.h"
 
-#define EXAMPLE_WIFI_SSID            CONFIG_WIFI_SSID
-#define EXAMPLE_WIFI_PASS            CONFIG_WIFI_PASSWORD
-
 #define COAP_DEFAULT_TIME_SEC 5
 #define COAP_DEFAULT_TIME_USEC 0
 
@@ -60,11 +57,11 @@ void CoapServerTask::run(void* data) {
         ESP_LOGI(TAG, "Connected to AP");
 
         /* Prepare the CoAP server socket */
-        coap_address_init(&serv_addr);
+        ::coap_address_init(&serv_addr);
         serv_addr.addr.sin.sin_family = AF_INET;
         serv_addr.addr.sin.sin_addr.s_addr = INADDR_ANY;
         serv_addr.addr.sin.sin_port = htons(COAP_DEFAULT_PORT);
-        ctx = coap_new_context(&serv_addr);
+        ctx = ::coap_new_context(&serv_addr);
         if (ctx) {
             flags = fcntl(ctx->sockfd, F_GETFL, 0);
             fcntl(ctx->sockfd, F_SETFL, flags | O_NONBLOCK);
@@ -72,24 +69,23 @@ void CoapServerTask::run(void* data) {
             tv.tv_usec = COAP_DEFAULT_TIME_USEC;
             tv.tv_sec = COAP_DEFAULT_TIME_SEC;
             /* Initialize the resource */
-            resource = coap_resource_init((unsigned char *) "Espressif", 9, 0);
+            resource = ::coap_resource_init((unsigned char *) "hello", 5, 0);
             if (resource) {
-                coap_register_handler(resource, COAP_REQUEST_GET, async_handler);
-                coap_add_resource(ctx, resource);
+                ::coap_register_handler(resource, COAP_REQUEST_GET, CoapServerTask::async_handler);
+                ::coap_add_resource(ctx, resource);
                 /*For incoming connections*/
                 for (;;) {
                     FD_ZERO(&readfds);
                     FD_CLR(ctx->sockfd, &readfds);
                     FD_SET(ctx->sockfd, &readfds);
 
-                    int result = select(ctx->sockfd + 1, &readfds, 0, 0, &tv);
-                    if (result > 0) {
-                        if (FD_ISSET(ctx->sockfd, &readfds))
-                            coap_read(ctx);
+                    int result = ::select(ctx->sockfd + 1, &readfds, 0, 0, &tv);
+                    if (result > 0 && FD_ISSET(ctx->sockfd, &readfds)) {
+                        ::coap_read(ctx);
                     } else if (result < 0) {
                         break;
                     } else {
-                        ESP_LOGE(TAG, "select timeout");
+                        ESP_LOGI(TAG, "select timeout");
                     }
 
                     if (async) {
@@ -98,11 +94,11 @@ void CoapServerTask::run(void* data) {
                 }
             }
 
-            coap_free_context(ctx);
+            ::coap_free_context(ctx);
         }
     }
 
-    vTaskDelete(NULL);
+    ::vTaskDelete(NULL);
 }
 
 void CoapServerTask::send_async_response(coap_context_t* ctx, const coap_endpoint_t* local_if) {
@@ -110,26 +106,26 @@ void CoapServerTask::send_async_response(coap_context_t* ctx, const coap_endpoin
     unsigned char buf[3];
     const char* response_data = "Hello World!";
     size_t size = sizeof(coap_hdr_t) + 20;
-    response = coap_pdu_init(async->flags & COAP_MESSAGE_CON, COAP_RESPONSE_CODE(205), 0, size);
-    response->hdr->id = coap_new_message_id(ctx);
+    response = ::coap_pdu_init(async->flags & COAP_MESSAGE_CON, COAP_RESPONSE_CODE(205), 0, size);
+    response->hdr->id = ::coap_new_message_id(ctx);
     if (async->tokenlen) {
-        coap_add_token(response, async->tokenlen, async->token);
+        ::coap_add_token(response, async->tokenlen, async->token);
     }
-    coap_add_option(response, COAP_OPTION_CONTENT_TYPE, coap_encode_var_bytes(buf, COAP_MEDIATYPE_TEXT_PLAIN), buf);
-    coap_add_data(response, strlen(response_data), (unsigned char *) response_data);
+    ::coap_add_option(response, COAP_OPTION_CONTENT_TYPE, coap_encode_var_bytes(buf, COAP_MEDIATYPE_TEXT_PLAIN), buf);
+    ::coap_add_data(response, strlen(response_data), (unsigned char *) response_data);
 
-    if (coap_send(ctx, local_if, &async->peer, response) == COAP_INVALID_TID) {
+    if (::coap_send(ctx, local_if, &async->peer, response) == COAP_INVALID_TID) {
 
     }
-    coap_delete_pdu(response);
+    ::coap_delete_pdu(response);
     coap_async_state_t *tmp;
-    coap_remove_async(ctx, async->id, &tmp);
-    coap_free_async(async);
+    ::coap_remove_async(ctx, async->id, &tmp);
+    ::coap_free_async(async);
     async = NULL;
 }
 
 void CoapServerTask::async_handler(coap_context_t* ctx, struct coap_resource_t* resource,
         const coap_endpoint_t* local_interface, coap_address_t* peer, coap_pdu_t* request, str* token,
         coap_pdu_t* response) {
-    async = coap_register_async(ctx, peer, request, COAP_ASYNC_SEPARATE | COAP_ASYNC_CONFIRM, (void*) "no data");
+    async = ::coap_register_async(ctx, peer, request, COAP_ASYNC_SEPARATE | COAP_ASYNC_CONFIRM, (void*) "no data");
 }
