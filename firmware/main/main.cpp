@@ -17,6 +17,7 @@
 #include "esp_event_loop.h"
 
 #include "AnimationTask.h"
+#include "CoapServerTask.h"
 #include "HardwareConfig.h"
 #include "HttpServerTask.h"
 #include "Wifi.h"
@@ -32,4 +33,6 @@ extern "C" void app_main()
     pAnimationTask->start(0);
     HttpServerTask* pHttpServerTask = new HttpServerTask("HttpServerTask");
     pHttpServerTask->start(0);
+    CoapServerTask* pCoapServerTask = new CoapServerTask("CoapServerTask");
+    pCoapServerTask->start(0);
 }
