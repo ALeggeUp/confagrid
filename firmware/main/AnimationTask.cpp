@@ -34,7 +34,9 @@ void AnimationTask::run(void* data) {
     while (1) {
         ESP_LOGW(tag, "AnimationTask::run");
         m_i2c->i2c_is31_pwm(I2C_NUM_1);
-        m_i2c->i2c_is31_en(I2C_NUM_1);
+        m_i2c->i2c_is31_en(I2C_NUM_1, 0xFF);
+        delay(1000);
+        m_i2c->i2c_is31_en(I2C_NUM_1, 0x00);
         delay(1000);
     }
 }

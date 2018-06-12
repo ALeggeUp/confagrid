@@ -104,10 +104,10 @@ esp_err_t I2C::i2c_is31_pwm(i2c_port_t i2c_num) {
     return ret;
 }
 
-esp_err_t I2C::i2c_is31_en(i2c_port_t i2c_num) {
+esp_err_t I2C::i2c_is31_en(i2c_port_t i2c_num, uint8_t value) {
     uint8_t* data = (uint8_t*) malloc(24);
     for (uint8_t i = 0; i < 24; ++i) {
-        data[i] = 0xFF;
+        data[i] = value;
     }
 
     i2c_is31_change_page(I2C_EXAMPLE_MASTER_NUM, 0);
